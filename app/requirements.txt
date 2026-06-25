@@ -15,3 +15,4 @@ python-docx==1.1.2
 # azure-ai-ml
 # gremlinpython                    # Cosmos DB graph
 # azure-monitor-query              # Sentinel / Log Analytics
+python-multipart==0.0.9

@@ -1,0 +1,127 @@
+{
+  "_note": "SYNTHETIC demo data — genuine applicant Elena M. All data fictitious.",
+  "scenario": "03-fair-access-approved",
+  "applicant": {
+    "id": "A-88204",
+    "displayName": "Elena M.",
+    "benefitsRequested": ["housing-support"],
+    "audienceNote": "Honest citizen. All checks pass, auto-approved at risk 12."
+  },
+  "steps": [
+    {
+      "order": 1,
+      "agent": "identity-proofing",
+      "title": "Identity proofing",
+      "capabilities": ["verid","foundry"],
+      "result": {
+        "credentialVerified": true,
+        "issuer": "Government Trusted Issuer",
+        "riskDelta": 2,
+        "ok": true,
+        "findings": ["Verifiable credential validated — issued by a trusted government issuer"]
+      }
+    },
+    {
+      "order": 2,
+      "agent": "document-parsing+validation",
+      "title": "Government ID — passport",
+      "capabilities": ["docintel","vision","content"],
+      "document": {
+        "type": "passport",
+        "fields": { "surname": "MARINESCU", "given": "ELENA", "number": "Y2 884 204", "expiry": "2032-10" },
+        "metadata": { "lastEditedDaysAgo": null, "editor": null }
+      },
+      "result": {
+        "tampered": false,
+        "riskDelta": 2,
+        "ok": true,
+        "findings": [
+          "Passport authentic — no tampering detected",
+          "Portrait matches the document and the applicant"
+        ]
+      }
+    },
+    {
+      "order": 3,
+      "agent": "consistency-checker",
+      "title": "Proof of income — pay stub",
+      "capabilities": ["docintel","openai","fabric"],
+      "document": {
+        "type": "payslip",
+        "employer": "Contoso Ltd",
+        "employerVat": "UT-VAT-114829",
+        "grossPay": 2000.0,
+        "netPay": 1600.0,
+        "payDate": "2026-05-29",
+        "payDateIsWeekend": false
+      },
+      "result": {
+        "employerRegistered": true,
+        "incomeMatch": true,
+        "riskDelta": 2,
+        "ok": true,
+        "findings": [
+          "Employer \u201cContoso Ltd\u201d is registered — valid VAT ID UT-VAT-114829",
+          "Declared income matches tax records (Fabric cross-match)"
+        ]
+      }
+    },
+    {
+      "order": 4,
+      "agent": "validation",
+      "title": "Proof of address — utility bill",
+      "capabilities": ["docintel","vision"],
+      "document": { "type": "utility-bill", "issuedMonthsAgo": 1, "policyMaxMonths": 3, "nameFieldAltered": false },
+      "result": {
+        "expired": false,
+        "tampered": false,
+        "riskDelta": 2,
+        "ok": true,
+        "findings": [
+          "Issued this month — within the 3-month policy",
+          "Name and address consistent; no alterations detected"
+        ]
+      }
+    },
+    {
+      "order": 5,
+      "agent": "face-verification",
+      "title": "Remote video consultation",
+      "capabilities": ["face","safety","vision"],
+      "result": {
+        "live": true,
+        "deepfakeScore": 0.03,
+        "faceMatch": true,
+        "riskDelta": 2,
+        "ok": true,
+        "findings": [
+          "Live person confirmed — natural micro-expressions and blink detected",
+          "Face matches the passport portrait (score 0.97)"
+        ]
+      }
+    }
+  ],
+  "decision": {
+    "agent": "eligibility-decision",
+    "outcome": "approve",
+    "stage": "pre-submission",
+    "riskScore": 12,
+    "approveThreshold": 30,
+    "reasons": [
+      "Verifiable identity credential (Entra Verified ID)",
+      "Authentic passport — no tampering",
+      "Registered employer; income matches tax records",
+      "Recent, unaltered proof of address",
+      "Live person on video; face matches ID"
+    ],
+    "explainability": {
+      "identity_credential": 0.0,
+      "document_integrity": 0.0,
+      "employer_verified": 0.0,
+      "address_current": 0.0,
+      "liveness_confirmed": 0.0
+    },
+    "fairnessSafeguard": "All five checks passed. Auto-approved — no human review required for low-risk applications.",
+    "audit": { "loggedTo": "Microsoft Purview", "paymentInstructionCreated": true }
+  }
+}
