@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="dark">
-<title>Benefits Integrity Cloud — Fraud, Waste & Abuse Detection & Prevention</title>
+<title>Benefits Integrity Cloud — Fraud, Waste &amp; Abuse Detection &amp; Prevention</title>
 <style>
 :root{
   color-scheme: dark;
@@ -102,6 +102,7 @@ body{
 .btn.primary:hover{transform:translateY(-2px);box-shadow:0 16px 38px rgba(59,155,255,.5)}
 .btn.outline{background:var(--panel);color:var(--ink);border:1px solid var(--line2)}
 .btn.outline:hover{border-color:var(--blue);color:#fff}
+.btn[disabled],.ghost-btn[disabled]{opacity:.55;cursor:not-allowed;transform:none!important}
 
 .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:42px 0 8px}
 .kpi{background:linear-gradient(180deg,var(--panel),rgba(17,26,48,.5));border:1px solid var(--line);border-radius:16px;padding:18px}
@@ -424,6 +425,58 @@ body{
 .pillrow{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:10px}
 .pillrow span{font-size:11px;color:var(--ink2);background:var(--panel);border:1px solid var(--line);padding:4px 10px;border-radius:999px}
 .hide{display:none!important}
+
+/* Upload zone */
+.upload-zone{border:2px dashed var(--line2);border-radius:14px;padding:28px 20px;text-align:center;background:var(--bg2);transition:.2s;min-height:180px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px}
+.upload-zone.drag-over{border-color:var(--blue);background:rgba(59,155,255,.06)}
+.uz-ico{font-size:38px}
+.uz-title{font-size:15px;font-weight:700}
+.uz-desc{font-size:13px;color:var(--ink2)}
+.uz-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:4px}
+.upload-label{cursor:pointer}
+/* Doc image with scan/flag */
+.doc-img-wrap{position:relative;display:inline-block;max-width:100%}
+.doc-img{max-width:100%;max-height:290px;border-radius:10px;border:1px solid var(--line2);display:block}
+.flag-region{position:absolute;border:2px solid var(--red);background:rgba(255,59,92,.14);border-radius:4px;pointer-events:none;opacity:0;transition:opacity .6s .3s}
+.flag-region.show{opacity:1}
+.flag-tag{position:absolute;top:-22px;left:0;font-size:9px;font-weight:800;color:var(--red);background:var(--bg);padding:2px 6px;border-radius:4px;white-space:nowrap;border:1px solid rgba(255,59,92,.3)}
+.ok-region{position:absolute;border:2px solid var(--green);background:rgba(57,217,138,.1);border-radius:4px;pointer-events:none;opacity:0;transition:opacity .6s .3s}
+.ok-region.show{opacity:1}
+.ok-tag{position:absolute;top:-22px;left:0;font-size:9px;font-weight:800;color:var(--green);background:var(--bg);padding:2px 6px;border-radius:4px;white-space:nowrap;border:1px solid rgba(57,217,138,.3)}
+/* Wizard track */
+.wizard-track{display:flex;margin:0 0 18px;padding:8px 0}
+.wz-step{flex:1;display:flex;flex-direction:column;align-items:center;position:relative}
+.wz-step::after{content:"";position:absolute;left:50%;right:-50%;top:14px;height:2px;background:var(--line2);z-index:0;transition:background .4s}
+.wz-step:last-child::after{display:none}
+.wz-step.done::after,.wz-step.flag::after{background:var(--green)}
+.wz-step.flag::after{background:var(--red)}
+.wz-dot{width:28px;height:28px;border-radius:50%;background:var(--panel3);border:2px solid var(--line2);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;position:relative;z-index:1;transition:all .3s;color:var(--ink3)}
+.wz-step.active .wz-dot{background:var(--blue);border-color:var(--blue);color:#fff;box-shadow:0 0 0 4px rgba(59,155,255,.22)}
+.wz-step.done .wz-dot{background:var(--green);border-color:var(--green);color:#fff}
+.wz-step.flag .wz-dot{background:var(--red);border-color:var(--red);color:#fff}
+.wz-label{font-size:9px;color:var(--ink3);margin-top:4px;text-align:center;max-width:54px;line-height:1.2}
+.wz-step.active .wz-label{color:var(--blue);font-weight:700}
+.wz-step.done .wz-label{color:var(--green)}
+.wz-step.flag .wz-label{color:var(--red)}
+/* Video call mock */
+.vc-screen{width:100%;max-width:420px;aspect-ratio:16/9;border-radius:12px;background:radial-gradient(circle at 50% 40%,#243352,#0c1426);position:relative;overflow:hidden;border:1px solid var(--line2);display:flex;align-items:center;justify-content:center;margin:0 auto}
+.vc-face{font-size:72px;filter:saturate(.7);position:absolute}
+.vc-frame-img{width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .5s;position:absolute;inset:0}
+.vc-frame-img.show{opacity:1}
+.vc-rec{position:absolute;right:10px;top:10px;font-size:10px;color:#fff;display:flex;align-items:center;gap:6px}
+.vc-rec i{width:8px;height:8px;border-radius:50%;background:var(--red);animation:blink 1.1s infinite}
+/* Step card in wizard */
+.step-card{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:2px}
+.step-card-title{font-size:15px;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.step-card-desc{font-size:13px;color:var(--ink2);margin-bottom:14px}
+.step-nav{display:flex;gap:10px;margin-top:14px;align-items:center}
+.vc-mesh{position:absolute;inset:0;background-image:linear-gradient(rgba(59,155,255,.18) 1px,transparent 1px),linear-gradient(90deg,rgba(59,155,255,.18) 1px,transparent 1px);background-size:26px 26px;opacity:0;transition:.45s}
+.vc-mesh.show{opacity:1}
+.vc-badge{position:absolute;left:10px;bottom:10px;font-size:11px;font-weight:800;padding:4px 9px;border-radius:7px;opacity:0;transform:translateY(8px);transition:.4s}
+.vc-badge.show{opacity:1;transform:none}
+.vc-badge.bad{background:var(--red);color:#fff}
+.vc-badge.good{background:var(--green);color:#06210f}
+.queue-actions{display:flex;align-items:center;gap:10px;margin-top:10px;flex-wrap:wrap}
 </style>
 </head>
 <body>
@@ -445,7 +498,6 @@ body{
 
 <div class="app">
 
-  <!-- ============ HOME ============ -->
   <section class="scene on" id="view-home">
     <div class="hero">
       <span class="eyebrow">⬡ Public Sector · Health &amp; Social Services</span>
@@ -517,7 +569,6 @@ body{
     </div>
   </section>
 
-  <!-- ============ SCENARIO 1 — APPLICANT ============ -->
   <section class="scene" id="view-s1">
     <div class="section" style="margin-top:28px">
       <h2>🧑‍💻 Citizen Portal — New Benefit Application <span class="tag">Scenario 01 · Prevention</span></h2>
@@ -540,13 +591,12 @@ body{
             <h3>🔎 Document &amp; identity workspace</h3>
             <span class="subtle" id="s1StageLabel">Step 1 of 6</span>
           </div>
-          <div class="docstage" id="docStage">
-            <div class="scanline"></div>
-            <div class="doc-hint" id="docHint">Press <b>Run next check →</b> to begin identity proofing.</div>
-          </div>
+          <div class="wizard-track" id="s1Wizard"></div>
+          <div class="docstage" id="docStage"></div>
           <div class="controls">
-            <button class="btn primary" data-action="s1next" id="s1NextBtn">Run next check →</button>
-            <button class="ghost-btn" data-action="s1reset">↺ Restart scenario</button>
+            <button class="btn primary" data-action="s1next" id="s1NextBtn" disabled>Next step →</button>
+            <button class="ghost-btn" data-action="s1reset">↺ Restart</button>
+            <span class="subtle" id="s1Status">Complete each check to unlock the next step.</span>
           </div>
           <div class="verdict-banner block" id="verdictBanner">
             <h3>🚫 Submission blocked — before filing</h3>
@@ -556,9 +606,7 @@ body{
               <div class="rh">⬡ Responsible AI · Explainable risk contribution</div>
               <div id="raiBars"></div>
             </div>
-            <div style="margin-top:12px;font-size:12.5px;color:var(--ink2)">
-              ✔ <b>Fairness safeguard:</b> a genuine applicant with a minor mismatch (e.g. a blurry scan) would instead be auto-reconciled or routed to a human reviewer — not blocked. Decisions are logged to Microsoft Purview with full audit trail.
-            </div>
+            <div style="margin-top:12px;font-size:12.5px;color:var(--ink2)" id="s1Fairness"></div>
           </div>
         </div>
 
@@ -568,7 +616,6 @@ body{
         </div>
       </div>
 
-      <!-- side: risk -->
       <div>
         <div class="panel" style="position:sticky;top:78px">
           <div class="ph"><h3>⚠ Live fraud risk</h3></div>
@@ -589,7 +636,6 @@ body{
     </div>
   </section>
 
-  <!-- ============ SCENARIO 3 — GENUINE APPLICANT ============ -->
   <section class="scene" id="view-s3">
     <div class="section" style="margin-top:28px">
       <h2>🟢 Citizen Portal — New Benefit Application <span class="tag" style="color:var(--green);background:rgba(57,217,138,.1);border-color:rgba(57,217,138,.28)">Scenario 02 · Fair access</span></h2>
@@ -612,21 +658,18 @@ body{
             <h3>🔎 Document &amp; identity workspace</h3>
             <span class="subtle" id="s3StageLabel">Step 1 of 6</span>
           </div>
-          <div class="docstage" id="docStage3">
-            <div class="scanline"></div>
-            <div class="doc-hint" id="docHint3">Press <b>Run next check →</b> to begin identity proofing.</div>
-          </div>
+          <div class="wizard-track" id="s3Wizard"></div>
+          <div class="docstage" id="docStage3"></div>
           <div class="controls">
-            <button class="btn primary" data-action="s3next" id="s3NextBtn">Run next check →</button>
-            <button class="ghost-btn" data-action="s3reset">↺ Restart scenario</button>
+            <button class="btn primary" data-action="s3next" id="s3NextBtn" disabled>Next step →</button>
+            <button class="ghost-btn" data-action="s3reset">↺ Restart</button>
+            <span class="subtle" id="s3Status">Complete each check to unlock the next step.</span>
           </div>
           <div class="verdict-banner approve" id="verdictBanner3">
             <h3>✅ Application approved — auto-onboarded</h3>
             <p class="subtle">Every check passed. The genuine applicant is approved without friction; benefits proceed to disbursement.</p>
             <ul id="approvedChecks3"></ul>
-            <div style="margin-top:12px;font-size:12.5px;color:var(--ink2)">
-              ✔ <b>Same agents, opposite outcome:</b> the very checks that blocked the fraud ring let an honest citizen through in seconds — decision logged to Microsoft Purview.
-            </div>
+            <div style="margin-top:12px;font-size:12.5px;color:var(--ink2)" id="s3Fairness"></div>
           </div>
         </div>
 
@@ -656,10 +699,9 @@ body{
     </div>
   </section>
 
-  <!-- ============ SCENARIO 2 — OFFICER ============ -->
   <section class="scene" id="view-s2">
     <div class="section" style="margin-top:28px">
-      <h2>🛡️ Integrity Command Center <span class="tag">Scenario 02 · Detection</span></h2>
+      <h2>🛡️ Integrity Command Center <span class="tag">Scenario 03 · Detection</span></h2>
       <p class="desc">Submitted applications, ranked by the Prioritization Agent. The hottest case is a coordinated burst — investigate it.</p>
     </div>
 
@@ -672,77 +714,39 @@ body{
       <div class="intel" style="color:var(--green);background:rgba(57,217,138,.1);border-color:rgba(57,217,138,.3)">🟢 Human-in-the-loop · final decision is yours</div>
     </div>
 
-    <!-- queue -->
     <div class="panel" id="queuePanel">
-      <div class="ph"><h3>📥 Risk-ranked case queue</h3><span class="subtle">Prioritization Agent · refreshed 14:03</span></div>
-      <div class="queue">
-        <div class="qcase hot" data-action="opencase">
-          <div class="risk-pill r-hi">97</div>
-          <div class="qc-body">
-            <div class="qc-t">Cluster #4471 — 9 linked applications <span class="by">⬡ Cyber Signals Agent</span></div>
-            <div class="qc-m">Same source IP · submitted &lt;17s apart · shared employer “Northwind Staffing Solutions LLC”</div>
-          </div>
-          <div class="qc-go">›</div>
-        </div>
-        <div class="qcase" data-action="opencase">
-          <div class="risk-pill r-md">61</div>
-          <div class="qc-body">
-            <div class="qc-t">Application #A-88210 — income mismatch <span class="by">⬡ Consistency Checker</span></div>
-            <div class="qc-m">Declared income 38% below matched tax record · single applicant</div>
-          </div>
-          <div class="qc-go">›</div>
-        </div>
-        <div class="qcase" data-action="opencase">
-          <div class="risk-pill r-lo">12</div>
-          <div class="qc-body">
-            <div class="qc-t">Application #A-88204 — clean <span class="by">⬡ Eligibility Agent</span></div>
-            <div class="qc-m">Verified credential · all cross-checks passed · auto-approved</div>
-          </div>
-          <div class="qc-go">›</div>
-        </div>
-      </div>
+      <div class="ph"><h3>📥 Risk-ranked case queue</h3><span class="subtle">Prioritization Agent · refreshed live</span></div>
+      <div class="queue" id="queueList"></div>
     </div>
 
-    <!-- investigation -->
     <div class="invest panel" id="investPanel">
       <button class="back-link" data-action="closecase">‹ Back to queue</button>
       <div class="ph" style="margin-top:4px">
-        <h3>🧠 Investigation — Cluster #4471 <span class="verdict-chip vc-block" style="margin-left:8px">Risk 97 · Critical</span></h3>
-        <span class="subtle">9 applications · €1.6M annualized exposure (illustrative)</span>
+        <h3 id="clusterHeadline">🧠 Investigation — Cluster #4471</h3>
+        <span class="subtle" id="clusterMeta">9 applications · €1.6M annualized exposure (illustrative)</span>
       </div>
 
       <div class="evi-grid">
-        <!-- cyber signals -->
         <div class="evi">
           <div class="eh">🛰️ Cyber signals <span class="by">Cyber Signals Agent</span></div>
-          <div class="fact"><span class="fk">Source IP</span><span class="fv bad">203.0.113.45</span></div>
-          <div class="fact"><span class="fk">Network (ASN)</span><span class="fv bad">Hosting / VPN · AS64500</span></div>
-          <div class="fact"><span class="fk">Device fingerprint</span><span class="fv bad">reused ×9 (hash 7f3a…c1)</span></div>
-          <div class="fact"><span class="fk">Form-fill cadence</span><span class="fv bad">~74 ms/field (bot)</span></div>
-          <div class="fact"><span class="fk">Submission window</span><span class="fv bad">16.8 seconds</span></div>
-          <div class="fact"><span class="fk">Threat intel match</span><span class="fv bad">Defender · known ring TTP</span></div>
+          <div id="cyberFacts"></div>
         </div>
-        <!-- ML anomaly -->
         <div class="evi">
           <div class="eh">📈 Burst timeline <span class="by">Azure ML · Anomaly Detection</span></div>
           <div class="timeline" id="burstTimeline">
             <div class="axis"></div>
-            <span class="cap">14:02:01</span><span class="cap r">14:02:18</span>
+            <span class="cap" id="burstStart">—</span><span class="cap r" id="burstEnd">—</span>
           </div>
-          <div class="fact"><span class="fk">Applications in burst</span><span class="fv bad">9</span></div>
-          <div class="fact"><span class="fk">Mean inter-arrival</span><span class="fv bad">1.9 s</span></div>
-          <div class="fact"><span class="fk">Shared employer</span><span class="fv bad">Northwind Staffing (unregistered)</span></div>
-          <div class="fact"><span class="fk">Shared IBAN</span><span class="fv bad">7 of 9 applications</span></div>
+          <div id="timelineFacts"></div>
         </div>
       </div>
 
-      <!-- graph -->
       <div class="evi graph-wrap" style="margin-top:14px">
         <div class="eh">🕸️ Relationship graph <span class="by">Graph Relationship Explorer · Cosmos DB</span></div>
         <div class="subtle" style="margin:-4px 0 8px">Click any applicant node to highlight the attributes the ring shares.</div>
         <div class="graphbox" id="graphBox"></div>
         <div class="g-legend">
-          <span><i style="background:#ff5d76"></i> Applicant (9)</span>
+          <span><i style="background:#ff5d76"></i> Applicant</span>
           <span><i style="background:#3b9bff"></i> Shared IP</span>
           <span><i style="background:#9d7bff"></i> Fictitious employer</span>
           <span><i style="background:#37e0d8"></i> Shared bank / IBAN</span>
@@ -750,7 +754,6 @@ body{
         </div>
       </div>
 
-      <!-- decision -->
       <div class="eh" style="margin-top:18px;color:var(--ink);font-size:14px">⚖️ Your decision <span class="subtle" style="font-weight:400">— human-in-the-loop</span></div>
       <div class="decision" id="decisionRow">
         <button class="act danger" data-action="decision" data-d="freeze">
@@ -784,7 +787,6 @@ body{
       </div>
     </div>
 
-    <!-- outcome -->
     <div class="section" style="margin-top:30px">
       <h2>Outcome</h2>
       <div class="outcome">
@@ -796,7 +798,6 @@ body{
     </div>
   </section>
 
-  <!-- ============ CLOSING (revealed at end of tour) ============ -->
   <section class="scene" id="view-close">
     <div class="hero" style="padding-top:40px">
       <span class="eyebrow">⬡ The bigger picture</span>
@@ -834,7 +835,6 @@ body{
   </div>
 </div>
 
-<!-- guided tour narrator -->
 <div class="narrator" id="narrator">
   <div class="nbox">
     <div class="pulse">⬡</div>
@@ -854,9 +854,546 @@ body{
 "use strict";
 (function(){
 
-/* ---------- capability catalogue ---------- */
-const CAPS = [
-  {id:"docintel", ico:"📑", nm:"Azure AI Document Intelligence"},
+/* ===== Capabilities ===== */
+const CAPS=[
+  {id:"docintel",ico:"📑",nm:"Azure AI Document Intelligence"},
+  {id:"content", ico:"🧠",nm:"Azure AI Content Understanding"},
+  {id:"vision",  ico:"🖼️",nm:"Azure AI Vision · Tamper detection"},
+  {id:"face",    ico:"🪪",nm:"Azure Face · Liveness &amp; deepfake"},
+  {id:"safety",  ico:"🛟",nm:"Azure AI Content Safety"},
+  {id:"verid",   ico:"✅",nm:"Microsoft Entra Verified ID"},
+  {id:"openai",  ico:"💬",nm:"Azure OpenAI · Reasoning &amp; NLP"},
+  {id:"aml",     ico:"📈",nm:"Azure ML · Risk &amp; anomaly"},
+  {id:"sentinel",ico:"🛰️",nm:"Microsoft Sentinel · Cyber Signals"},
+  {id:"defender",ico:"🦠",nm:"Microsoft Defender · Threat intel"},
+  {id:"graph",   ico:"🕸️",nm:"Graph Analytics · Cosmos DB"},
+  {id:"fabric",  ico:"🧱",nm:"Microsoft Fabric · OneLake"},
+  {id:"foundry", ico:"⬡", nm:"Azure AI Foundry · Multi-agent"},
+  {id:"copstudio",ico:"🧩",nm:"Microsoft Copilot Studio"},
+  {id:"m365",    ico:"📨",nm:"Microsoft 365 Copilot"},
+  {id:"powerbi", ico:"📊",nm:"Power BI · RAI dashboards"},
+  {id:"purview", ico:"🔐",nm:"Microsoft Purview · Governance"},
+  {id:"rai",     ico:"⚖️",nm:"Responsible AI · Explainability"}
+];
+const used=new Set();
+function buildCapGrid(elId){const el=document.getElementById(elId);if(!el)return;el.innerHTML=CAPS.map(c=>`<div class="cap" data-cap="${c.id}"><span class="dot"></span><span class="ico">${c.ico}</span><span class="nm">${c.nm}</span></div>`).join("");}
+function litCap(id,fresh){document.querySelectorAll('.cap[data-cap="'+id+'"]').forEach(n=>{n.classList.add("lit");if(fresh){n.classList.add("fresh");setTimeout(()=>n.classList.remove("fresh"),650);}});}
+function useCaps(ids){ids.forEach(id=>{const isNew=!used.has(id);used.add(id);litCap(id,isNew);});const h=document.getElementById("capCountHome");if(h)h.textContent=used.size;}
+buildCapGrid("capGrid");
+buildCapGrid("capGridClose");
+
+/* ===== View ===== */
+function showView(v){
+  document.querySelectorAll(".scene").forEach(s=>s.classList.remove("on"));
+  const node=document.getElementById("view-"+v);if(node)node.classList.add("on");
+  document.querySelectorAll("#personaSwitch button").forEach(b=>b.classList.toggle("on",b.getAttribute("data-view")===v));
+  window.scrollTo({top:0,behavior:"smooth"});
+  if(v==="s2")initS2();
+}
+
+/* ===== Utils ===== */
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+
+/* ===== Gauge ===== */
+function setGauge(v,arcId,numId){
+  const off=220-(220*Math.min(v,100)/100);
+  const arc=document.getElementById(arcId);if(arc)arc.style.strokeDashoffset=off;
+  const num=document.getElementById(numId);if(num)num.textContent=Math.round(v);
+}
+function setChip(risk,ok,chipId){
+  const chip=document.getElementById(chipId);if(!chip)return;
+  if(ok){chip.className="verdict-chip vc-clear";chip.textContent=risk<=30?"Low risk":"Elevated";}
+  else if(risk>=70){chip.className="verdict-chip vc-block";chip.textContent="High risk";}
+  else if(risk>=35){chip.className="verdict-chip";chip.style.cssText="background:rgba(255,186,73,.14);color:var(--amber);border:1px solid rgba(255,186,73,.35)";chip.textContent="Elevated";}
+  else{chip.className="verdict-chip vc-eval";chip.textContent="Evaluating";}
+}
+
+/* ===== Signal stream ===== */
+function pushSig(text,ok,streamId){
+  const s=document.getElementById(streamId);if(!s)return;
+  const row=document.createElement("div");row.className="ss";
+  row.innerHTML=`<span>${ok?"🟢":"🔺"}</span><span>${text}</span>`;
+  s.appendChild(row);requestAnimationFrame(()=>row.classList.add("show"));
+}
+
+/* ===== Scenario Runner factory ===== */
+function makeRunner(cfg){
+  let step=-1,risk=0;
+  const flagged=new Set(),done=new Set();
+  const TOTAL=cfg.steps.length;
+
+  function buildWizard(){
+    const el=document.getElementById(cfg.wizardId);if(!el)return;
+    el.innerHTML=cfg.steps.map((s,i)=>`<div class="wz-step" id="${cfg.id}-wz-${i}"><div class="wz-dot">${i+1}</div><div class="wz-label">${s.wizLabel}</div></div>`).join("");
+  }
+  function updateWizard(activeIdx){
+    cfg.steps.forEach((_,i)=>{
+      const el=document.getElementById(`${cfg.id}-wz-${i}`);if(!el)return;
+      el.className="wz-step";
+      if(i===activeIdx)el.classList.add("active");
+      else if(flagged.has(i))el.classList.add("flag");
+      else if(done.has(i))el.classList.add("done");
+    });
+  }
+  function buildRail(){
+    const wrap=document.getElementById(cfg.stepsId);if(!wrap)return;
+    wrap.innerHTML=cfg.steps.map((s,i)=>`<div class="step" id="${cfg.id}-step-${i}"><div class="sico">${s.ico}</div><div class="sbody"><div class="stitle">${s.title} <span class="agent">⬡ ${s.agent}</span></div><div class="smeta">Awaiting…</div><div class="result"></div></div></div>`).join("");
+  }
+  function markActive(i){document.querySelectorAll(`#${cfg.stepsId} .step`).forEach((n,idx)=>n.classList.toggle("active",idx===i));}
+  function markResult(i,res){
+    const n=document.getElementById(`${cfg.id}-step-${i}`);if(!n)return;
+    n.classList.remove("active");n.classList.add(res.ok?"done":"flag");
+    n.querySelector(".smeta").textContent=res.ok?"Verified — passed":"Risk signals found";
+    const caps=(cfg.steps[i].caps||[]).map(c=>{const cap=CAPS.find(x=>x.id===c);return cap?`<span>${cap.ico} ${cap.nm.replace(/&amp;/g,"&")}</span>`:""}).join("");
+    n.querySelector(".result").innerHTML=res.findings.map(f=>`<div class="signal${res.ok?" ok":""}"><span class="si">${res.ok?"🟢":"🔺"}</span><span>${f}</span></div>`).join("")+(caps?`<div class="usedcaps">${caps}</div>`:"");
+  }
+
+  /* Step renderers */
+  function renderButtonStep(stepDef){
+    const stage=document.getElementById(cfg.stageId);stage.className="docstage";
+    stage.innerHTML=`<div style="text-align:center;padding:24px 0"><div style="font-size:54px;margin-bottom:14px">${stepDef.ico}</div><div style="font-size:16px;font-weight:700;margin-bottom:8px">${stepDef.buttonHint||stepDef.title}</div><div style="font-size:13px;color:var(--ink2);max-width:380px;margin:0 auto 20px">${stepDef.hint||""}</div><button class="btn primary" id="${cfg.id}-actbtn" style="font-size:14px">${stepDef.buttonLabel}</button></div>`;
+    const btn=document.getElementById(`${cfg.id}-actbtn`);
+    if(btn)btn.addEventListener("click",()=>{btn.disabled=true;btn.textContent="⏳ Verifying…";runner.completeStep(step,null,null,null);});
+  }
+
+  function renderUploadStep(stepDef){
+    const stage=document.getElementById(cfg.stageId);stage.className="docstage";
+    const fid=`${cfg.id}-file-${stepDef.order}`;
+    stage.innerHTML=`<div class="upload-zone" id="${cfg.id}-uz">
+      <div class="uz-ico">📤</div>
+      <div class="uz-title">${stepDef.uploadLabel}</div>
+      <div class="uz-desc">${stepDef.uploadDesc||"JPEG, PNG or PDF · max 10 MB"}</div>
+      <div class="uz-btns">
+        <label class="btn outline upload-label" style="font-size:13px;padding:10px 18px">📎 Browse file<input type="file" id="${fid}" accept="image/*,.pdf" style="display:none"></label>
+        ${stepDef.samplePath?`<button class="ghost-btn" id="${cfg.id}-samplebtn">📄 Use sample: ${stepDef.sampleName}</button>`:""}
+      </div>
+    </div>`;
+    const inp=document.getElementById(fid);
+    if(inp)inp.addEventListener("change",e=>{if(e.target.files[0])runner.processFile(e.target.files[0],step);});
+    if(stepDef.samplePath){
+      const sb=document.getElementById(`${cfg.id}-samplebtn`);
+      if(sb)sb.addEventListener("click",()=>runner.useSample(step));
+    }
+    const uz=document.getElementById(`${cfg.id}-uz`);
+    if(uz){
+      uz.addEventListener("dragover",e=>{e.preventDefault();uz.classList.add("drag-over");});
+      uz.addEventListener("dragleave",()=>uz.classList.remove("drag-over"));
+      uz.addEventListener("drop",e=>{e.preventDefault();uz.classList.remove("drag-over");if(e.dataTransfer.files[0])runner.processFile(e.dataTransfer.files[0],step);});
+    }
+  }
+
+  function renderVideoStep(stepDef){
+    const stage=document.getElementById(cfg.stageId);stage.className="docstage";
+    const dftag=stepDef.deepfake?`<div class="deepfake-tag" id="${cfg.id}-dftag">⚠ DEEPFAKE DETECTED · liveness failed</div>`:`<div class="live-badge" id="${cfg.id}-livebadge">✓ LIVENESS PASSED · face matches ID</div>`;
+    stage.innerHTML=`<div class="vc-screen"><div class="vc-face">🧑‍🦱</div><img class="vc-frame-img" id="${cfg.id}-vcframe" src="" alt=""><div class="vc-rec"><i></i> LIVE</div>${dftag}<button class="btn primary" id="${cfg.id}-vcbtn" style="font-size:13px;padding:12px 20px;z-index:2;position:relative">📹 Start live verification</button></div>`;
+    const btn=document.getElementById(`${cfg.id}-vcbtn`);
+    if(btn)btn.addEventListener("click",async()=>{btn.style.display="none";runner.completeStep(step,null,null,stepDef.samplePath);});
+  }
+
+  async function renderDecision(){
+    const stage=document.getElementById(cfg.stageId);stage.className="docstage";
+    stage.innerHTML=`<div style="text-align:center;padding:24px 0"><div style="font-size:50px">🧠</div><div class="doc-hint" style="margin-top:12px">Azure AI Foundry orchestrating all agent findings…</div></div>`;
+    stage.classList.add("scanning");
+    useCaps(cfg.steps[step].caps||["foundry","openai","rai","purview"]);
+    let decision;
+    try{const r=await fetch(`/api/${cfg.apiPath}/decision`);decision=await r.json();}
+    catch(e){decision={outcome:cfg.defaultOutcome||"block",riskScore:cfg.maxRisk||95,reasons:[],explainability:{}};}
+    await sleep(2200);stage.classList.remove("scanning");
+    markResult(step,{ok:decision.outcome==="approve",findings:[decision.outcome==="approve"?`All cross-checks passed — risk score ${decision.riskScore}/100`:`Aggregate fraud risk ${decision.riskScore}/100 — auto-block threshold exceeded`,decision.outcome==="approve"?"Auto-approved — benefits proceed to disbursement":"Decision logged to Purview — submission halted pre-filing"]});
+    cfg.finalize(decision);
+    const nb=document.getElementById(cfg.nextBtnId);if(nb){nb.textContent="✓ Scenario complete";nb.disabled=true;}
+  }
+
+  const runner={
+    init(){
+      step=-1;risk=0;flagged.clear();done.clear();
+      buildWizard();buildRail();
+      const stage=document.getElementById(cfg.stageId);
+      stage.className="docstage";
+      stage.innerHTML=`<div style="text-align:center;padding:28px 0"><div style="font-size:54px;margin-bottom:14px">🏛️</div><div class="doc-hint">Click <b>Begin application →</b> to start the intake process.</div></div>`;
+      setGauge(0,cfg.arcId,cfg.numId);
+      const chip=document.getElementById(cfg.chipId);if(chip){chip.className="verdict-chip vc-eval";chip.textContent="Evaluating";}
+      const ss=document.getElementById(cfg.streamId);if(ss)ss.innerHTML="";
+      const sl=document.getElementById(cfg.stageLabelId);if(sl)sl.textContent=`Step 1 of ${TOTAL}`;
+      const vb=document.getElementById(cfg.verdictId);if(vb)vb.classList.remove("show");
+      const nb=document.getElementById(cfg.nextBtnId);if(nb){nb.disabled=false;nb.textContent="Begin application →";}
+      updateWizard(-1);
+    },
+    startStep(i){
+      step=i;const stepDef=cfg.steps[i];
+      markActive(i);updateWizard(i);
+      const sl=document.getElementById(cfg.stageLabelId);if(sl)sl.textContent=`Step ${i+1} of ${TOTAL}`;
+      const nb=document.getElementById(cfg.nextBtnId);if(nb){nb.disabled=true;nb.textContent="Continue →";}
+      if(stepDef.type==="button")renderButtonStep(stepDef);
+      else if(stepDef.type==="upload")renderUploadStep(stepDef);
+      else if(stepDef.type==="video")renderVideoStep(stepDef);
+      else if(stepDef.type==="decision")renderDecision();
+    },
+    next(){
+      if(step===-1){this.startStep(0);}
+      else{const nb=document.getElementById(cfg.nextBtnId);if(nb&&!nb.disabled&&step<TOTAL-1)this.startStep(step+1);}
+    },
+    async processFile(file,stepIdx){
+      if(stepIdx!==step)return;
+      const url=URL.createObjectURL(file);
+      await this.completeStep(stepIdx,file,file.name,url);
+    },
+    async useSample(stepIdx){
+      const stepDef=cfg.steps[stepIdx];if(!stepDef.samplePath)return;
+      try{const resp=await fetch(stepDef.samplePath);const blob=await resp.blob();
+        const url=URL.createObjectURL(blob);
+        await this.completeStep(stepIdx,blob,stepDef.sampleName,url);
+      }catch(e){await this.completeStep(stepIdx,null,null,null);}
+    },
+    async completeStep(stepIdx,file,fileName,imageUrl){
+      const stepDef=cfg.steps[stepIdx];
+      const stage=document.getElementById(cfg.stageId);
+
+      if(stepDef.type==="video"){
+        const frame=document.getElementById(`${cfg.id}-vcframe`);
+        if(frame&&imageUrl){frame.src=imageUrl;}
+        stage.classList.add("scanning");useCaps(stepDef.caps);
+        await sleep(900);if(frame)frame.style.opacity="1";await sleep(1000);
+      } else if(imageUrl||file){
+        const objUrl=imageUrl||(file?URL.createObjectURL(file):null);
+        if(objUrl){stage.innerHTML=`<div class="doc-img-wrap" id="${cfg.id}-imgwrap"><div class="scanline"></div><img class="doc-img" src="${objUrl}" alt="${fileName||"document"}"></div>`;}
+        stage.classList.add("scanning");useCaps(stepDef.caps);
+      } else {
+        stage.classList.add("scanning");useCaps(stepDef.caps);
+      }
+
+      let result;
+      try{
+        const fd=new FormData();if(file)fd.append("file",file,fileName||"doc.png");
+        const resp=await fetch(`/api/${cfg.apiPath}/analyze/${stepDef.order}`,{method:"POST",body:fd});
+        result=await resp.json();
+      }catch(e){result=stepDef.fixture||{ok:false,riskDelta:0,cumulativeRisk:risk,findings:["Offline — fixture data"]};}
+
+      await sleep(stepDef.type==="video"?800:1400);stage.classList.remove("scanning");
+
+      /* Overlay */
+      const wrap=document.getElementById(`${cfg.id}-imgwrap`);
+      if(wrap&&stepDef.flagRegion){
+        if(!result.ok){
+          const fr=document.createElement("div");
+          fr.className="flag-region";fr.style.cssText=`left:${stepDef.flagRegion.left};top:${stepDef.flagRegion.top};width:${stepDef.flagRegion.width};height:${stepDef.flagRegion.height}`;
+          fr.innerHTML=`<span class="flag-tag">${stepDef.flagTag||"⚠ Anomaly"}</span>`;
+          wrap.appendChild(fr);requestAnimationFrame(()=>fr.classList.add("show"));
+        } else if(stepDef.okTag){
+          const or=document.createElement("div");
+          or.className="ok-region";or.style.cssText=`left:${stepDef.flagRegion.left};top:${stepDef.flagRegion.top};width:${stepDef.flagRegion.width};height:${stepDef.flagRegion.height}`;
+          or.innerHTML=`<span class="ok-tag">${stepDef.okTag}</span>`;
+          wrap.appendChild(or);requestAnimationFrame(()=>or.classList.add("show"));
+        }
+      }
+
+      /* Video badge */
+      if(stepDef.type==="video"){
+        if(stepDef.deepfake&&!result.ok){const t=document.getElementById(`${cfg.id}-dftag`);if(t)setTimeout(()=>t.classList.add("show"),300);}
+        else{const t=document.getElementById(`${cfg.id}-livebadge`);if(t)setTimeout(()=>t.classList.add("show"),300);}
+      }
+
+      risk=result.cumulativeRisk!=null?result.cumulativeRisk:Math.min(cfg.maxRisk||95,risk+result.riskDelta);
+      setGauge(risk,cfg.arcId,cfg.numId);setChip(risk,!!result.ok,cfg.chipId);
+      result.findings.forEach(f=>pushSig(f,!!result.ok,cfg.streamId));
+      if(!result.ok)flagged.add(stepIdx);else done.add(stepIdx);
+      markResult(stepIdx,{ok:!!result.ok,findings:result.findings});
+      updateWizard(stepIdx);
+
+      const nb=document.getElementById(cfg.nextBtnId);
+      if(nb&&stepDef.type!=="decision"){
+        nb.disabled=false;
+        nb.textContent=stepIdx===TOTAL-2?"View decision →":"Next →";
+      }
+    },
+    async autoRun(i){
+      this.startStep(i);await sleep(350);
+      const stepDef=cfg.steps[i];
+      if(stepDef.type==="button"){document.getElementById(`${cfg.id}-actbtn`)?.click();}
+      else if(stepDef.type==="upload"){if(stepDef.samplePath)await this.useSample(i);}
+      else if(stepDef.type==="video"){document.getElementById(`${cfg.id}-vcbtn`)?.click();}
+    }
+  };
+  return runner;
+}
+
+/* ===== S1 — fraud applicant ===== */
+const s1Runner=makeRunner({
+  id:"s1",apiPath:"scenario1",
+  stageId:"docStage",wizardId:"s1Wizard",stepsId:"s1Steps",
+  streamId:"sigStream",arcId:"gaugeArc",numId:"riskNum",chipId:"riskChip",
+  stageLabelId:"s1StageLabel",nextBtnId:"s1NextBtn",verdictId:"verdictBanner",
+  maxRisk:95,defaultOutcome:"block",
+  steps:[
+    {order:1,type:"button",ico:"✅",wizLabel:"Identity",title:"Identity proofing",agent:"Identity Proofing Agent",caps:["verid","foundry"],
+     buttonHint:"Begin identity verification",buttonLabel:"🔐 Verify with Entra Verified ID",
+     hint:"The system requests a verifiable digital credential. No credential found — identity is self-asserted only.",
+     fixture:{ok:false,riskDelta:15,cumulativeRisk:15,findings:["Identity not backed by a cryptographically verifiable credential","Self-asserted name only — no trusted issuer"]}},
+    {order:2,type:"upload",ico:"🪪",wizLabel:"Passport",title:"Government ID — passport",agent:"Document Parsing + Validation Agent",caps:["docintel","vision","content"],
+     uploadLabel:"Upload your passport (photo page)",samplePath:"/docs/scenario1/passport-tampered.png",sampleName:"passport-tampered.png",
+     flagRegion:{left:"8%",top:"8%",width:"29%",height:"62%"},flagTag:"⚠ Face-swap / re-compression",
+     fixture:{ok:false,riskDelta:30,cumulativeRisk:45,findings:["Tampered portrait — face region spliced (Error-Level Analysis)","Document metadata edited 2 days ago in image software","Portrait does not match document substrate"]}},
+    {order:3,type:"upload",ico:"💵",wizLabel:"Pay stub",title:"Proof of income — pay stub",agent:"Validation Agent + Consistency Checker",caps:["docintel","openai","fabric"],
+     uploadLabel:"Upload your most recent pay stub",samplePath:"/docs/scenario1/payslip-northwind.png",sampleName:"payslip-northwind.png",
+     flagRegion:{left:"3%",top:"28%",width:"94%",height:"50%"},flagTag:"⚠ Employer unregistered",
+     fixture:{ok:false,riskDelta:25,cumulativeRisk:70,findings:["Employer \"Northwind Staffing Solutions\" has no active VAT registration","Font & kerning anomalies; pay date falls on a weekend","Declared income inconsistent with matched tax records"]}},
+    {order:4,type:"upload",ico:"🏠",wizLabel:"Address",title:"Proof of address — utility bill",agent:"Validation Agent",caps:["docintel","vision"],
+     uploadLabel:"Upload a utility bill (within last 3 months)",samplePath:"/docs/scenario1/utility-bill.png",sampleName:"utility-bill.png",
+     flagRegion:{left:"3%",top:"4%",width:"62%",height:"22%"},flagTag:"⚠ Date altered / outdated",
+     fixture:{ok:false,riskDelta:10,cumulativeRisk:80,findings:["Document outdated — issued 11 months ago (exceeds 3-month rule)","Account-holder name altered — different embedded font detected"]}},
+    {order:5,type:"video",ico:"🎥",wizLabel:"Video",title:"Remote video consultation",agent:"Face Verification Agent",caps:["face","safety","vision"],
+     samplePath:"/docs/scenario1/video-consult-frame.png",sampleName:"video-consult-frame.png",deepfake:true,
+     fixture:{ok:false,riskDelta:15,cumulativeRisk:95,findings:["Deepfake / synthetic video — frame-level GAN artifacts","Liveness check failed — no natural micro-expressions","Face does not match the (already tampered) ID portrait"]}},
+    {order:6,type:"decision",ico:"⬡",wizLabel:"Decision",title:"Orchestrated eligibility decision",agent:"Eligibility Decision Agent",caps:["foundry","openai","rai","purview","powerbi"],
+     fixture:{ok:false,riskDelta:0,cumulativeRisk:95}}
+  ],
+  finalize(decision){
+    const vb=document.getElementById("verdictBanner");if(!vb)return;vb.classList.add("show");
+    document.getElementById("verdictReasons").innerHTML=(decision.reasons||["Risk score 95/100 — fraud signals across all submitted documents","Deepfake video call — liveness check failed","Employer and address documents both tampered"]).map(r=>`<li>${r}</li>`).join("");
+    const bars=Object.entries(decision.explainability||{coordinated_burst:0.32,fake_employer:0.24,shared_iban:0.18,bot_cadence:0.14,device_fingerprint:0.12}).map(([k,v])=>[k.replace(/_/g," ").replace(/\b\w/g,l=>l.toUpperCase()),Math.round(v*100)]);
+    document.getElementById("raiBars").innerHTML=bars.map(b=>`<div class="bar"><span class="bl">${b[0]}</span><span class="bt"><span class="bf" data-w="${b[1]}"></span></span><span class="bv">${b[1]}%</span></div>`).join("");
+    setTimeout(()=>document.querySelectorAll("#raiBars .bf").forEach(f=>f.style.width=f.getAttribute("data-w")+"%"),120);
+    document.querySelectorAll("#s1Wizard .wz-step").forEach(el=>el.className="wz-step flag");
+  }
+});
+
+/* ===== S3 — genuine applicant ===== */
+const s3Runner=makeRunner({
+  id:"s3",apiPath:"scenario3",
+  stageId:"docStage3",wizardId:"s3Wizard",stepsId:"s3Steps",
+  streamId:"sigStream3",arcId:"gaugeArc3",numId:"riskNum3",chipId:"riskChip3",
+  stageLabelId:"s3StageLabel",nextBtnId:"s3NextBtn",verdictId:"verdictBanner3",
+  maxRisk:12,defaultOutcome:"approve",
+  steps:[
+    {order:1,type:"button",ico:"✅",wizLabel:"Identity",title:"Identity proofing",agent:"Identity Proofing Agent",caps:["verid","foundry"],
+     buttonHint:"Begin identity verification",buttonLabel:"🔐 Verify with Entra Verified ID",
+     hint:"The system validates Elena's digital credential — issued by a trusted government source.",
+     fixture:{ok:true,riskDelta:2,cumulativeRisk:2,findings:["Verifiable credential validated — issued by trusted government authority"]}},
+    {order:2,type:"upload",ico:"🪪",wizLabel:"Passport",title:"Government ID — passport",agent:"Document Parsing + Validation Agent",caps:["docintel","vision","content"],
+     uploadLabel:"Upload your passport (photo page)",samplePath:"/docs/scenario2/passport-clean-elena.png",sampleName:"passport-clean-elena.png",
+     flagRegion:{left:"8%",top:"8%",width:"29%",height:"62%"},okTag:"✓ Portrait verified",
+     fixture:{ok:true,riskDelta:2,cumulativeRisk:4,findings:["Passport authentic — no tampering detected","Portrait matches the document and the applicant"]}},
+    {order:3,type:"upload",ico:"💵",wizLabel:"Pay stub",title:"Proof of income — pay stub",agent:"Validation Agent + Consistency Checker",caps:["docintel","openai","fabric"],
+     uploadLabel:"Upload your most recent pay stub",samplePath:"/docs/scenario2/payslip-contoso.png",sampleName:"payslip-contoso.png",
+     flagRegion:{left:"3%",top:"28%",width:"94%",height:"50%"},okTag:"✓ Income verified",
+     fixture:{ok:true,riskDelta:2,cumulativeRisk:6,findings:["Employer \"Contoso Ltd\" registered — valid VAT ID UT-VAT-114829","Declared income matches tax records (Fabric cross-match)"]}},
+    {order:4,type:"upload",ico:"🏠",wizLabel:"Address",title:"Proof of address — utility bill",agent:"Validation Agent",caps:["docintel","vision"],
+     uploadLabel:"Upload a utility bill (within last 3 months)",samplePath:"/docs/scenario2/utility-bill-recent.png",sampleName:"utility-bill-recent.png",
+     flagRegion:{left:"3%",top:"4%",width:"62%",height:"22%"},okTag:"✓ Current & unaltered",
+     fixture:{ok:true,riskDelta:2,cumulativeRisk:8,findings:["Issued this month — within the 3-month policy","Name and address consistent; no alterations"]}},
+    {order:5,type:"video",ico:"🎥",wizLabel:"Video",title:"Remote video consultation",agent:"Face Verification Agent",caps:["face","safety","vision"],
+     samplePath:"/docs/scenario2/video-consult-frame-clean.png",sampleName:"video-consult-frame-clean.png",deepfake:false,
+     fixture:{ok:true,riskDelta:2,cumulativeRisk:10,findings:["Live person confirmed — natural micro-expressions and blink","Face matches the passport portrait (confidence 0.97)"]}},
+    {order:6,type:"decision",ico:"⬡",wizLabel:"Decision",title:"Orchestrated eligibility decision",agent:"Eligibility Decision Agent",caps:["foundry","openai","rai","purview","m365"],
+     fixture:{ok:true,riskDelta:2,cumulativeRisk:12}}
+  ],
+  finalize(decision){
+    const vb=document.getElementById("verdictBanner3");if(!vb)return;vb.classList.add("show");
+    document.getElementById("approvedChecks3").innerHTML=(decision.reasons||["All 5 document checks passed","Identity verifiable credential confirmed","Liveness check passed — no deepfake"]).map(r=>`<li>${r}</li>`).join("");
+    document.querySelectorAll("#s3Wizard .wz-step").forEach(el=>el.className="wz-step done");
+    const chip=document.getElementById("riskChip3");if(chip){chip.className="verdict-chip vc-clear";chip.textContent="Approved";}
+  }
+});
+
+/* ===== S2 — Officer ===== */
+let s2Loaded=false;
+async function initS2(){
+  if(s2Loaded)return;s2Loaded=true;
+  try{const r=await fetch("/api/officer/queue");if(!r.ok)return;const data=await r.json();renderQueue(data.queue);}catch(e){}
+}
+
+function renderQueue(queue){
+  const qDiv=document.querySelector("#queuePanel .queue");if(!qDiv||!queue)return;
+  const tierCls={hi:"r-hi",md:"r-md",lo:"r-lo"};
+  qDiv.innerHTML=queue.map((item,i)=>`<div class="qcase ${item.tier==="hi"?"hot":""}" ${i===0?'data-action="opencase"':''}>
+    <div class="risk-pill ${tierCls[item.tier]||"r-md"}">${item.risk}</div>
+    <div class="qc-body"><div class="qc-t">${item.caseId} <span class="by">⬡ ${item.agent}</span></div><div class="qc-m">${item.reason}</div></div>
+    <div class="qc-go">›</div></div>`).join("");
+}
+
+function buildBurst(){
+  const tl=document.getElementById("burstTimeline");if(!tl||tl.dataset.built)return;tl.dataset.built="1";
+  const times=["01.3","03.1","05.0","06.8","08.9","11.2","13.4","15.9","18.1"];
+  times.forEach((t,i)=>{const ev=document.createElement("div");ev.className="ev";ev.style.left=(6+i*(88/8))+"%";ev.style.animationDelay=(i*0.12)+"s";ev.innerHTML=`<span class="tt">:${t}</span>`;tl.appendChild(ev);});
+}
+
+const GRAPH_HUBS=[
+  {id:"ip",x:50,y:50,c:"#3b9bff",r:17,label:"IP 203.0.113.45"},
+  {id:"emp",x:22,y:24,c:"#9d7bff",r:15,label:"Northwind Staffing"},
+  {id:"bank",x:80,y:26,c:"#37e0d8",r:15,label:"IBAN ••4471"},
+  {id:"phone",x:78,y:78,c:"#ffba49",r:13,label:"Phone ×2"}
+];
+const GRAPH_APPS=(()=>{
+  const names=["A. Volkov","I. Petrov","N. Sokol","R. Marin","D. Ilic","K. Novak","S. Toma","L. Horvat","M. Radu"];
+  return names.map((nm,i)=>{const ang=(Math.PI*2/9)*i-Math.PI/2;return{id:"a"+i,x:50+Math.cos(ang)*40,y:50+Math.sin(ang)*40,name:nm,links:["ip","emp",...(i<7?["bank"]:[]),...(i===2||i===5?["phone"]:[])]}; });
+})();
+
+function buildGraph(){
+  const box=document.getElementById("graphBox");if(!box||box.dataset.built)return;box.dataset.built="1";
+  let svg=`<svg viewBox="0 0 100 100" preserveAspectRatio="none">`;
+  GRAPH_APPS.forEach(a=>a.links.forEach(l=>{const hub=GRAPH_HUBS.find(h=>h.id===l);if(hub)svg+=`<line class="edge" data-a="${a.id}" data-hub="${l}" x1="${a.x}" y1="${a.y}" x2="${hub.x}" y2="${hub.y}" stroke="${hub.c}" stroke-opacity="0.22" stroke-width="0.4"/>"`;}));
+  GRAPH_HUBS.forEach(h=>svg+=`<g><circle cx="${h.x}" cy="${h.y}" r="${h.r/3.2}" fill="${h.c}" fill-opacity="0.18" stroke="${h.c}" stroke-width="0.5"/><text x="${h.x}" y="${h.y+0.8}" font-size="2.1" fill="#eaf0ff" text-anchor="middle" font-family="Segoe UI">${h.label}</text></g>`);
+  GRAPH_APPS.forEach(a=>svg+=`<g class="g-node" data-node="${a.id}"><circle cx="${a.x}" cy="${a.y}" r="3" fill="#ff5d76" fill-opacity="0.9"/><text x="${a.x}" y="${a.y-4}" font-size="1.9" fill="#aab8d8" text-anchor="middle" font-family="Segoe UI">${a.name}</text></g>`);
+  svg+=`</svg>`;box.innerHTML=svg;
+}
+function highlightNode(id){
+  const box=document.getElementById("graphBox");if(!box)return;
+  box.querySelectorAll(".edge").forEach(e=>{const on=e.getAttribute("data-a")===id;e.setAttribute("stroke-opacity",on?"0.95":"0.07");e.setAttribute("stroke-width",on?"0.7":"0.4");});
+  box.querySelectorAll(".g-node circle").forEach(c=>{const on=c.parentElement.getAttribute("data-node")===id;c.setAttribute("r",on?"4":"3");c.setAttribute("fill-opacity",on?"1":"0.45");});
+}
+
+const APPS=[
+  {id:"A-90412",name:"A. Volkov",amt:1420},{id:"A-90413",name:"I. Petrov",amt:1380},
+  {id:"A-90414",name:"N. Sokol",amt:1510},{id:"A-90415",name:"R. Marin",amt:1295},
+  {id:"A-90416",name:"D. Ilic",amt:1460},{id:"A-90417",name:"K. Novak",amt:1350},
+  {id:"A-90418",name:"S. Toma",amt:1540},{id:"A-90419",name:"L. Horvat",amt:1400},
+  {id:"A-90420",name:"M. Radu",amt:1325}
+];
+const FREEZE_TOTAL=APPS.reduce((s,a)=>s+a.amt,0);
+function eur(n){return "€"+n.toLocaleString("en-US");}
+
+const AUDIT_MSGS={
+  freeze:"PAYMENT FREEZE applied · 9 applications · "+eur(FREEZE_TOTAL)+"/mo held · funds protected",
+  escalate:"ENFORCEMENT CASE ENF-4471 opened · investigator J. Marković assigned",
+  casefile:"CASE FILE generated · saved to SharePoint, shared in Teams #benefits-integrity",
+  notify:"PARTNER ALERT dispatched · Tax Authority · Police FCU · FIU · Purview logged"
+};
+let auditClock=0;
+const T0=14*3600+3*60+12;
+function stamp(){const s=T0+auditClock*6;auditClock++;const p=x=>String(x).padStart(2,"0");return p(Math.floor(s/3600))+":"+p(Math.floor(s%3600/60))+":"+p(s%60);}
+
+function acHead(ico,ttl,sub,by,status,sc){return `<div class="ac-head"><div class="ac-ico">${ico}</div><div style="flex:1;min-width:0"><div class="ac-ttl">${ttl}</div><div class="ac-sub">${sub}</div></div><span class="ac-by">⬡ ${by}</span><span class="ac-status ${sc}">${status}</span></div>`;}
+
+function renderActionDetail(d){
+  if(d==="freeze"){return acHead("🧊","Payments frozen","Disbursement halted across all 9 linked applications","Disbursement Engine · Azure ML","FUNDS HELD","st-red")+`<table class="pay-table"><thead><tr><th>Application</th><th>Applicant</th><th>Monthly benefit</th><th>Status</th></tr></thead><tbody>`+APPS.map(a=>`<tr><td style="font-family:Consolas,monospace">${a.id}</td><td>${a.name}</td><td class="amt">${eur(a.amt)}</td><td><span class="ps-status">Scheduled</span></td></tr>`).join("")+`</tbody></table><div class="pay-total"><span>Monthly benefit disbursement held</span><b>${eur(FREEZE_TOTAL)}</b></div><div class="ac-note">No funds leave the treasury for this cluster. Holds stay in force until the enforcement case is resolved.</div>`;}
+  if(d==="escalate"){return acHead("🚨","Escalated to investigation","Enforcement case opened and assigned","Dynamics 365 · Case Management","UNDER INVESTIGATION","st-amber")+`<div class="fact"><span class="fk">Enforcement case</span><span class="fv">ENF-4471</span></div><div class="fact"><span class="fk">Priority</span><span class="fv bad">Critical</span></div><div class="fact"><span class="fk">Response SLA</span><span class="fv">48 hours</span></div><div class="fact"><span class="fk">Assigned investigator</span><span class="fv">J. Marković · Sr Fraud Investigator</span></div><div class="fact"><span class="fk">Evidence package</span><span class="fv">Signals · graph · timeline · 9 apps</span></div><div class="ac-note">The investigator is notified in Teams; the evidence package is auto-attached and the case is tracked to closure.</div>`;}
+  if(d==="casefile"){return acHead("📄","Case file generated","Compiled from all evidence by AI","Document Generator + M365 Copilot","READY","st-blue")+`<div class="drafting" id="draftingLine"><span class="sp"></span> Microsoft 365 Copilot is drafting the case file…</div><div id="docPreviewWrap" style="display:none"><div class="docpreview"><div class="dt">Fraud Case File — Cluster #4471</div><div class="dm">PREPARED BY MICROSOFT 365 COPILOT · CONFIDENTIAL · CASE ENF-4471</div><div class="summ"><b>Executive summary —</b> Nine benefit applications were submitted from a single IP address within a 16.8-second window, all citing the unregistered employer "Northwind Staffing Solutions LLC" and sharing a common bank account. Cyber-signal, pattern and graph evidence indicate a coordinated organized-fraud ring.</div><ol><li>Executive summary &amp; risk rating (97 / 100)</li><li>Cyber-signal evidence — IP, device fingerprint, bot cadence</li><li>Network relationship graph (9 applicants + shared entities)</li><li>Submission burst timeline</li><li>Application inventory — 9 records &amp; amounts</li><li>Responsible-AI risk explainability</li><li>Recommended enforcement action</li></ol></div><div class="ac-note">Saved to SharePoint and shared to <b>#benefits-integrity</b> Teams channel.</div><button class="btn primary" data-action="dlcase" style="margin-top:13px;font-size:13.5px;padding:12px 20px">⬇ Download case file (.docx)</button></div>`;}
+  return acHead("📨","Partner agencies notified","Secure cross-agency data-share dispatched","Notification Agent · Purview governed","SENT","st-green")+`<div class="agency-row"><span class="ar-ico">🏛️</span><span class="ar-nm">National Tax Authority — benefit/income discrepancy</span><span class="ar-st">Delivered ✓</span></div><div class="agency-row"><span class="ar-ico">👮</span><span class="ar-nm">Police — Financial Crimes Unit liaison</span><span class="ar-st">Acknowledged ✓</span></div><div class="agency-row"><span class="ar-ico">🔎</span><span class="ar-nm">Financial Intelligence Unit (FIU)</span><span class="ar-st">Delivered ✓</span></div><div class="ac-note">Each agency receives only authorized fields. Every field-level disclosure is logged in Microsoft Purview.</div>`;
+}
+
+function animateFreeze(){document.querySelectorAll('#act-freeze .ps-status').forEach((sp,i)=>{setTimeout(()=>{sp.textContent="FROZEN";sp.classList.add("frozen");},200+i*140);});}
+function animateCasefile(){setTimeout(()=>{const l=document.getElementById("draftingLine");if(l)l.style.display="none";const w=document.getElementById("docPreviewWrap");if(w)w.style.display="block";},1600);}
+
+const actionsDone=new Set();
+function updateActionCounter(){
+  const n=actionsDone.size;
+  const c=document.getElementById("actCounter");if(c)c.textContent=n+" / 4 completed";
+  if(n===4){const cr=document.getElementById("caseResolved");if(cr)cr.classList.add("show");}
+}
+
+async function doDecision(d,btn){
+  if(actionsDone.has(d)){const ex=document.getElementById("act-"+d);if(ex)ex.scrollIntoView({behavior:"smooth",block:"center"});return;}
+  actionsDone.add(d);if(btn)btn.classList.add("done");
+  try{await fetch(`/api/officer/clusters/4471/actions/${d}`,{method:"POST"});}catch(e){}
+  if(d==="freeze")useCaps(["aml","purview"]);
+  else if(d==="escalate")useCaps(["foundry","purview"]);
+  else if(d==="casefile")useCaps(["m365","copstudio","openai","purview"]);
+  else if(d==="notify")useCaps(["sentinel","purview"]);
+  document.getElementById("actionsHead").classList.remove("hide");
+  const card=document.createElement("div");card.className="action-card";card.id="act-"+d;
+  card.innerHTML=renderActionDetail(d);
+  document.getElementById("actionsTaken").appendChild(card);
+  document.getElementById("auditBox").classList.add("show");
+  document.getElementById("auditLog").innerHTML+="["+stamp()+"] Officer Maria S. · "+AUDIT_MSGS[d]+"<br>";
+  if(d==="freeze")animateFreeze();if(d==="casefile")animateCasefile();
+  updateActionCounter();
+}
+
+function openCase(){
+  document.getElementById("queuePanel").classList.add("hide");
+  document.getElementById("investPanel").classList.add("on");
+  buildBurst();buildGraph();
+  useCaps(["sentinel","defender","aml","graph","foundry","powerbi"]);
+  window.scrollTo({top:120,behavior:"smooth"});
+}
+function closeCase(){
+  document.getElementById("investPanel").classList.remove("on");
+  document.getElementById("queuePanel").classList.remove("hide");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+/* ===== Case file download ===== */
+function caseFileHTML(){
+  let today;try{today=new Date().toLocaleDateString("en-GB",{year:"numeric",month:"long",day:"numeric"});}catch(e){today="2026";}
+  const rows=APPS.map(a=>`<tr><td>${a.id}</td><td>${a.name}</td><td style="text-align:right">${eur(a.amt)}</td><td>FROZEN</td></tr>`).join("");
+  const rai=[["Coordinated same-IP burst",32],["Shared fictitious employer",24],["Shared bank account / IBAN",18],["Bot-like form cadence",14],["Device fingerprint reuse",12]].map(r=>`<tr><td>${r[0]}</td><td style="text-align:right">${r[1]}%</td></tr>`).join("");
+  return `<html><head><meta charset="utf-8"><title>Fraud Case File Cluster 4471</title><style>body{font-family:'Segoe UI',Arial,sans-serif;color:#1a2238;font-size:11pt;margin:40px}h1{font-size:20pt;color:#0e1730}h2{font-size:13pt;color:#1f4fa0;border-bottom:2px solid #cdd8ef;padding-bottom:4px;margin-top:22px}table{border-collapse:collapse;width:100%;font-size:10pt;margin-top:8px}th,td{border:1px solid #c9d3e8;padding:6px 9px}th{background:#eef2fb;color:#1f3a66}.foot{margin-top:26px;border-top:1px solid #ccc;padding-top:10px;color:#888;font-size:8.5pt}</style></head><body>
+<h1>Fraud Case File — Cluster #4471</h1><p style="font-size:9pt;color:#9db4e6;letter-spacing:1px">PREPARED BY MICROSOFT 365 COPILOT · CONFIDENTIAL · CASE ENF-4471 · Generated ${today}</p><p><span style="background:#ffe3e8;color:#b3173a;font-weight:bold;padding:3px 12px;border-radius:10px;font-size:9pt">RISK 97 / 100 · CRITICAL</span></p>
+<h2>1. Executive summary</h2><p>Nine benefit applications were submitted from a single IP address within a 16.8-second window by an automated agent, all citing the unregistered employer "Northwind Staffing Solutions LLC" and sharing a common bank account.</p>
+<h2>2. Application inventory</h2><table><tr><th>Application</th><th>Applicant</th><th>Monthly benefit</th><th>Status</th></tr>${rows}<tr><th colspan="2">Total held</th><th style="text-align:right">${eur(FREEZE_TOTAL)}</th><th>FROZEN</th></tr></table>
+<h2>3. Responsible-AI risk explainability</h2><table><tr><th>Contributing factor</th><th>Weight</th></tr>${rai}</table>
+<div class="foot">Demonstration document · synthetic data. Names, companies, IP addresses and figures are fictitious.</div></body></html>`;
+}
+function downloadCaseFile(){
+  const btn=document.querySelector('[data-action="dlcase"]');
+  if(btn){btn.textContent="⏳ Generating…";btn.disabled=true;}
+  fetch("/api/officer/clusters/4471/casefile")
+    .then(r=>{if(!r.ok)throw new Error("no-api");return r.blob();})
+    .then(blob=>{const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download="Fraud-Case-File-Cluster-4471.docx";document.body.appendChild(a);a.click();setTimeout(()=>{document.body.removeChild(a);URL.revokeObjectURL(url);},800);if(btn){btn.textContent="✓ Downloaded";btn.disabled=false;}})
+    .catch(()=>{const blob=new Blob(["\uFEFF",caseFileHTML()],{type:"application/msword"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download="Fraud-Case-File-Cluster-4471.doc";document.body.appendChild(a);a.click();setTimeout(()=>{document.body.removeChild(a);URL.revokeObjectURL(url);},800);if(btn){btn.textContent="✓ Downloaded";btn.disabled=false;}});
+}
+
+/* ===== Guided tour ===== */
+const TOUR=[
+  {view:"home",head:"The mission",text:"Governments lose billions to benefits fraud. Meet two personas — an applicant and an integrity officer — and the AI that serves both.",run:null},
+  {view:"home",head:"18 capabilities",text:"Across this story, 18 Microsoft AI capabilities work together. Watch the capability map light up as we go.",run:null},
+  {view:"s1",head:"Scenario 1 · Prevention",text:"A fraud-ring applicant begins a claim. Identity proofing runs via Entra Verified ID.",run:()=>{s1Runner.init();s1Runner.autoRun(0);}},
+  {view:"s1",head:"Forged passport",text:"They upload a passport. Document Intelligence reads it; Azure AI Vision spots a tampered, face-swapped portrait.",run:async()=>{await sleep(300);s1Runner.next();await sleep(400);s1Runner.autoRun(1);}},
+  {view:"s1",head:"Fictitious employer",text:"A pay stub from 'Northwind Staffing' — an employer that doesn't legally exist. Fabric cross-match exposes it.",run:async()=>{await sleep(300);s1Runner.next();await sleep(400);s1Runner.autoRun(2);}},
+  {view:"s1",head:"Altered address",text:"An 11-month-old utility bill with an altered name. Outside policy and tampered.",run:async()=>{await sleep(300);s1Runner.next();await sleep(400);s1Runner.autoRun(3);}},
+  {view:"s1",head:"Deepfake on camera",text:"For the remote consultation, they use a deepfake. Azure Face liveness detection isn't fooled.",run:async()=>{await sleep(300);s1Runner.next();await sleep(400);s1Runner.autoRun(4);}},
+  {view:"s1",head:"Blocked at the door",text:"Azure AI Foundry orchestrates every finding and blocks the claim before it is ever submitted. Fully explainable.",run:async()=>{await sleep(300);s1Runner.next();}},
+  {view:"s3",head:"Scenario 2 · The genuine applicant",text:"Now an honest citizen — Elena — applies. The same agents run; watch every check pass.",run:()=>{s3Runner.init();s3Runner.autoRun(0);}},
+  {view:"s3",head:"Genuine passport",text:"Her passport is authentic — Document Intelligence and Vision find no tampering.",run:async()=>{await sleep(300);s3Runner.next();await sleep(400);s3Runner.autoRun(1);}},
+  {view:"s3",head:"Real employer, matching income",text:"Her pay stub is from Contoso — a registered employer — and the income matches tax records.",run:async()=>{await sleep(300);s3Runner.next();await sleep(400);s3Runner.autoRun(2);}},
+  {view:"s3",head:"Valid address",text:"A recent, unaltered utility bill clears the proof-of-address check.",run:async()=>{await sleep(300);s3Runner.next();await sleep(400);s3Runner.autoRun(3);}},
+  {view:"s3",head:"A live person",text:"On video, Azure Face confirms a live person who matches the ID — no deepfake.",run:async()=>{await sleep(300);s3Runner.next();await sleep(400);s3Runner.autoRun(4);}},
+  {view:"s3",head:"Approved in seconds",text:"The same orchestration that blocked the ring auto-approves Elena at risk 12. Fairness, engineered in.",run:async()=>{await sleep(300);s3Runner.next();}},
+  {view:"s2",head:"Scenario 3 · Detection",text:"Now the officer's view. Some fraud slips past intake — so we watch what's already submitted. The top case is a coordinated burst.",run:()=>{closeCase();}},
+  {view:"s2",head:"Cyber signals",text:"Nine applications from the same IP, submitted under 17 seconds apart by a bot — all citing the same fake employer.",run:()=>{openCase();}},
+  {view:"s2",head:"The network revealed",text:"Graph analytics link all nine applicants to a shared IP, employer, bank account and phone. The ring is exposed.",run:null},
+  {view:"s2",head:"Human decides — four actions",text:"The officer acts: freeze payments, open enforcement case, generate case file, alert agencies — every step audited in Purview.",run:()=>{const seq=["freeze","escalate","casefile","notify"];seq.forEach((d,i)=>setTimeout(()=>doDecision(d,document.querySelector(`.act[data-d="${d}"]`)),i*700));}},
+  {view:"close",head:"From recovery to prevention",text:"Fraud stopped at the source, genuine citizens served faster, every decision explainable and human-led. That's the Microsoft difference.",run:null}
+];
+let ti=-1,tourOn=false;
+function tourStart(){tourOn=true;ti=-1;s1Runner.init();s3Runner.init();closeCase();document.getElementById("narrator").classList.add("on");tourNext();}
+function tourStop(){tourOn=false;document.getElementById("narrator").classList.remove("on");}
+function tourNext(){
+  if(ti>=TOUR.length-1){tourStop();return;}
+  ti++;const t=TOUR[ti];
+  showView(t.view);
+  document.getElementById("narHead").textContent=t.head;
+  document.getElementById("narText").innerHTML=t.text;
+  document.getElementById("narFill").style.width=((ti+1)/TOUR.length*100)+"%";
+  document.getElementById("tourNextBtn").textContent=ti>=TOUR.length-1?"Finish ✓":"Next →";
+  if(t.run)setTimeout(t.run,350);
+}
+
+/* ===== Init ===== */
+s1Runner.init();s3Runner.init();
+
+/* ===== Events ===== */
+document.addEventListener("click",function(e){
+  const vt=e.target.closest("[data-view]");if(vt){showView(vt.getAttribute("data-view"));return;}
+  const a=e.target.closest("[data-action]");if(!a)return;
+  const act=a.getAttribute("data-action");
+  if(act==="s1next")s1Runner.next();
+  else if(act==="s1reset")s1Runner.init();
+  else if(act==="s3next")s3Runner.next();
+  else if(act==="s3reset")s3Runner.init();
+  else if(act==="opencase")openCase();
+  else if(act==="closecase")closeCase();
+  else if(act==="decision")doDecision(a.getAttribute("data-d"),a);
+  else if(act==="tour")tourStart();
+  else if(act==="tourstop")tourStop();
+  else if(act==="tournext")tourNext();
+  else if(act==="dlcase")downloadCaseFile();
+});
+document.addEventListener("click",function(e){const n=e.target.closest(".g-node");if(n)highlightNode(n.getAttribute("data-node"));});
+document.addEventListener("mouseover",function(e){const n=e.target.closest(".g-node");if(n)highlightNode(n.getAttribute("data-node"));});
+
+})();
+</script>
   {id:"content",  ico:"🧠", nm:"Azure AI Content Understanding"},
   {id:"vision",   ico:"🖼️", nm:"Azure AI Vision · Tamper detection"},
   {id:"face",     ico:"🪪", nm:"Azure Face · Liveness &amp; deepfake"},
@@ -898,7 +1435,6 @@ function useCaps(ids){
 buildCapGrid("capGrid");
 buildCapGrid("capGridClose");
 
-/* ---------- view switching ---------- */
 function showView(v){
   document.querySelectorAll(".scene").forEach(s=>s.classList.remove("on"));
   const node=document.getElementById("view-"+v);
@@ -907,685 +1443,1021 @@ function showView(v){
     b.classList.toggle("on", b.getAttribute("data-view")===v);
   });
   window.scrollTo({top:0,behavior:"smooth"});
+  if(v==="s2"){ ensureOfficerQueue(); }
 }
 
-/* ---------- Scenario 1 data ---------- */
-const S1 = [
-  { ico:"✅", title:"Identity proofing", agent:"Identity Proofing Agent",
-    caps:["verid","foundry"],
-    hint:"Applicant asked to present a verifiable digital credential.",
-    render:()=>docStageMsg("🪪","Requesting a verifiable credential via Microsoft Entra Verified ID…"),
-    delta:15, ok:false,
-    signals:["Identity not backed by a cryptographically <b>verifiable credential</b>","Self-asserted name only — no trusted issuer"]
+function byId(id){ return document.getElementById(id); }
+function clone(obj){ return JSON.parse(JSON.stringify(obj)); }
+function sleep(ms){ return new Promise(resolve=>setTimeout(resolve, ms)); }
+function escapeHtml(value){
+  return String(value == null ? "" : value)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#39;");
+}
+function slugFileName(path){
+  return (path.split("/").pop() || "sample.png").replace(/[^a-z0-9._-]/gi,"-");
+}
+function capPills(ids){
+  return `<div class="usedcaps">${ids.map(c=>{ const cc=CAPS.find(x=>x.id===c); return `<span>${cc?cc.ico:""} ${cc?cc.nm.replace(/&amp;/g,"&"):c}</span>`; }).join("")}</div>`;
+}
+
+const FIXTURES = {
+  scenario1: {
+    steps: [
+      {order:1, agent:"identity-proofing", title:"Identity proofing", capabilities:["verid","foundry"], result:{riskDelta:15, ok:false, findings:["Identity not backed by a cryptographically verifiable credential","Self-asserted name only — no trusted issuer"]}},
+      {order:2, agent:"document-parsing+validation", title:"Government ID — passport", capabilities:["docintel","vision","content"], result:{riskDelta:30, ok:false, findings:["Tampered portrait detected — face region spliced / re-compressed","Document metadata edited 2 days ago in image software","Portrait does not match document substrate"]}},
+      {order:3, agent:"consistency-checker", title:"Proof of income — pay stub", capabilities:["docintel","openai","fabric"], result:{riskDelta:25, ok:false, findings:["Employer has no active business / VAT registration","Synthetic pay stub — font & kerning anomalies, weekend pay date","Declared income inconsistent with matched tax records"]}},
+      {order:4, agent:"validation", title:"Proof of address — utility bill", capabilities:["docintel","vision"], result:{riskDelta:10, ok:false, findings:["Document outdated — issued 11 months ago (exceeds 3-month rule)","Account-holder name altered — different embedded font detected"]}},
+      {order:5, agent:"face-verification", title:"Remote video consultation", capabilities:["face","safety","vision"], result:{riskDelta:15, ok:false, findings:["Deepfake / synthetic video detected — frame-level GAN artifacts","Liveness check failed — no natural micro-expressions or blink","Face does not match the (already tampered) ID portrait"]}}
+    ],
+    decision: {
+      outcome:"block",
+      riskScore:95,
+      reasons:["Tampered passport portrait (deepfake face-swap)","Forged pay stub from a fictitious, unregistered employer","Outdated & altered proof of address","Deepfake detected in the live video consultation","Identity never backed by a verifiable credential"],
+      explainability:{document_tampering:0.34,deepfake_liveness:0.26,fictitious_employer:0.20,identity_unverifiable:0.12,cross_record_mismatch:0.08},
+      fairnessSafeguard:"A genuine applicant with a minor mismatch (e.g. a blurry scan) is auto-reconciled or routed to human review — never auto-blocked."
+    }
   },
-  { ico:"🪪", title:"Government ID — passport", agent:"Document Parsing + Validation Agent",
-    caps:["docintel","vision","content"],
-    hint:"Passport uploaded. Running OCR + image-tamper analysis.",
-    render:renderPassport,
-    delta:30, ok:false,
-    signals:["<b>Tampered portrait</b> detected — face region spliced / re-compressed (Error-Level Analysis)","Document metadata edited 2 days ago in image software","Portrait does not match document substrate"]
+  scenario3: {
+    steps: [
+      {order:1, agent:"identity-proofing", title:"Identity proofing", capabilities:["verid","foundry"], result:{riskDelta:2, ok:true, findings:["Verifiable credential validated — issued by a trusted government issuer"]}},
+      {order:2, agent:"document-parsing+validation", title:"Government ID — passport", capabilities:["docintel","vision","content"], result:{riskDelta:2, ok:true, findings:["Passport authentic — no tampering detected","Portrait matches the document and the applicant"]}},
+      {order:3, agent:"consistency-checker", title:"Proof of income — pay stub", capabilities:["docintel","openai","fabric"], result:{riskDelta:2, ok:true, findings:["Employer “Contoso Ltd” is registered — valid VAT ID UT-VAT-114829","Declared income matches tax records (Fabric cross-match)"]}},
+      {order:4, agent:"validation", title:"Proof of address — utility bill", capabilities:["docintel","vision"], result:{riskDelta:2, ok:true, findings:["Issued this month — within the 3-month policy","Name and address consistent; no alterations detected"]}},
+      {order:5, agent:"face-verification", title:"Remote video consultation", capabilities:["face","safety","vision"], result:{riskDelta:2, ok:true, findings:["Live person confirmed — natural micro-expressions and blink detected","Face matches the passport portrait (score 0.97)"]}}
+    ],
+    decision: {
+      outcome:"approve",
+      riskScore:12,
+      reasons:["Verifiable identity credential (Entra Verified ID)","Authentic passport — no tampering","Registered employer; income matches tax records","Recent, unaltered proof of address","Live person on video; face matches ID"],
+      fairnessSafeguard:"All five checks passed. Auto-approved — no human review required for low-risk applications."
+    }
   },
-  { ico:"💵", title:"Proof of income — pay stub", agent:"Validation Agent + Consistency Checker",
-    caps:["docintel","openai","fabric"],
-    hint:"Pay stub uploaded. Cross-matching employer + income.",
-    render:renderPaystub,
-    delta:25, ok:false,
-    signals:["Employer <b>“Northwind Staffing Solutions”</b> has no active business / VAT registration","Synthetic pay stub — font &amp; kerning anomalies, weekend pay date","Declared income inconsistent with matched tax records (Fabric cross-match)"]
-  },
-  { ico:"🏠", title:"Proof of address — utility bill", agent:"Validation Agent",
-    caps:["docintel","vision"],
-    hint:"Utility bill uploaded. Checking recency + integrity.",
-    render:()=>docStageMsg("🧾","Utility bill — verifying issue date &amp; field integrity…"),
-    delta:10, ok:false,
-    signals:["Document <b>outdated</b> — issued 11 months ago (exceeds 3-month rule)","Account-holder name altered — different embedded font detected"]
-  },
-  { ico:"🎥", title:"Remote video consultation", agent:"Face Verification Agent",
-    caps:["face","safety","vision"],
-    hint:"Live verification call started. Running liveness + deepfake checks.",
-    render:renderVideo,
-    delta:15, ok:false,
-    signals:["<b>Deepfake / synthetic video</b> detected — frame-level GAN artifacts","Liveness check failed — no natural micro-expressions or blink","Face does not match the (already tampered) ID portrait"]
-  },
-  { ico:"⬡", title:"Orchestrated eligibility decision", agent:"Eligibility Decision Agent",
-    caps:["foundry","openai","rai","purview","powerbi"],
-    hint:"All agents reporting. Composing final decision.",
-    render:()=>docStageMsg("🧠","Azure AI Foundry orchestrating all agent findings…"),
-    delta:0, ok:false, final:true,
-    signals:["Aggregate fraud risk <b>95 / 100</b> — threshold for auto-block exceeded","Decision is explainable &amp; logged — submission halted pre-filing"]
+  officer: {
+    queue:[
+      {caseId:"Cluster #4471", risk:97, tier:"hi", reason:"Same IP · <17s apart · shared fictitious employer", agent:"Cyber Signals Agent"},
+      {caseId:"A-88210", risk:61, tier:"md", reason:"Declared income 38% below matched tax record", agent:"Consistency Checker"},
+      {caseId:"A-88204", risk:12, tier:"lo", reason:"Verified credential · all cross-checks passed · auto-approved", agent:"Eligibility Decision Agent"}
+    ],
+    cluster:{
+      id:"4471",
+      risk:97,
+      applicationCount:9,
+      annualizedExposureEur:1600000,
+      cyberSignals:{sourceIp:"203.0.113.45",asn:"AS64500",asnType:"hosting/vpn",deviceFingerprint:"7f3a...c1",deviceFingerprintReuse:9,formFillMsPerField:74,submissionWindowSeconds:16.8,meanInterArrivalSeconds:1.9,threatIntelMatch:"Microsoft Defender — known ring TTP"},
+      submissionTimestamps:["14:02:01.3","14:02:03.1","14:02:05.0","14:02:06.8","14:02:08.9","14:02:11.2","14:02:13.4","14:02:15.9","14:02:18.1"],
+      sharedEntities:{employer:{name:"Northwind Staffing Solutions LLC",registered:false},ibanSharedOn:7,phonesShared:2},
+      riskExplainability:{coordinated_same_ip_burst:0.32,shared_fictitious_employer:0.24,shared_bank_account:0.18,bot_like_form_cadence:0.14,device_fingerprint_reuse:0.12}
+    },
+    applications:[
+      {id:"A-90412", applicant:"A. Volkov", monthlyBenefitEur:1420, sharedIban:true, sharedPhone:false},
+      {id:"A-90413", applicant:"I. Petrov", monthlyBenefitEur:1380, sharedIban:true, sharedPhone:false},
+      {id:"A-90414", applicant:"N. Sokol", monthlyBenefitEur:1510, sharedIban:true, sharedPhone:true},
+      {id:"A-90415", applicant:"R. Marin", monthlyBenefitEur:1295, sharedIban:true, sharedPhone:false},
+      {id:"A-90416", applicant:"D. Ilic", monthlyBenefitEur:1460, sharedIban:true, sharedPhone:false},
+      {id:"A-90417", applicant:"K. Novak", monthlyBenefitEur:1350, sharedIban:true, sharedPhone:true},
+      {id:"A-90418", applicant:"S. Toma", monthlyBenefitEur:1540, sharedIban:true, sharedPhone:false},
+      {id:"A-90419", applicant:"L. Horvat", monthlyBenefitEur:1400, sharedIban:false, sharedPhone:false},
+      {id:"A-90420", applicant:"M. Radu", monthlyBenefitEur:1325, sharedIban:false, sharedPhone:false}
+    ],
+    totals:{monthlyBenefitHeldEur:12680},
+    actions:{
+      freeze:{label:"Freeze payments", agent:"Disbursement Engine · Azure ML", status:"FUNDS HELD"},
+      escalate:{label:"Escalate to investigation", agent:"Dynamics 365 · Case Management", status:"UNDER INVESTIGATION", caseId:"ENF-4471", investigator:"J. Marković", slaHours:48},
+      casefile:{label:"Generate case file", agent:"Document Generator + M365 Copilot", status:"READY"},
+      notify:{label:"Notify partner agencies", agent:"Notification Agent · Purview governed", status:"SENT", recipients:["National Tax Authority","Police — Financial Crimes Unit","Financial Intelligence Unit (FIU)"]}
+    }
   }
-];
-let s1i = -1, risk = 0;
+};
 
-function docStageMsg(icon,text){
-  return `<div style="text-align:center"><div style="font-size:46px">${icon}</div><div class="doc-hint" style="margin-top:10px">${text}</div></div>`;
-}
-function renderPassport(){
-  return `<div class="passport" id="ppCard">
-    <div class="pp-h"><span>PASSPORT · SPECIMEN</span><span>UTOPIA</span></div>
-    <div class="pp-row">
-      <div class="photo">🧑<div class="ela"></div><div class="tamper-badge">TAMPERED</div></div>
-      <div class="fields">
-        <div class="f"><div class="k">Surname</div><div class="vv">VOLKOV</div></div>
-        <div class="f"><div class="k">Given name</div><div class="vv">ANDREI</div></div>
-        <div class="f bad"><div class="k">Passport №</div><div class="vv">X1 902 412</div></div>
-        <div class="f"><div class="k">Expiry</div><div class="vv">2031-04</div></div>
-      </div>
-    </div></div>`;
-}
-function renderPaystub(){
-  return `<div class="paper" id="psCard">
-    <div class="stamp">FORGED</div>
-    <h5>Northwind Staffing Solutions LLC</h5>
-    <div class="small">Payslip · Period 05/2026 · Ref NW-44812</div>
-    <div class="ln"><span>Employee</span><span>A. Volkov</span></div>
-    <div class="ln"><span>Employer VAT</span><span class="hl">INVALID / UNREGISTERED</span></div>
-    <div class="ln"><span>Gross pay</span><span class="hl">€4,950.00</span></div>
-    <div class="ln"><span>Pay date</span><span class="hl">Sun 2026-05-31</span></div>
-    <div class="ln"><span>Net pay</span><span>€3,910.00</span></div>
-  </div>`;
-}
-function renderVideo(){
-  return `<div class="videobox" id="vidCard">
-    <div class="rec"><i></i> LIVE</div>
-    <div class="mesh"></div>
-    <div class="face">🧑‍🦱</div>
-    <div class="deepfake-tag">⚠ DEEPFAKE DETECTED · liveness failed</div>
-  </div>`;
-}
+const WIZARD_LABELS = ["Identity","Passport","Pay stub","Address","Video","Decision"];
+const SCENARIOS = {
+  s1: {
+    wizardId:"s1Wizard", stageLabelId:"s1StageLabel", docStageId:"docStage", nextBtnId:"s1NextBtn", statusId:"s1Status",
+    railId:"s1Steps", sigId:"sigStream", gaugeArcId:"gaugeArc", riskNumId:"riskNum", riskChipId:"riskChip",
+    verdictBannerId:"verdictBanner", viewPrefix:"/api/scenario1", decisionPath:"/api/scenario1/decision", fixtureKey:"scenario1",
+    steps:[
+      {label:"Identity", icon:"✅", title:"Identity proofing", agent:"Identity Proofing Agent", kind:"identity", desc:"Verify your identity with Entra Verified ID", actionText:"🔐 Verify with Entra ID →", caps:["verid","foundry"]},
+      {label:"Passport", icon:"🪪", title:"Government ID — passport", agent:"Document Parsing + Validation Agent", kind:"upload", desc:"Upload the passport image for OCR, metadata analysis and tamper detection.", samplePath:"/docs/scenario1/passport-tampered.png", sampleLabel:"passport-tampered.png", caps:["docintel","vision","content"], overlay:{cls:"flag-region", tagCls:"flag-tag", label:"⚠ Face-swap detected", style:"left:10%;top:5%;width:28%;height:65%;"}},
+      {label:"Pay stub", icon:"💵", title:"Proof of income — pay stub", agent:"Validation Agent + Consistency Checker", kind:"upload", desc:"Cross-match the pay stub with employer registration and tax records.", samplePath:"/docs/scenario1/payslip-northwind.png", sampleLabel:"payslip-northwind.png", caps:["docintel","openai","fabric"], overlay:{cls:"flag-region", tagCls:"flag-tag", label:"⚠ Employer unregistered", style:"left:3%;top:30%;width:94%;height:50%;"}},
+      {label:"Address", icon:"🏠", title:"Proof of address — utility bill", agent:"Validation Agent", kind:"upload", desc:"Check recency, field integrity and policy compliance on the submitted utility bill.", samplePath:"/docs/scenario1/utility-bill.png", sampleLabel:"utility-bill.png", caps:["docintel","vision"], overlay:{cls:"flag-region", tagCls:"flag-tag", label:"⚠ Date altered", style:"left:3%;top:5%;width:60%;height:22%;"}},
+      {label:"Video", icon:"🎥", title:"Remote video consultation", agent:"Face Verification Agent", kind:"video", desc:"Start the live verification flow. The frame is loaded automatically for liveness and deepfake analysis.", samplePath:"/docs/scenario1/video-consult-frame.png", badgeText:"⚠ DEEPFAKE DETECTED · liveness failed", badgeClass:"bad", caps:["face","safety","vision"]},
+      {label:"Decision", icon:"⬡", title:"Orchestrated eligibility decision", agent:"Eligibility Decision Agent", kind:"decision", desc:"Azure AI Foundry composes the final verdict and explainability package.", caps:["foundry","openai","rai","purview","powerbi"]}
+    ]
+  },
+  s3: {
+    wizardId:"s3Wizard", stageLabelId:"s3StageLabel", docStageId:"docStage3", nextBtnId:"s3NextBtn", statusId:"s3Status",
+    railId:"s3Steps", sigId:"sigStream3", gaugeArcId:"gaugeArc3", riskNumId:"riskNum3", riskChipId:"riskChip3",
+    verdictBannerId:"verdictBanner3", viewPrefix:"/api/scenario3", decisionPath:"/api/scenario3/decision", fixtureKey:"scenario3",
+    steps:[
+      {label:"Identity", icon:"✅", title:"Identity proofing", agent:"Identity Proofing Agent", kind:"identity", desc:"Verify your identity with Entra Verified ID", actionText:"🔐 Verify with Entra ID →", caps:["verid","foundry"]},
+      {label:"Passport", icon:"🪪", title:"Government ID — passport", agent:"Document Parsing + Validation Agent", kind:"upload", desc:"Upload the passport image for authenticity and portrait checks.", samplePath:"/docs/scenario2/passport-clean-elena.png", sampleLabel:"passport-clean-elena.png", caps:["docintel","vision","content"]},
+      {label:"Pay stub", icon:"💵", title:"Proof of income — pay stub", agent:"Validation Agent + Consistency Checker", kind:"upload", desc:"Cross-check the employer and income against trusted records.", samplePath:"/docs/scenario2/payslip-contoso.png", sampleLabel:"payslip-contoso.png", caps:["docintel","openai","fabric"]},
+      {label:"Address", icon:"🏠", title:"Proof of address — utility bill", agent:"Validation Agent", kind:"upload", desc:"Validate recency and consistency on the utility bill.", samplePath:"/docs/scenario2/utility-bill-recent.png", sampleLabel:"utility-bill-recent.png", caps:["docintel","vision"]},
+      {label:"Video", icon:"🎥", title:"Remote video consultation", agent:"Face Verification Agent", kind:"video", desc:"Run live liveness and face-match checks against the identity document.", samplePath:"/docs/scenario2/video-consult-frame-clean.png", badgeText:"✓ LIVENESS PASSED · face matches ID", badgeClass:"good", caps:["face","safety","vision"]},
+      {label:"Decision", icon:"⬡", title:"Orchestrated eligibility decision", agent:"Eligibility Decision Agent", kind:"decision", desc:"Azure AI Foundry composes the low-risk decision and audit trail.", caps:["foundry","openai","rai","purview","m365"]}
+    ]
+  }
+};
 
-function buildS1Steps(){
-  const wrap=document.getElementById("s1Steps");
-  wrap.innerHTML = S1.map((s,i)=>
-    `<div class="step" data-step="${i}">
-       <div class="sico">${s.ico}</div>
-       <div class="sbody">
-         <div class="stitle">${s.title} <span class="agent">⬡ ${s.agent}</span></div>
-         <div class="smeta">Awaiting check…</div>
-         <div class="result"></div>
-       </div>
-     </div>`).join("");
+function freshWizardState(){
+  return {current:0,running:false,complete:false,nextEnabled:false,risk:0,stepResults:[],signalItems:[],previewAssets:{},decision:null,message:"Complete each check to unlock the next step."};
 }
-function setGauge(v){
-  const off = 220 - (220 * Math.min(v,100)/100);
-  document.getElementById("gaugeArc").style.strokeDashoffset = off;
-  document.getElementById("riskNum").textContent = Math.round(v);
-}
-function pushSignalStream(html, ok){
-  const s=document.getElementById("sigStream");
-  const row=document.createElement("div");
-  row.className="ss";
-  row.innerHTML=`<span>${ok?"🟢":"🔺"}</span><span>${html}</span>`;
-  s.appendChild(row);
-  requestAnimationFrame(()=>row.classList.add("show"));
-}
+const wizardState = { s1:freshWizardState(), s3:freshWizardState() };
 
-function s1Advance(){
-  if(s1i >= S1.length-1){ return false; }
-  s1i++;
-  const s = S1[s1i];
-  document.getElementById("s1StageLabel").textContent = "Step "+(s1i+1)+" of "+S1.length;
-  // mark active
-  document.querySelectorAll("#s1Steps .step").forEach((n,idx)=>{
-    n.classList.toggle("active", idx===s1i);
+function setPreviewAsset(view, idx, url, revokable){
+  const state = wizardState[view];
+  const prev = state.previewAssets[idx];
+  if(prev && prev.revokable && prev.url){ URL.revokeObjectURL(prev.url); }
+  state.previewAssets[idx] = {url:url || "", revokable:!!revokable};
+}
+function revokeAllScenarioAssets(view){
+  const assets = wizardState[view].previewAssets;
+  Object.keys(assets).forEach(key=>{
+    const entry = assets[key];
+    if(entry && entry.revokable && entry.url){ URL.revokeObjectURL(entry.url); }
   });
-  const stage=document.getElementById("docStage");
-  stage.innerHTML = '<div class="scanline"></div>' + (s.render? s.render() : docStageMsg("📄",s.hint));
-  document.getElementById("docHint") && (document.getElementById("docHint").innerHTML=s.hint);
-  // scan animation then reveal
-  stage.classList.add("scanning");
-  if(s1i===4) stage.classList.add("scanning-video");
-  useCaps(s.caps);
-
-  setTimeout(()=>{
-    stage.classList.remove("scanning","scanning-video");
-    // flag visuals
-    const pp=document.getElementById("ppCard"); if(pp) pp.parentElement.classList.add("flagphoto");
-    const ps=document.getElementById("psCard"); if(ps) ps.parentElement.classList.add("flagdoc");
-    const vc=document.getElementById("vidCard"); if(vc){ vc.classList.add("flagvideo"); }
-    if(document.getElementById("ppCard")) document.getElementById("docStage").classList.add("flagphoto");
-    if(document.getElementById("psCard")) document.getElementById("docStage").classList.add("flagdoc");
-    if(document.getElementById("vidCard")) document.getElementById("docStage").classList.add("flagvideo");
-
-    // step result
-    const stepNode=document.querySelectorAll("#s1Steps .step")[s1i];
-    stepNode.classList.remove("active");
-    stepNode.classList.add(s.final? "done":"flag");
-    stepNode.querySelector(".smeta").textContent = s.final? "Decision composed" : "Risk signals found";
-    stepNode.querySelector(".result").innerHTML =
-      s.signals.map(sig=>`<div class="signal"><span class="si">🔺</span><span>${sig}</span></div>`).join("") +
-      `<div class="usedcaps">${s.caps.map(c=>{const cc=CAPS.find(x=>x.id===c);return `<span>${cc?cc.ico:""} ${cc?cc.nm.replace(/&amp;/g,'&'):c}</span>`}).join("")}</div>`;
-    // risk
-    risk = Math.min(95, risk + s.delta);
-    setGauge(risk);
-    s.signals.forEach(sig=>pushSignalStream(sig,false));
-
-    if(risk>=70){ document.getElementById("riskChip").className="verdict-chip vc-block"; document.getElementById("riskChip").textContent="High risk"; }
-    else if(risk>=35){ document.getElementById("riskChip").className="verdict-chip"; document.getElementById("riskChip").style.cssText=""; document.getElementById("riskChip").classList.add("verdict-chip"); document.getElementById("riskChip").textContent="Elevated"; }
-
-    if(s.final){ finalizeS1(); }
-  }, s.render && (s1i!==3 && s1i!==5)? 1500 : 1100);
-  return true;
+}
+function fixtureStepResponse(view, stepNumber){
+  const src = FIXTURES[SCENARIOS[view].fixtureKey];
+  const step = src.steps[stepNumber-1];
+  let cumulative = 0;
+  for(let i=0;i<stepNumber;i++){ cumulative += src.steps[i].result.riskDelta; }
+  if(view==="s1"){ cumulative = Math.min(95, cumulative); }
+  return {
+    order:step.order,
+    agent:step.agent,
+    title:step.title,
+    capabilities:clone(step.capabilities),
+    findings:clone(step.result.findings),
+    riskDelta:step.result.riskDelta,
+    ok:!!step.result.ok,
+    cumulativeRisk:cumulative
+  };
+}
+function fixtureDecisionResponse(view){
+  return clone(FIXTURES[SCENARIOS[view].fixtureKey].decision);
 }
 
-function finalizeS1(){
-  document.getElementById("riskChip").className="verdict-chip vc-block";
-  document.getElementById("riskChip").textContent="Blocked";
-  setGauge(95);
-  const banner=document.getElementById("verdictBanner"); banner.classList.add("show");
-  document.getElementById("verdictReasons").innerHTML = [
-    "Tampered passport portrait (deepfake face-swap)",
-    "Forged pay stub from a fictitious, unregistered employer",
-    "Outdated &amp; altered proof of address",
-    "Deepfake detected in the live video consultation",
-    "Identity never backed by a verifiable credential"
-  ].map(r=>`<li>${r}</li>`).join("");
-  const bars=[
-    ["Document tampering",34],["Deepfake / liveness",26],["Fictitious employer",20],["Identity unverifiable",12],["Cross-record mismatch",8]
+async function fetchJsonWithFallback(requests, fallbackFactory){
+  for(let i=0;i<requests.length;i++){
+    const req = requests[i];
+    try{
+      const res = await fetch(req.url, req.options || {});
+      if(!res.ok) throw new Error("HTTP "+res.status);
+      return await res.json();
+    }catch(err){}
+  }
+  return fallbackFactory();
+}
+async function analyzeStepApi(view, stepNumber, file){
+  const cfg = SCENARIOS[view];
+  const url = cfg.viewPrefix + "/analyze/" + stepNumber;
+  const requests = [];
+  if(view==="s1" && stepNumber===1){
+    requests.push({url:url, options:{method:"GET"}});
+    requests.push({url:url, options:{method:"POST"}});
+  }else{
+    let body = null;
+    if(file){
+      body = new FormData();
+      body.append("file", file, file.name || ("step-"+stepNumber+".png"));
+    }
+    requests.push({url:url, options:{method:"POST", body:body}});
+  }
+  const response = await fetchJsonWithFallback(requests, ()=>fixtureStepResponse(view, stepNumber));
+  if(typeof response.ok !== "boolean"){ response.ok = view==="s3"; }
+  if(typeof response.cumulativeRisk !== "number"){
+    response.cumulativeRisk = fixtureStepResponse(view, stepNumber).cumulativeRisk;
+  }
+  return response;
+}
+async function fetchDecisionApi(view){
+  return fetchJsonWithFallback([{url:SCENARIOS[view].decisionPath, options:{method:"GET"}}], ()=>fixtureDecisionResponse(view));
+}
+
+function setGaugeFor(view, value){
+  const cfg = SCENARIOS[view];
+  const off = 220 - (220 * Math.min(value,100) / 100);
+  byId(cfg.gaugeArcId).style.strokeDashoffset = off;
+  byId(cfg.riskNumId).textContent = Math.round(value);
+}
+function setGauge(v){ setGaugeFor("s1", v); }
+function setGauge3(v){ setGaugeFor("s3", v); }
+
+function setRiskChip(view, text, kind, inlineStyle){
+  const chip = byId(SCENARIOS[view].riskChipId);
+  chip.className = "verdict-chip" + (kind ? " "+kind : "");
+  chip.textContent = text;
+  chip.style.cssText = inlineStyle || "";
+}
+function updateRiskChip(view){
+  const state = wizardState[view];
+  if(view==="s1"){
+    if(state.complete){ setRiskChip("s1","Blocked","vc-block"); return; }
+    if(state.risk >= 70){ setRiskChip("s1","High risk","vc-block"); return; }
+    if(state.risk >= 35){ setRiskChip("s1","Elevated","", "background:rgba(255,186,73,.14);color:var(--amber);border:1px solid rgba(255,186,73,.35)"); return; }
+    setRiskChip("s1","Evaluating","vc-eval");
+    return;
+  }
+  if(state.complete){ setRiskChip("s3","Approved","vc-clear"); return; }
+  if(state.risk > 0){ setRiskChip("s3","Low risk","vc-clear"); return; }
+  setRiskChip("s3","Evaluating","vc-eval");
+}
+
+function renderWizardTrack(view){
+  const cfg = SCENARIOS[view];
+  const state = wizardState[view];
+  byId(cfg.wizardId).innerHTML = cfg.steps.map((step, idx)=>{
+    let cls = "wz-step";
+    const result = state.stepResults[idx];
+    if(result){ cls += (view==="s3" || result.ok) ? " done" : " flag"; }
+    else if(!state.complete && idx===state.current){ cls += " active"; }
+    return `<div class="${cls}"><div class="wz-dot">${idx+1}</div><div class="wz-label">${step.label}</div></div>`;
+  }).join("");
+  byId(cfg.stageLabelId).textContent = "Step " + Math.min(state.current + 1, cfg.steps.length) + " of " + cfg.steps.length;
+}
+
+function renderSignalStream(view){
+  const cfg = SCENARIOS[view];
+  const items = [];
+  wizardState[view].stepResults.forEach(result=>{
+    if(!result) return;
+    (result.findings || []).forEach(f=>items.push({text:f, ok:!!result.ok}));
+  });
+  byId(cfg.sigId).innerHTML = items.map(item=>`<div class="ss show"><span>${item.ok?"🟢":"🔺"}</span><span>${escapeHtml(item.text)}</span></div>`).join("");
+}
+
+function renderActivityRail(view){
+  const cfg = SCENARIOS[view];
+  const state = wizardState[view];
+  const done = state.stepResults.filter(Boolean);
+  if(!done.length){
+    byId(cfg.railId).innerHTML = `<div class="doc-hint" style="padding:10px 6px;text-align:left">Agent findings will appear here as each check completes.</div>`;
+    return;
+  }
+  byId(cfg.railId).innerHTML = state.stepResults.map((result, idx)=>{
+    if(!result) return "";
+    const step = cfg.steps[idx];
+    const cls = result.ok || view==="s3" ? "step done" : "step flag";
+    const signals = (result.findings || []).map(text=>`<div class="signal${result.ok ? " ok" : ""}"><span class="si">${result.ok?"🟢":"⚠"}</span><span>${escapeHtml(text)}</span></div>`).join("");
+    return `<div class="${cls}"><div class="sico">${step.icon}</div><div class="sbody"><div class="stitle">${escapeHtml(step.title)} <span class="agent">⬡ ${escapeHtml(result.agentLabel || step.agent)}</span></div><div class="smeta">${escapeHtml(result.summary || (result.ok ? "Verified — passed" : "Risk signals found"))}</div><div class="result">${signals}${capPills(result.capabilities || step.caps)}</div></div></div>`;
+  }).join("");
+}
+
+function updateScenarioButtons(view){
+  const cfg = SCENARIOS[view];
+  const state = wizardState[view];
+  const btn = byId(cfg.nextBtnId);
+  btn.disabled = !state.nextEnabled || state.running || state.complete;
+  btn.textContent = state.complete ? "✅ Scenario complete" : "Next step →";
+  byId(cfg.statusId).textContent = state.message;
+}
+
+function overlayMarkup(step, show){
+  if(!step.overlay) return "";
+  return `<div class="${step.overlay.cls}${show ? " show" : ""}" style="${step.overlay.style}"><span class="${step.overlay.tagCls}">${escapeHtml(step.overlay.label)}</span></div>`;
+}
+
+function renderUploadCard(view, idx){
+  const state = wizardState[view];
+  const step = SCENARIOS[view].steps[idx];
+  const preview = state.previewAssets[idx] ? state.previewAssets[idx].url : "";
+  if(preview){
+    return `<div class="step-card">
+      <div class="step-card-title">${step.icon} ${escapeHtml(step.title)}</div>
+      <div class="step-card-desc">${escapeHtml(step.desc)}</div>
+      <div class="doc-img-wrap">
+        <img class="doc-img" src="${escapeHtml(preview)}" alt="${escapeHtml(step.title)}">
+        ${overlayMarkup(step, !!state.stepResults[idx] && view==="s1")}
+      </div>
+      <div class="step-nav"><span class="subtle">${state.running ? "Scanning uploaded document…" : state.stepResults[idx] ? "Findings captured — continue when ready." : "Preparing analysis…"}</span></div>
+    </div>`;
+  }
+  const inputId = `${view}-input-${idx}`;
+  return `<div class="step-card">
+    <div class="step-card-title">${step.icon} ${escapeHtml(step.title)}</div>
+    <div class="step-card-desc">${escapeHtml(step.desc)}</div>
+    <div class="upload-zone" id="${view}-zone-${idx}">
+      <div class="uz-ico">📄</div>
+      <div class="uz-title">Drop a document here</div>
+      <div class="uz-desc">PNG or image upload supported for this demo step.</div>
+      <div class="uz-btns">
+        <label class="ghost-btn upload-label" for="${inputId}">📎 Browse file</label>
+        <button class="ghost-btn" data-action="usesample" data-scenario="${view}" data-step="${idx}">📄 Use sample: ${escapeHtml(step.sampleLabel)}</button>
+      </div>
+      <input id="${inputId}" class="hide" type="file" accept="image/*" data-scenario="${view}" data-step="${idx}">
+    </div>
+  </div>`;
+}
+
+function renderIdentityCard(view){
+  const state = wizardState[view];
+  const step = SCENARIOS[view].steps[0];
+  return `<div class="step-card">
+    <div class="step-card-title">${step.icon} ${escapeHtml(step.title)}</div>
+    <div class="step-card-desc">Verify your identity with Entra Verified ID before moving to document checks.</div>
+    <div style="display:grid;place-items:center;gap:14px;padding:12px 0 8px">
+      <div style="font-size:54px">🪪</div>
+      <div class="doc-hint" style="max-width:420px">${state.running ? "Requesting a verifiable credential and validating issuer trust…" : "Verify your identity with Entra Verified ID"}</div>
+      <button class="btn primary" data-action="verifyid" data-scenario="${view}" ${state.running ? "disabled" : ""}>🔐 Verify with Entra ID →</button>
+    </div>
+  </div>`;
+}
+
+function renderVideoCard(view, idx){
+  const state = wizardState[view];
+  const step = SCENARIOS[view].steps[idx];
+  const preview = state.previewAssets[idx] ? state.previewAssets[idx].url : "";
+  const result = state.stepResults[idx];
+  const face = view==="s1" ? "🧑‍🦱" : "🙋‍♀️";
+  const green = step.badgeClass==="good";
+  return `<div class="step-card">
+    <div class="step-card-title">${step.icon} ${escapeHtml(step.title)}</div>
+    <div class="step-card-desc">${escapeHtml(step.desc)}</div>
+    <div class="vc-screen">
+      <img class="vc-frame-img${preview ? " show" : ""}" src="${preview ? escapeHtml(preview) : ""}" alt="Video verification frame">
+      <div class="vc-face"${preview ? ' style="opacity:0"' : ""}>${face}</div>
+      <div class="vc-rec"><i style="${green ? "background:var(--green)" : ""}"></i> LIVE</div>
+      <div class="vc-mesh${state.running ? " show" : ""}"></div>
+      <div class="vc-badge ${step.badgeClass}${result ? " show" : ""}">${escapeHtml(step.badgeText)}</div>
+    </div>
+    <div class="step-nav">
+      <button class="btn primary" data-action="startvideo" data-scenario="${view}" ${state.running || result ? "disabled" : ""}>📹 Start live verification</button>
+      <span class="subtle">${state.running ? "Analyzing liveness and face match…" : result ? "Verification complete." : "Auto-loads the verification frame for analysis."}</span>
+    </div>
+  </div>`;
+}
+
+function renderDecisionCard(view){
+  const state = wizardState[view];
+  const step = SCENARIOS[view].steps[5];
+  return `<div class="step-card">
+    <div class="step-card-title">${step.icon} ${escapeHtml(step.title)}</div>
+    <div class="step-card-desc">${escapeHtml(step.desc)}</div>
+    <div style="display:grid;place-items:center;gap:14px;padding:10px 0">
+      <div style="font-size:50px">🧠</div>
+      <div class="doc-hint" style="max-width:460px">${state.complete ? (view==="s1" ? "The application is blocked before filing with fully explainable reasons." : "The application is approved with a low-risk audit trail.") : "Azure AI Foundry is orchestrating the final decision…"}</div>
+    </div>
+  </div>`;
+}
+
+function renderScenarioStage(view){
+  const cfg = SCENARIOS[view];
+  const state = wizardState[view];
+  const stepIdx = Math.min(state.current, cfg.steps.length - 1);
+  let html = '<div class="scanline"></div>';
+  if(stepIdx===0) html += renderIdentityCard(view);
+  else if(stepIdx>=1 && stepIdx<=3) html += renderUploadCard(view, stepIdx);
+  else if(stepIdx===4) html += renderVideoCard(view, stepIdx);
+  else html += renderDecisionCard(view);
+  const stage = byId(cfg.docStageId);
+  stage.className = "docstage" + ((state.running && stepIdx>=1 && stepIdx<=3) ? " scanning" : "");
+  stage.innerHTML = html;
+  if(stepIdx>=1 && stepIdx<=3 && !(state.previewAssets[stepIdx] && state.previewAssets[stepIdx].url)){ bindUploadZone(view, stepIdx); }
+  updateScenarioButtons(view);
+}
+
+function bindUploadZone(view, idx){
+  const zone = byId(`${view}-zone-${idx}`);
+  if(!zone) return;
+  ["dragenter","dragover"].forEach(evt=>zone.addEventListener(evt,function(e){ e.preventDefault(); zone.classList.add("drag-over"); }));
+  ["dragleave","dragend","drop"].forEach(evt=>zone.addEventListener(evt,function(e){ e.preventDefault(); zone.classList.remove("drag-over"); }));
+  zone.addEventListener("drop", function(e){
+    const file = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
+    if(file){ handleUploadedFile(view, idx, file); }
+  });
+}
+
+function decisionBarsMarkup(explainability){
+  const labels = {
+    document_tampering:"Document tampering",
+    deepfake_liveness:"Deepfake / liveness",
+    fictitious_employer:"Fictitious employer",
+    identity_unverifiable:"Identity unverifiable",
+    cross_record_mismatch:"Cross-record mismatch",
+    coordinated_same_ip_burst:"Coordinated same-IP burst",
+    shared_fictitious_employer:"Shared fictitious employer",
+    shared_bank_account:"Shared bank account / IBAN",
+    bot_like_form_cadence:"Bot-like form cadence",
+    device_fingerprint_reuse:"Device fingerprint reuse"
+  };
+  return Object.entries(explainability || {}).sort((a,b)=>b[1]-a[1]).map(entry=>{
+    const label = labels[entry[0]] || entry[0];
+    const pct = Math.round(entry[1] * 100);
+    return `<div class="bar"><span class="bl">${escapeHtml(label)}</span><span class="bt"><span class="bf" data-w="${pct}"></span></span><span class="bv">${pct}%</span></div>`;
+  }).join("");
+}
+
+function finalizeScenarioDecision(view, decision){
+  const state = wizardState[view];
+  state.decision = decision;
+  state.complete = true;
+  state.running = false;
+  state.nextEnabled = false;
+  state.risk = typeof decision.riskScore === "number" ? decision.riskScore : state.risk;
+  setGaugeFor(view, state.risk);
+  renderWizardTrack(view);
+  renderSignalStream(view);
+  renderActivityRail(view);
+  renderScenarioStage(view);
+  updateRiskChip(view);
+  if(view==="s1"){
+    byId("verdictReasons").innerHTML = (decision.reasons || []).map(r=>`<li>${escapeHtml(r)}</li>`).join("");
+    byId("raiBars").innerHTML = decisionBarsMarkup(decision.explainability || {});
+    byId("s1Fairness").innerHTML = `✔ <b>Fairness safeguard:</b> ${escapeHtml(decision.fairnessSafeguard || "")}`;
+    byId("verdictBanner").classList.add("show");
+    setTimeout(()=>document.querySelectorAll("#raiBars .bf").forEach(f=>{ f.style.width = f.getAttribute("data-w")+"%"; }), 120);
+    state.message = "✅ Scenario complete";
+  }else{
+    byId("approvedChecks3").innerHTML = (decision.reasons || []).map(r=>`<li>${escapeHtml(r)}</li>`).join("");
+    byId("s3Fairness").innerHTML = `✔ <b>Same agents, opposite outcome:</b> ${escapeHtml(decision.fairnessSafeguard || "")}`;
+    byId("verdictBanner3").classList.add("show");
+    state.message = "✅ Scenario complete";
+  }
+  updateScenarioButtons(view);
+}
+
+async function runDecision(view){
+  const cfg = SCENARIOS[view];
+  const state = wizardState[view];
+  state.current = 5;
+  state.running = true;
+  state.nextEnabled = false;
+  state.message = "Composing final decision…";
+  useCaps(cfg.steps[5].caps);
+  renderWizardTrack(view);
+  renderScenarioStage(view);
+  const [decision] = await Promise.all([fetchDecisionApi(view), sleep(900)]);
+  state.stepResults[5] = {
+    ok:view==="s3",
+    agentLabel:cfg.steps[5].agent,
+    capabilities:clone(cfg.steps[5].caps),
+    findings:view==="s3" ? clone(decision.reasons || []) : clone(decision.reasons || []),
+    summary:view==="s3" ? "Approved" : "Decision composed"
+  };
+  finalizeScenarioDecision(view, decision);
+}
+
+function normalizeResult(view, idx, response){
+  const step = SCENARIOS[view].steps[idx];
+  return {
+    ok:typeof response.ok === "boolean" ? response.ok : view==="s3",
+    title:response.title || step.title,
+    agentLabel:step.agent,
+    capabilities:clone(response.capabilities || step.caps),
+    findings:clone(response.findings || []),
+    summary:idx===4 ? (view==="s3" ? "Live verification passed" : "Risk signals found") : ((response.ok || view==="s3") ? "Verified — passed" : "Risk signals found")
+  };
+}
+
+async function completeStep(view, idx, response){
+  const cfg = SCENARIOS[view];
+  const state = wizardState[view];
+  const normalized = normalizeResult(view, idx, response);
+  state.stepResults[idx] = normalized;
+  state.risk = typeof response.cumulativeRisk === "number" ? response.cumulativeRisk : state.risk;
+  state.running = false;
+  useCaps(normalized.capabilities || cfg.steps[idx].caps);
+  setGaugeFor(view, state.risk);
+  updateRiskChip(view);
+  renderWizardTrack(view);
+  renderSignalStream(view);
+  renderActivityRail(view);
+  if(idx < 4){
+    state.nextEnabled = true;
+    state.message = "Findings captured. Continue to the next step.";
+    renderScenarioStage(view);
+    return;
+  }
+  state.message = "Preparing final decision…";
+  renderScenarioStage(view);
+  await sleep(250);
+  runDecision(view);
+}
+
+function scenarioStepResponseDelay(idx){
+  return idx===0 ? 850 : 1500;
+}
+
+async function runIdentityStep(view){
+  const state = wizardState[view];
+  if(state.running || state.stepResults[0]) return;
+  state.running = true;
+  state.nextEnabled = false;
+  state.message = "Verifying Entra credential…";
+  renderScenarioStage(view);
+  const [response] = await Promise.all([analyzeStepApi(view, 1, null), sleep(scenarioStepResponseDelay(0))]);
+  completeStep(view, 0, response);
+}
+
+async function beginMediaAnalysis(view, idx, file, previewUrl, revokable){
+  const state = wizardState[view];
+  if(state.running || state.stepResults[idx]) return;
+  setPreviewAsset(view, idx, previewUrl, revokable);
+  state.running = true;
+  state.nextEnabled = false;
+  state.message = idx===4 ? "Running live verification…" : "Analyzing uploaded document…";
+  renderScenarioStage(view);
+  const [response] = await Promise.all([analyzeStepApi(view, idx+1, file || null), sleep(scenarioStepResponseDelay(idx))]);
+  completeStep(view, idx, response);
+}
+
+async function handleUploadedFile(view, idx, file){
+  if(!file) return;
+  const url = URL.createObjectURL(file);
+  beginMediaAnalysis(view, idx, file, url, true);
+}
+
+async function useSampleDoc(stepDef, scenarioId){
+  const view = scenarioId;
+  const idx = SCENARIOS[view].steps.indexOf(stepDef);
+  if(idx < 0 || !stepDef.samplePath) return;
+  try{
+    const res = await fetch(stepDef.samplePath, {cache:"no-store"});
+    if(!res.ok) throw new Error("sample");
+    const blob = await res.blob();
+    const type = blob.type || "image/png";
+    const file = new File([blob], slugFileName(stepDef.samplePath), {type:type});
+    const url = URL.createObjectURL(file);
+    beginMediaAnalysis(view, idx, file, url, true);
+  }catch(err){
+    beginMediaAnalysis(view, idx, null, stepDef.samplePath, false);
+  }
+}
+
+async function startVideoVerification(view){
+  const step = SCENARIOS[view].steps[4];
+  try{
+    const res = await fetch(step.samplePath, {cache:"no-store"});
+    if(!res.ok) throw new Error("sample");
+    const blob = await res.blob();
+    const file = new File([blob], slugFileName(step.samplePath), {type:blob.type || "image/png"});
+    const url = URL.createObjectURL(file);
+    beginMediaAnalysis(view, 4, file, url, true);
+  }catch(err){
+    beginMediaAnalysis(view, 4, null, step.samplePath, false);
+  }
+}
+
+function advanceScenario(view){
+  const state = wizardState[view];
+  if(state.running || !state.nextEnabled || state.complete) return;
+  state.current = Math.min(state.current + 1, 5);
+  state.nextEnabled = false;
+  state.message = "Complete the next verification step.";
+  renderWizardTrack(view);
+  renderScenarioStage(view);
+}
+
+function resetScenario(view){
+  revokeAllScenarioAssets(view);
+  wizardState[view] = freshWizardState();
+  if(view==="s1"){
+    byId("verdictBanner").classList.remove("show");
+    byId("verdictReasons").innerHTML = "";
+    byId("raiBars").innerHTML = "";
+    byId("s1Fairness").textContent = "";
+    setGauge(0);
+  }else{
+    byId("verdictBanner3").classList.remove("show");
+    byId("approvedChecks3").innerHTML = "";
+    byId("s3Fairness").textContent = "";
+    setGauge3(0);
+  }
+  updateRiskChip(view);
+  renderWizardTrack(view);
+  renderSignalStream(view);
+  renderActivityRail(view);
+  renderScenarioStage(view);
+}
+function s1Reset(){ resetScenario("s1"); }
+function s3Reset(){ resetScenario("s3"); }
+
+function eur(n){ return "€" + Number(n || 0).toLocaleString("en-US"); }
+
+const officerState = { queue:[], detail:null, graph:null, actionsDone:new Set(), auditRows:[] };
+
+function officerFixtureGraph(){
+  const apps = FIXTURES.officer.applications;
+  const nodes = [
+    {id:"ip", label:"203.0.113.45", type:"ip", color:"#3b9bff", r:17},
+    {id:"emp", label:"Northwind Staffing", type:"employer", color:"#9d7bff", r:15},
+    {id:"bank", label:"IBAN ••4471", type:"bank", color:"#37e0d8", r:15},
+    {id:"phone", label:"Phone ×2", type:"phone", color:"#ffba49", r:13}
   ];
-  document.getElementById("raiBars").innerHTML = bars.map(b=>
-    `<div class="bar"><span class="bl">${b[0]}</span><span class="bt"><span class="bf" data-w="${b[1]}"></span></span><span class="bv">${b[1]}%</span></div>`).join("");
-  setTimeout(()=>document.querySelectorAll("#raiBars .bf").forEach(f=>f.style.width=f.getAttribute("data-w")+"%"),120);
-  const btn=document.getElementById("s1NextBtn"); btn.textContent="✓ Claim blocked"; btn.disabled=true; btn.style.opacity=".6";
+  const edges = [];
+  apps.forEach((app, i)=>{
+    const ang = (Math.PI*2/apps.length)*i - Math.PI/2;
+    nodes.push({id:"a"+i,label:app.applicant,type:"applicant",color:"#ff5d76",r:6,x:Math.round((50+Math.cos(ang)*40)*100)/100,y:Math.round((50+Math.sin(ang)*40)*100)/100});
+    edges.push({source:"a"+i,target:"ip"});
+    edges.push({source:"a"+i,target:"emp"});
+    if(app.sharedIban) edges.push({source:"a"+i,target:"bank"});
+    if(app.sharedPhone) edges.push({source:"a"+i,target:"phone"});
+  });
+  return {nodes:nodes, edges:edges};
 }
 
-function s1Reset(){
-  s1i=-1; risk=0;
-  buildS1Steps(); setGauge(0);
-  document.getElementById("sigStream").innerHTML="";
-  document.getElementById("docStage").className="docstage";
-  document.getElementById("docStage").innerHTML='<div class="scanline"></div><div class="doc-hint" id="docHint">Press <b>Run next check →</b> to begin identity proofing.</div>';
-  document.getElementById("verdictBanner").classList.remove("show");
-  document.getElementById("s1StageLabel").textContent="Step 1 of 6";
-  const chip=document.getElementById("riskChip"); chip.className="verdict-chip vc-eval"; chip.textContent="Evaluating";
-  const btn=document.getElementById("s1NextBtn"); btn.textContent="Run next check →"; btn.disabled=false; btn.style.opacity="1";
+async function ensureOfficerQueue(){
+  const data = await fetchJsonWithFallback([{url:"/api/officer/queue", options:{method:"GET"}}], ()=>({queue:clone(FIXTURES.officer.queue)}));
+  officerState.queue = clone(data.queue || []);
+  renderQueue();
 }
 
-/* ---------- Scenario 3 — genuine applicant ---------- */
-function renderPassportClean(){
-  return '<div class="passport"><div class="pp-h"><span>PASSPORT · SPECIMEN</span><span>UTOPIA</span></div>'+
-  '<div class="pp-row"><div class="photo">🙋‍♀️<div style="position:absolute;top:6px;left:6px;font-size:8.5px;font-weight:800;background:var(--green);color:#06210f;padding:2px 6px;border-radius:5px">VERIFIED</div></div>'+
-  '<div class="fields"><div class="f"><div class="k">Surname</div><div class="vv">MARINESCU</div></div>'+
-  '<div class="f"><div class="k">Given name</div><div class="vv">ELENA</div></div>'+
-  '<div class="f"><div class="k">Passport №</div><div class="vv">Y2 884 204</div></div>'+
-  '<div class="f"><div class="k">Expiry</div><div class="vv">2032-10</div></div></div></div></div>';
-}
-function renderPaystubClean(){
-  return '<div class="paper"><div class="stamp" style="color:#1f9a5f;border-color:#1f9a5f;opacity:1">VALID</div>'+
-  '<h5>Contoso Ltd</h5><div class="small">Payslip · Period 05/2026 · Ref CTS-20416</div>'+
-  '<div class="ln"><span>Employee</span><span>E. Marinescu</span></div>'+
-  '<div class="ln"><span>Employer VAT</span><span style="color:#1f9a5f;font-weight:700">UT-VAT-114829 ✓</span></div>'+
-  '<div class="ln"><span>Gross pay</span><span>€2,000.00</span></div>'+
-  '<div class="ln"><span>Pay date</span><span>2026-05-29</span></div>'+
-  '<div class="ln"><span>Net pay</span><span>€1,600.00</span></div></div>';
-}
-function renderVideoClean(){
-  return '<div class="videobox"><div class="rec"><i style="background:var(--green)"></i> LIVE</div>'+
-  '<div class="mesh" style="opacity:1"></div><div class="face">🙋‍♀️</div>'+
-  '<div style="position:absolute;left:10px;bottom:10px;font-size:10.5px;font-weight:800;background:var(--green);color:#06210f;padding:4px 9px;border-radius:7px">✓ LIVENESS PASSED · face matches ID</div></div>';
-}
-const S3 = [
-  { ico:"✅", title:"Identity proofing", agent:"Identity Proofing Agent", caps:["verid","foundry"],
-    hint:"Applicant presents a verifiable digital credential.",
-    render:()=>docStageMsg("🪪","Validating a verifiable credential via Microsoft Entra Verified ID…"),
-    delta:2, signals:["Verifiable credential validated — issued by a trusted government issuer"] },
-  { ico:"🪪", title:"Government ID — passport", agent:"Document Parsing + Validation Agent", caps:["docintel","vision","content"],
-    hint:"Passport uploaded. Running OCR + image-integrity analysis.",
-    render:renderPassportClean,
-    delta:2, signals:["Passport authentic — no tampering detected","Portrait matches the document and the applicant"] },
-  { ico:"💵", title:"Proof of income — pay stub", agent:"Validation Agent + Consistency Checker", caps:["docintel","openai","fabric"],
-    hint:"Pay stub uploaded. Cross-matching employer + income.",
-    render:renderPaystubClean,
-    delta:2, signals:["Employer “Contoso Ltd” is registered with a valid VAT ID","Declared income matches tax records (Fabric cross-match)"] },
-  { ico:"🏠", title:"Proof of address — utility bill", agent:"Validation Agent", caps:["docintel","vision"],
-    hint:"Utility bill uploaded. Checking recency + integrity.",
-    render:()=>docStageMsg("🧾","Utility bill — recent and unaltered, within policy."),
-    delta:2, signals:["Issued this month — within the 3-month policy","Name and address consistent; no alterations"] },
-  { ico:"🎥", title:"Remote video consultation", agent:"Face Verification Agent", caps:["face","safety","vision"],
-    hint:"Live verification call started. Running liveness + match checks.",
-    render:renderVideoClean,
-    delta:2, signals:["Live person confirmed — natural micro-expressions and blink","Face matches the ID portrait"] },
-  { ico:"⬡", title:"Orchestrated eligibility decision", agent:"Eligibility Decision Agent", caps:["foundry","openai","rai","purview","m365"],
-    hint:"All agents reporting. Composing final decision.",
-    render:()=>docStageMsg("🧠","Azure AI Foundry orchestrating all agent findings…"),
-    delta:2, final:true, signals:["All cross-checks passed — risk 12 / 100","Auto-approved — benefits proceed to disbursement"] }
-];
-let s3i=-1, risk3=0;
-function buildS3Steps(){
-  const wrap=document.getElementById("s3Steps");
-  wrap.innerHTML=S3.map((s,i)=>'<div class="step" data-step="'+i+'"><div class="sico">'+s.ico+'</div><div class="sbody"><div class="stitle">'+s.title+' <span class="agent">⬡ '+s.agent+'</span></div><div class="smeta">Awaiting check…</div><div class="result"></div></div></div>').join("");
-}
-function setGauge3(v){
-  const off=220-(220*Math.min(v,100)/100);
-  document.getElementById("gaugeArc3").style.strokeDashoffset=off;
-  document.getElementById("riskNum3").textContent=Math.round(v);
-}
-function pushSig3(html){
-  const s=document.getElementById("sigStream3");
-  const row=document.createElement("div"); row.className="ss";
-  row.innerHTML='<span>🟢</span><span>'+html+'</span>';
-  s.appendChild(row); requestAnimationFrame(()=>row.classList.add("show"));
-}
-function s3Advance(){
-  if(s3i>=S3.length-1){ return false; }
-  s3i++;
-  const s=S3[s3i];
-  document.getElementById("s3StageLabel").textContent="Step "+(s3i+1)+" of "+S3.length;
-  document.querySelectorAll("#s3Steps .step").forEach((n,idx)=>n.classList.toggle("active",idx===s3i));
-  const stage=document.getElementById("docStage3");
-  stage.innerHTML='<div class="scanline"></div>'+(s.render?s.render():docStageMsg("📄",s.hint));
-  const dh=document.getElementById("docHint3"); if(dh) dh.innerHTML=s.hint;
-  stage.classList.add("scanning");
-  if(s3i===4) stage.classList.add("scanning-video");
-  useCaps(s.caps);
-  setTimeout(()=>{
-    stage.classList.remove("scanning","scanning-video");
-    const stepNode=document.querySelectorAll("#s3Steps .step")[s3i];
-    stepNode.classList.remove("active"); stepNode.classList.add("done");
-    stepNode.querySelector(".smeta").textContent = s.final? "Approved" : "Verified — passed";
-    stepNode.querySelector(".result").innerHTML=
-      s.signals.map(sig=>'<div class="signal ok"><span class="si">🟢</span><span>'+sig+'</span></div>').join("")+
-      '<div class="usedcaps">'+s.caps.map(c=>{const cc=CAPS.find(x=>x.id===c);return '<span>'+(cc?cc.ico:'')+' '+(cc?cc.nm.replace(/&amp;/g,'&'):c)+'</span>'}).join("")+'</div>';
-    risk3=Math.min(12, risk3 + s.delta);
-    setGauge3(risk3);
-    s.signals.forEach(sig=>pushSig3(sig));
-    const chip=document.getElementById("riskChip3"); chip.className="verdict-chip vc-clear"; chip.textContent="Low risk";
-    if(s.final){ finalizeS3(); }
-  }, s.render && (s3i===1||s3i===2||s3i===4)? 1400 : 1000);
-  return true;
-}
-function finalizeS3(){
-  const chip=document.getElementById("riskChip3"); chip.className="verdict-chip vc-clear"; chip.textContent="Approved";
-  setGauge3(12);
-  document.getElementById("verdictBanner3").classList.add("show");
-  document.getElementById("approvedChecks3").innerHTML=[
-    "Verifiable identity credential (Entra Verified ID)",
-    "Authentic passport — no tampering",
-    "Registered employer; income matches tax records",
-    "Recent, unaltered proof of address",
-    "Live person on video; face matches ID"
-  ].map(r=>'<li>'+r+'</li>').join("");
-  const btn=document.getElementById("s3NextBtn"); btn.textContent="✓ Approved"; btn.disabled=true; btn.style.opacity=".6";
-}
-function s3Reset(){
-  s3i=-1; risk3=0; buildS3Steps(); setGauge3(0);
-  document.getElementById("sigStream3").innerHTML="";
-  const ds=document.getElementById("docStage3"); ds.className="docstage";
-  ds.innerHTML='<div class="scanline"></div><div class="doc-hint" id="docHint3">Press <b>Run next check →</b> to begin identity proofing.</div>';
-  document.getElementById("verdictBanner3").classList.remove("show");
-  document.getElementById("s3StageLabel").textContent="Step 1 of 6";
-  const chip=document.getElementById("riskChip3"); chip.className="verdict-chip vc-eval"; chip.textContent="Evaluating";
-  const btn=document.getElementById("s3NextBtn"); btn.textContent="Run next check →"; btn.disabled=false; btn.style.opacity="1";
+function renderQueue(){
+  const wrap = byId("queueList");
+  wrap.innerHTML = officerState.queue.map((item, idx)=>{
+    const tier = item.tier === "hi" ? "r-hi" : item.tier === "md" ? "r-md" : "r-lo";
+    const hot = item.tier === "hi" ? " hot" : "";
+    const open = idx===0 ? `<div class="queue-actions"><button class="ghost-btn" data-action="opencase">Open cluster →</button></div>` : "";
+    return `<div class="qcase${hot}" ${idx===0 ? 'data-action="opencase"' : ""}>
+      <div class="risk-pill ${tier}">${escapeHtml(item.risk)}</div>
+      <div class="qc-body">
+        <div class="qc-t">${escapeHtml(item.caseId)} <span class="by">⬡ ${escapeHtml(item.agent)}</span></div>
+        <div class="qc-m">${escapeHtml(item.reason)}</div>
+        ${open}
+      </div>
+      <div class="qc-go">${idx===0 ? "›" : "•"}</div>
+    </div>`;
+  }).join("");
 }
 
-/* ---------- Scenario 2 ---------- */
-function buildBurst(){
-  const tl=document.getElementById("burstTimeline");
-  if(!tl || tl.dataset.built) return;
-  tl.dataset.built="1";
-  const times=["01.3","03.1","05.0","06.8","08.9","11.2","13.4","15.9","18.1"];
-  times.forEach((t,i)=>{
-    const ev=document.createElement("div");
-    ev.className="ev";
-    ev.style.left=(6 + i*(88/8))+"%";
-    ev.style.animationDelay=(i*0.12)+"s";
-    ev.innerHTML=`<span class="tt">:${t}</span>`;
+function renderOfficerFacts(detail){
+  const cluster = detail.cluster || FIXTURES.officer.cluster;
+  const signals = cluster.cyberSignals;
+  const shared = cluster.sharedEntities;
+  byId("clusterHeadline").innerHTML = `🧠 Investigation — Cluster #${escapeHtml(cluster.id)} <span class="verdict-chip vc-block" style="margin-left:8px">Risk ${escapeHtml(cluster.risk)} · Critical</span>`;
+  byId("clusterMeta").textContent = `${cluster.applicationCount} applications · €1.6M annualized exposure (illustrative)`;
+  byId("cyberFacts").innerHTML = [
+    ["Source IP", signals.sourceIp, true],
+    ["Network (ASN)", signals.asnType + " · " + signals.asn, true],
+    ["Device fingerprint", "reused ×" + signals.deviceFingerprintReuse + " (hash " + signals.deviceFingerprint + ")", true],
+    ["Form-fill cadence", "~" + signals.formFillMsPerField + " ms/field (bot)", true],
+    ["Submission window", signals.submissionWindowSeconds + " seconds", true],
+    ["Threat intel match", signals.threatIntelMatch, true]
+  ].map(row=>`<div class="fact"><span class="fk">${escapeHtml(row[0])}</span><span class="fv${row[2] ? " bad" : ""}">${escapeHtml(row[1])}</span></div>`).join("");
+  byId("timelineFacts").innerHTML = [
+    ["Applications in burst", String(cluster.applicationCount), true],
+    ["Mean inter-arrival", signals.meanInterArrivalSeconds + " s", true],
+    ["Shared employer", shared.employer.name + (shared.employer.registered ? "" : " (unregistered)"), true],
+    ["Shared IBAN", shared.ibanSharedOn + " of " + cluster.applicationCount + " applications", true]
+  ].map(row=>`<div class="fact"><span class="fk">${escapeHtml(row[0])}</span><span class="fv${row[2] ? " bad" : ""}">${escapeHtml(row[1])}</span></div>`).join("");
+}
+
+function buildBurst(timestamps){
+  const tl = byId("burstTimeline");
+  tl.querySelectorAll(".ev,.tk").forEach(node=>node.remove());
+  const points = timestamps || [];
+  byId("burstStart").textContent = points[0] || "—";
+  byId("burstEnd").textContent = points[points.length-1] || "—";
+  points.forEach((t,i)=>{
+    const tick = document.createElement("div");
+    tick.className = "tk";
+    tick.style.left = (6 + i * (88 / Math.max(points.length-1,1))) + "%";
+    tl.appendChild(tick);
+    const ev = document.createElement("div");
+    ev.className = "ev";
+    ev.style.left = tick.style.left;
+    ev.style.animationDelay = (i * 0.08) + "s";
+    ev.innerHTML = `<span class="tt">${escapeHtml(t.split(":").slice(1).join(":"))}</span>`;
     tl.appendChild(ev);
   });
 }
 
-/* graph */
-const GRAPH = {
-  hubs:[
-    {id:"ip", x:50, y:50, c:"#3b9bff", r:17, label:"IP 203.0.113.45"},
-    {id:"emp", x:22, y:24, c:"#9d7bff", r:15, label:"Northwind Staffing"},
-    {id:"bank", x:80, y:26, c:"#37e0d8", r:15, label:"IBAN ••4471"},
-    {id:"phone", x:78, y:78, c:"#ffba49", r:13, label:"Phone ×2"}
-  ],
-  applicants:[]
-};
-(function(){
-  const names=["A. Volkov","I. Petrov","N. Sokol","R. Marin","D. Ilic","K. Novak","S. Toma","L. Horvat","M. Radu"];
-  for(let i=0;i<9;i++){
-    const ang=(Math.PI*2/9)*i - Math.PI/2;
-    const x=50+Math.cos(ang)*40, y=50+Math.sin(ang)*40;
-    // each applicant links to ip always; others vary
-    const links=["ip"];
-    if(i%1===0) links.push("emp");
-    if(i<7) links.push("bank");
-    if(i===2||i===5) links.push("phone");
-    GRAPH.applicants.push({id:"a"+i, x, y, name:names[i], links});
-  }
-})();
+function graphLayout(graph){
+  const hubs = {
+    ip:{x:50,y:50}, emp:{x:22,y:24}, bank:{x:80,y:26}, phone:{x:78,y:78}
+  };
+  graph.nodes.forEach(node=>{
+    if(node.type !== "applicant" && hubs[node.id]){
+      node.x = hubs[node.id].x;
+      node.y = hubs[node.id].y;
+    }
+  });
+  return graph;
+}
 
-function buildGraph(){
-  const box=document.getElementById("graphBox");
-  if(!box || box.dataset.built) return;
-  box.dataset.built="1";
-  const W=100,H=100;
-  let svg=`<svg viewBox="0 0 100 100" preserveAspectRatio="none">`;
-  // edges
-  let edges="";
-  GRAPH.applicants.forEach(a=>{
-    a.links.forEach(l=>{
-      const hub=GRAPH.hubs.find(h=>h.id===l);
-      edges+=`<line class="edge" data-a="${a.id}" data-hub="${l}" x1="${a.x}" y1="${a.y}" x2="${hub.x}" y2="${hub.y}" stroke="${hub.c}" stroke-opacity="0.22" stroke-width="0.4"/>`;
-    });
+function buildGraph(graph){
+  const box = byId("graphBox");
+  const data = graphLayout(clone(graph || officerFixtureGraph()));
+  const nodes = data.nodes || [];
+  const edges = data.edges || [];
+  const nodeMap = {};
+  nodes.forEach(node=>{ nodeMap[node.id] = node; });
+  let svg = '<svg viewBox="0 0 100 100" preserveAspectRatio="none">';
+  edges.forEach(edge=>{
+    const a = nodeMap[edge.source], b = nodeMap[edge.target];
+    if(!a || !b) return;
+    svg += `<line class="edge" data-a="${edge.source}" x1="${a.x}" y1="${a.y}" x2="${b.x}" y2="${b.y}" stroke="${b.color || "#3b9bff"}" stroke-opacity="0.22" stroke-width="0.4"/>`;
   });
-  svg+=edges;
-  // hubs
-  GRAPH.hubs.forEach(h=>{
-    svg+=`<g><circle cx="${h.x}" cy="${h.y}" r="${h.r/3.2}" fill="${h.c}" fill-opacity="0.18" stroke="${h.c}" stroke-width="0.5"/>
-      <text x="${h.x}" y="${h.y+0.8}" font-size="2.1" fill="#eaf0ff" text-anchor="middle" font-family="Segoe UI">${h.label}</text></g>`;
+  nodes.filter(node=>node.type!=="applicant").forEach(node=>{
+    svg += `<g><circle cx="${node.x}" cy="${node.y}" r="${(node.r || 15)/3.2}" fill="${node.color}" fill-opacity="0.18" stroke="${node.color}" stroke-width="0.5"/><text x="${node.x}" y="${node.y+0.8}" font-size="2.1" fill="#eaf0ff" text-anchor="middle" font-family="Segoe UI">${escapeHtml(node.label)}</text></g>`;
   });
-  // applicant nodes
-  GRAPH.applicants.forEach(a=>{
-    svg+=`<g class="g-node" data-node="${a.id}">
-      <circle cx="${a.x}" cy="${a.y}" r="3" fill="#ff5d76" fill-opacity="0.9"/>
-      <text x="${a.x}" y="${a.y-4}" font-size="1.9" fill="#aab8d8" text-anchor="middle" font-family="Segoe UI">${a.name}</text></g>`;
+  nodes.filter(node=>node.type==="applicant").forEach(node=>{
+    svg += `<g class="g-node" data-node="${node.id}"><circle cx="${node.x}" cy="${node.y}" r="3" fill="#ff5d76" fill-opacity="0.9"/><text x="${node.x}" y="${node.y-4}" font-size="1.9" fill="#aab8d8" text-anchor="middle" font-family="Segoe UI">${escapeHtml(node.label)}</text></g>`;
   });
-  svg+=`</svg>`;
-  box.innerHTML=svg;
+  svg += "</svg>";
+  box.innerHTML = svg;
 }
 
 function highlightNode(id){
-  const box=document.getElementById("graphBox");
+  const box = byId("graphBox");
+  if(!box) return;
   box.querySelectorAll(".edge").forEach(e=>{
-    const on = e.getAttribute("data-a")===id;
-    e.setAttribute("stroke-opacity", on? "0.95":"0.07");
-    e.setAttribute("stroke-width", on? "0.7":"0.4");
+    const on = e.getAttribute("data-a") === id;
+    e.setAttribute("stroke-opacity", on ? "0.95" : "0.07");
+    e.setAttribute("stroke-width", on ? "0.7" : "0.4");
   });
   box.querySelectorAll(".g-node circle").forEach(c=>{
-    const on=c.parentElement.getAttribute("data-node")===id;
-    c.setAttribute("r", on? "4":"3");
-    c.setAttribute("fill-opacity", on? "1":"0.45");
+    const on = c.parentElement.getAttribute("data-node") === id;
+    c.setAttribute("r", on ? "4" : "3");
+    c.setAttribute("fill-opacity", on ? "1" : "0.45");
   });
 }
 
-const APPS = [
-  {id:"A-90412",name:"A. Volkov",amt:1420},
-  {id:"A-90413",name:"I. Petrov",amt:1380},
-  {id:"A-90414",name:"N. Sokol",amt:1510},
-  {id:"A-90415",name:"R. Marin",amt:1295},
-  {id:"A-90416",name:"D. Ilic",amt:1460},
-  {id:"A-90417",name:"K. Novak",amt:1350},
-  {id:"A-90418",name:"S. Toma",amt:1540},
-  {id:"A-90419",name:"L. Horvat",amt:1400},
-  {id:"A-90420",name:"M. Radu",amt:1325}
-];
-const FREEZE_TOTAL = APPS.reduce((s,a)=>s+a.amt,0);
-function eur(n){ return "€"+n.toLocaleString("en-US"); }
-
-const AUDIT = {
-  freeze:"PAYMENT FREEZE applied · 9 applications · "+eur(FREEZE_TOTAL)+"/mo held · status: funds protected",
-  escalate:"ENFORCEMENT CASE ENF-4471 opened · investigator J. Marković assigned · evidence package attached",
-  casefile:"CASE FILE generated (Document Generator + M365 Copilot) · saved to SharePoint, shared in Teams",
-  notify:"PARTNER ALERT dispatched · Tax Authority · Police FCU · FIU · governed data-share logged"
-};
-
-let auditClock = 0;
-const T0 = 14*3600 + 3*60 + 12;
-function stamp(){ const s=T0+auditClock*6; auditClock++; const p=x=>String(x).padStart(2,"0"); return p(Math.floor(s/3600))+":"+p(Math.floor(s%3600/60))+":"+p(s%60); }
-
-function acHead(ico,ttl,sub,by,status,sc){
-  return `<div class="ac-head"><div class="ac-ico">${ico}</div>
-    <div style="flex:1;min-width:0"><div class="ac-ttl">${ttl}</div><div class="ac-sub">${sub}</div></div>
-    <span class="ac-by">⬡ ${by}</span><span class="ac-status ${sc}">${status}</span></div>`;
+function resetOfficerActions(){
+  officerState.actionsDone = new Set();
+  officerState.auditRows = [];
+  byId("actionsHead").classList.add("hide");
+  byId("actionsTaken").innerHTML = "";
+  byId("auditBox").classList.remove("show");
+  byId("auditLog").innerHTML = "";
+  byId("caseResolved").classList.remove("show");
+  byId("actCounter").textContent = "0 / 4 completed";
+  document.querySelectorAll('#decisionRow .act').forEach(btn=>btn.classList.remove("done"));
 }
-function renderActionDetail(d){
-  if(d==="freeze"){
-    return acHead("🧊","Payments frozen","Disbursement halted across all 9 linked applications","Disbursement Engine · Azure ML","FUNDS HELD","st-red")+
-    `<table class="pay-table"><thead><tr><th>Application</th><th>Applicant</th><th>Monthly benefit</th><th>Status</th></tr></thead><tbody>`+
-    APPS.map((a,i)=>`<tr><td style="font-family:Consolas,monospace">${a.id}</td><td>${a.name}</td><td class="amt">${eur(a.amt)}</td><td><span class="ps-status">Scheduled</span></td></tr>`).join("")+
-    `</tbody></table>
-     <div class="pay-total"><span>Monthly benefit disbursement held</span><b>${eur(FREEZE_TOTAL)}</b></div>
-     <div class="ac-note">No funds leave the treasury for this cluster. Holds stay in force until the enforcement case is resolved — reversible for any application later cleared.</div>`;
-  }
-  if(d==="escalate"){
-    return acHead("🚨","Escalated to investigation","Enforcement case opened and assigned","Dynamics 365 · Case Management","UNDER INVESTIGATION","st-amber")+
-    `<div class="fact"><span class="fk">Enforcement case</span><span class="fv">ENF-4471</span></div>
-     <div class="fact"><span class="fk">Priority</span><span class="fv bad">Critical</span></div>
-     <div class="fact"><span class="fk">Response SLA</span><span class="fv">48 hours</span></div>
-     <div class="fact"><span class="fk">Assigned investigator</span><span class="fv">J. Marković · Sr Fraud Investigator</span></div>
-     <div class="fact"><span class="fk">Evidence package</span><span class="fv">Signals · graph · timeline · 9 apps</span></div>
-     <div class="ac-note">The investigator is notified in Microsoft Teams; the full evidence package is auto-attached and the case is tracked to closure.</div>`;
-  }
-  if(d==="casefile"){
-    return acHead("📄","Case file generated","Compiled from all evidence by AI","Document Generator + M365 Copilot","READY","st-blue")+
-    `<div class="drafting" id="draftingLine"><span class="sp"></span> Microsoft 365 Copilot is drafting the case file…</div>
-     <div id="docPreviewWrap" style="display:none">
-       <div class="docpreview">
-         <div class="dt">Fraud Case File — Cluster #4471</div>
-         <div class="dm">PREPARED BY MICROSOFT 365 COPILOT · CONFIDENTIAL · CASE ENF-4471</div>
-         <div class="summ"><b>Executive summary —</b> Nine benefit applications were submitted from a single IP address within a 16.8-second window by an automated agent, all citing the unregistered employer “Northwind Staffing Solutions LLC” and sharing a common bank account. Cyber-signal, pattern and graph evidence indicate a coordinated organized-fraud ring. Recommended action: maintain payment freeze and pursue enforcement.</div>
-         <ol>
-           <li>Executive summary &amp; risk rating (97 / 100)</li>
-           <li>Cyber-signal evidence — IP, device fingerprint, bot cadence</li>
-           <li>Network relationship graph (9 applicants + shared entities)</li>
-           <li>Submission burst timeline</li>
-           <li>Application inventory — 9 records &amp; amounts</li>
-           <li>Responsible-AI risk explainability</li>
-           <li>Recommended enforcement action</li>
-         </ol>
-       </div>
-       <div class="ac-note">Saved to SharePoint and shared to the Teams channel <b>#benefits-integrity</b> for investigator review.</div>
-       <button class="btn primary" data-action="dlcase" style="margin-top:13px;font-size:13.5px;padding:12px 20px">⬇ Download case file</button>
-     </div>`;
-  }
-  if(d==="notify"){
-    return acHead("📨","Partner agencies notified","Secure cross-agency data-share dispatched","Notification Agent · Purview governed","SENT","st-green")+
-    `<div class="agency-row"><span class="ar-ico">🏛️</span><span class="ar-nm">National Tax Authority — benefit/income discrepancy</span><span class="ar-st">Delivered ✓</span></div>
-     <div class="agency-row"><span class="ar-ico">👮</span><span class="ar-nm">Police — Financial Crimes Unit liaison</span><span class="ar-st">Acknowledged ✓</span></div>
-     <div class="agency-row"><span class="ar-ico">🔎</span><span class="ar-nm">Financial Intelligence Unit (FIU)</span><span class="ar-st">Delivered ✓</span></div>
-     <div class="ac-note">Each agency receives only the fields it is authorized to see, via an approved channel. Every field-level disclosure is logged in Microsoft Purview.</div>`;
-  }
-  return "";
+
+async function openCase(){
+  const detailReq = fetchJsonWithFallback([{url:"/api/officer/clusters/4471", options:{method:"GET"}}], ()=>({
+    cluster:clone(FIXTURES.officer.cluster),
+    applications:clone(FIXTURES.officer.applications),
+    totals:clone(FIXTURES.officer.totals),
+    timestamps:clone(FIXTURES.officer.cluster.submissionTimestamps)
+  }));
+  const graphReq = fetchJsonWithFallback([{url:"/api/officer/clusters/4471/graph", options:{method:"GET"}}], ()=>officerFixtureGraph());
+  const results = await Promise.all([detailReq, graphReq]);
+  officerState.detail = results[0];
+  officerState.graph = results[1];
+  resetOfficerActions();
+  renderOfficerFacts(officerState.detail);
+  buildBurst(officerState.detail.timestamps || officerState.detail.cluster.submissionTimestamps || []);
+  buildGraph(officerState.graph);
+  useCaps(["sentinel","defender","aml","graph","foundry","powerbi"]);
+  byId("queuePanel").classList.add("hide");
+  byId("investPanel").classList.add("on");
+  window.scrollTo({top:120,behavior:"smooth"});
 }
+
+function closeCase(){
+  byId("investPanel").classList.remove("on");
+  byId("queuePanel").classList.remove("hide");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function updateActionCounter(){
+  byId("actCounter").textContent = officerState.actionsDone.size + " / 4 completed";
+  if(officerState.actionsDone.size === 4){ byId("caseResolved").classList.add("show"); }
+}
+
+function formatAuditTime(value){
+  try{
+    const d = new Date(value);
+    return d.toLocaleTimeString("en-GB",{hour12:false});
+  }catch(err){ return "14:03:12"; }
+}
+
+function officerActionFallback(action){
+  const src = FIXTURES.officer.actions[action];
+  return {
+    action:action,
+    status:src.status,
+    label:src.label,
+    agent:src.agent,
+    detail:Object.keys(src).reduce((acc,key)=>{ if(["label","agent","status"].indexOf(key)===-1) acc[key]=src[key]; return acc; },{}),
+    audit:{timestamp:new Date().toISOString(), loggedTo:"Microsoft Purview", officer:"Maria S.", clusterId:"4471"}
+  };
+}
+
+function actionCardHead(ico, ttl, sub, by, status, cls){
+  return `<div class="ac-head"><div class="ac-ico">${ico}</div><div style="flex:1;min-width:0"><div class="ac-ttl">${escapeHtml(ttl)}</div><div class="ac-sub">${escapeHtml(sub)}</div></div><span class="ac-by">⬡ ${escapeHtml(by)}</span><span class="ac-status ${cls}">${escapeHtml(status)}</span></div>`;
+}
+
+function currentOfficerData(){
+  return officerState.detail || {cluster:FIXTURES.officer.cluster, applications:FIXTURES.officer.applications, totals:FIXTURES.officer.totals};
+}
+
+function renderActionDetail(action, response){
+  const data = currentOfficerData();
+  const apps = data.applications || FIXTURES.officer.applications;
+  const totals = data.totals || FIXTURES.officer.totals;
+  if(action==="freeze"){
+    return actionCardHead("🧊","Payments frozen","Disbursement halted across all linked applications",response.agent,response.status,"st-red") +
+    `<table class="pay-table"><thead><tr><th>Application</th><th>Applicant</th><th>Monthly benefit</th><th>Status</th></tr></thead><tbody>` +
+    apps.map(app=>`<tr><td style="font-family:Consolas,monospace">${escapeHtml(app.id)}</td><td>${escapeHtml(app.applicant)}</td><td class="amt">${eur(app.monthlyBenefitEur)}</td><td><span class="ps-status">Scheduled</span></td></tr>`).join("") +
+    `</tbody></table><div class="pay-total"><span>Monthly benefit disbursement held</span><b>${eur(totals.monthlyBenefitHeldEur)}</b></div><div class="ac-note">No funds leave the treasury for this cluster. Holds stay in force until the enforcement case is resolved — reversible for any application later cleared.</div>`;
+  }
+  if(action==="escalate"){
+    return actionCardHead("🚨","Escalated to investigation","Enforcement case opened and assigned",response.agent,response.status,"st-amber") +
+      `<div class="fact"><span class="fk">Enforcement case</span><span class="fv">${escapeHtml((response.detail && response.detail.caseId) || "ENF-4471")}</span></div>
+       <div class="fact"><span class="fk">Priority</span><span class="fv bad">Critical</span></div>
+       <div class="fact"><span class="fk">Response SLA</span><span class="fv">${escapeHtml(String((response.detail && response.detail.slaHours) || 48))} hours</span></div>
+       <div class="fact"><span class="fk">Assigned investigator</span><span class="fv">${escapeHtml((response.detail && response.detail.investigator) || "J. Marković")}</span></div>
+       <div class="fact"><span class="fk">Evidence package</span><span class="fv">Signals · graph · timeline · applications</span></div>
+       <div class="ac-note">The investigator is notified in Microsoft Teams; the full evidence package is auto-attached and the case is tracked to closure.</div>`;
+  }
+  if(action==="casefile"){
+    return actionCardHead("📄","Case file generated","Compiled from all evidence by AI",response.agent,response.status,"st-blue") +
+      `<div class="drafting" id="draftingLine"><span class="sp"></span> Microsoft 365 Copilot is drafting the case file…</div>
+       <div id="docPreviewWrap" style="display:none">
+         <div class="docpreview">
+           <div class="dt">Fraud Case File — Cluster #4471</div>
+           <div class="dm">PREPARED BY MICROSOFT 365 COPILOT · CONFIDENTIAL · CASE ENF-4471</div>
+           <div class="summ"><b>Executive summary —</b> Nine benefit applications were submitted from a single IP address within a 16.8-second window by an automated agent, all citing the unregistered employer “Northwind Staffing Solutions LLC” and sharing a common bank account. Cyber-signal, pattern and graph evidence indicate a coordinated organized-fraud ring. Recommended action: maintain payment freeze and pursue enforcement.</div>
+           <ol>
+             <li>Executive summary &amp; risk rating (97 / 100)</li>
+             <li>Cyber-signal evidence — IP, device fingerprint, bot cadence</li>
+             <li>Network relationship graph</li>
+             <li>Submission burst timeline</li>
+             <li>Application inventory and amounts</li>
+             <li>Responsible-AI risk explainability</li>
+             <li>Recommended enforcement action</li>
+           </ol>
+         </div>
+         <div class="ac-note">Saved to SharePoint and shared to the Teams channel <b>#benefits-integrity</b> for investigator review.</div>
+         <button class="btn primary" data-action="dlcase" style="margin-top:13px;font-size:13.5px;padding:12px 20px">⬇ Download</button>
+       </div>`;
+  }
+  return actionCardHead("📨","Partner agencies notified","Secure cross-agency data-share dispatched",response.agent,response.status,"st-green") +
+    ((response.detail && response.detail.recipients) || FIXTURES.officer.actions.notify.recipients).map(name=>`<div class="agency-row"><span class="ar-ico">📨</span><span class="ar-nm">${escapeHtml(name)}</span><span class="ar-st">Delivered ✓</span></div>`).join("") +
+    `<div class="ac-note">Each agency receives only the fields it is authorized to see, via an approved channel. Every field-level disclosure is logged in Microsoft Purview.</div>`;
+}
+
 function animateFreeze(){
-  document.querySelectorAll('#act-freeze .ps-status').forEach((sp,i)=>{
-    setTimeout(()=>{ sp.textContent="FROZEN"; sp.classList.add("frozen"); }, 200 + i*140);
+  document.querySelectorAll('#act-freeze .ps-status').forEach((node, idx)=>{
+    setTimeout(()=>{ node.textContent = "FROZEN"; node.classList.add("frozen"); }, 200 + idx * 120);
   });
 }
 function animateCasefile(){
   setTimeout(()=>{
-    const line=document.getElementById("draftingLine"); if(line) line.style.display="none";
-    const wrap=document.getElementById("docPreviewWrap"); if(wrap) wrap.style.display="block";
+    const line = byId("draftingLine");
+    const wrap = byId("docPreviewWrap");
+    if(line) line.style.display = "none";
+    if(wrap) wrap.style.display = "block";
   }, 1500);
 }
-function updateActionCounter(){
-  const n=actionsDone.size;
-  const c=document.getElementById("actCounter"); if(c) c.textContent=n+" / 4 completed";
-  if(n===4){ const cr=document.getElementById("caseResolved"); if(cr) cr.classList.add("show"); }
+
+function auditDescription(action, response){
+  const data = currentOfficerData();
+  if(action==="freeze"){ return `PAYMENT FREEZE applied · ${data.cluster.applicationCount} applications · ${eur(data.totals.monthlyBenefitHeldEur)}/mo held`; }
+  if(action==="escalate"){ return `ENFORCEMENT CASE ${(response.detail && response.detail.caseId) || "ENF-4471"} opened · investigator ${(response.detail && response.detail.investigator) || "J. Marković"} assigned`; }
+  if(action==="casefile"){ return "CASE FILE generated · saved to SharePoint and shared in Teams"; }
+  return "PARTNER ALERT dispatched · Tax Authority · Police FCU · FIU";
 }
 
-const actionsDone = new Set();
-function doDecision(d, btn){
-  if(actionsDone.has(d)){ const ex=document.getElementById("act-"+d); if(ex) ex.scrollIntoView({behavior:"smooth",block:"center"}); return; }
-  actionsDone.add(d);
+async function doDecision(action, btn){
+  if(officerState.actionsDone.has(action)){
+    const existing = byId("act-"+action);
+    if(existing) existing.scrollIntoView({behavior:"smooth", block:"center"});
+    return;
+  }
+  const response = await fetchJsonWithFallback([{url:"/api/officer/clusters/4471/actions/"+action, options:{method:"POST"}}], ()=>officerActionFallback(action));
+  officerState.actionsDone.add(action);
   if(btn) btn.classList.add("done");
-  if(d==="freeze") useCaps(["aml","purview"]);
-  else if(d==="escalate") useCaps(["foundry","purview"]);
-  else if(d==="casefile") useCaps(["m365","copstudio","openai","purview"]);
-  else if(d==="notify") useCaps(["sentinel","purview"]);
-  document.getElementById("actionsHead").classList.remove("hide");
-  const card=document.createElement("div");
-  card.className="action-card"; card.id="act-"+d;
-  card.innerHTML=renderActionDetail(d);
-  document.getElementById("actionsTaken").appendChild(card);
-  document.getElementById("auditBox").classList.add("show");
-  document.getElementById("auditLog").innerHTML += "["+stamp()+"] Officer Maria S. · "+AUDIT[d]+"<br>";
-  if(d==="freeze") animateFreeze();
-  if(d==="casefile") animateCasefile();
+  if(action==="freeze") useCaps(["aml","purview"]);
+  else if(action==="escalate") useCaps(["foundry","purview"]);
+  else if(action==="casefile") useCaps(["m365","copstudio","openai","purview"]);
+  else if(action==="notify") useCaps(["sentinel","purview"]);
+  byId("actionsHead").classList.remove("hide");
+  const card = document.createElement("div");
+  card.className = "action-card";
+  card.id = "act-"+action;
+  card.innerHTML = renderActionDetail(action, response);
+  byId("actionsTaken").appendChild(card);
+  byId("auditBox").classList.add("show");
+  const stamp = formatAuditTime(response.audit && response.audit.timestamp);
+  officerState.auditRows.push(`[${stamp}] Officer ${(response.audit && response.audit.officer) || "Maria S."} · ${auditDescription(action, response)}`);
+  byId("auditLog").innerHTML = officerState.auditRows.map(row=>escapeHtml(row)).join("<br>");
+  if(action==="freeze") animateFreeze();
+  if(action==="casefile") animateCasefile();
   updateActionCounter();
 }
 
 function caseFileHTML(){
-  let today;
-  try{ today = new Date().toLocaleDateString("en-GB",{year:"numeric",month:"long",day:"numeric"}); }catch(e){ today="2026"; }
-  const rows = APPS.map(a=>`<tr><td>${a.id}</td><td>${a.name}</td><td style="text-align:right">${eur(a.amt)}</td><td>FROZEN</td></tr>`).join("");
-  const rai = [["Coordinated same-IP burst",32],["Shared fictitious employer",24],["Shared bank account / IBAN",18],["Bot-like form cadence",14],["Device fingerprint reuse",12]]
-     .map(r=>`<tr><td>${r[0]}</td><td style="text-align:right">${r[1]}%</td></tr>`).join("");
-  return `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word"><head><meta charset="utf-8"><title>Fraud Case File Cluster 4471</title>
-  <style>
-   body{font-family:'Segoe UI',Arial,sans-serif;color:#1a2238;font-size:11pt;line-height:1.5;margin:40px}
-   h1{font-size:20pt;margin:0;color:#0e1730}
-   .sub{color:#9db4e6;font-size:9pt;letter-spacing:1px;text-transform:uppercase}
-   .band{background:#0e1730;color:#fff;padding:16px 20px;margin:0 0 18px}
-   h2{font-size:13pt;color:#1f4fa0;border-bottom:2px solid #cdd8ef;padding-bottom:4px;margin-top:22px}
-   table{border-collapse:collapse;width:100%;font-size:10pt;margin-top:8px}
-   th,td{border:1px solid #c9d3e8;padding:6px 9px;text-align:left}
-   th{background:#eef2fb;color:#1f3a66}
-   .pill{display:inline-block;background:#ffe3e8;color:#b3173a;font-weight:bold;padding:3px 12px;border-radius:10px;font-size:9pt}
-   .note{background:#f4f6fc;border-left:4px solid #1f4fa0;padding:9px 12px;font-size:9.5pt;color:#33405a;margin-top:10px}
-   .foot{margin-top:26px;border-top:1px solid #ccc;padding-top:10px;color:#888;font-size:8.5pt}
-  </style></head><body>
-  <div class="band"><div class="sub">Confidential &middot; Benefits Integrity &middot; Case ENF-4471</div>
-   <h1>Fraud Case File &mdash; Cluster #4471</h1>
-   <div class="sub" style="margin-top:6px">Prepared by Microsoft 365 Copilot &middot; Generated ${today}</div></div>
-  <p><span class="pill">RISK 97 / 100 &middot; CRITICAL</span></p>
-  <h2>1. Executive summary</h2>
-  <p>Nine benefit applications were submitted from a single IP address within a 16.8-second window by an automated agent, all citing the unregistered employer &ldquo;Northwind Staffing Solutions LLC&rdquo; and sharing a common bank account. Cyber-signal, pattern and graph evidence indicate a coordinated organized-fraud ring. All nine payments have been frozen and an enforcement case opened. No improper funds were released.</p>
-  <h2>2. Cyber-signal evidence</h2>
-  <table><tr><th>Signal</th><th>Finding</th></tr>
-   <tr><td>Source IP</td><td>203.0.113.45</td></tr>
-   <tr><td>Network (ASN)</td><td>Hosting / VPN &middot; AS64500</td></tr>
-   <tr><td>Device fingerprint</td><td>Reused x9 (hash 7f3a...c1)</td></tr>
-   <tr><td>Form-fill cadence</td><td>~74 ms/field (bot-driven)</td></tr>
-   <tr><td>Submission window</td><td>16.8 seconds (9 applications)</td></tr>
-   <tr><td>Threat-intel match</td><td>Microsoft Defender &middot; known ring TTP</td></tr></table>
-  <h2>3. Submission burst timeline</h2>
-  <p>Applications submitted 14:02:01 to 14:02:18 local time. Mean inter-arrival 1.9 seconds &mdash; far below human entry speed and consistent with scripted automation.</p>
-  <h2>4. Network relationships</h2>
-  <ul>
-   <li>Shared source IP across all 9 applications</li>
-   <li>Shared employer: &ldquo;Northwind Staffing Solutions LLC&rdquo; (no active business / VAT registration)</li>
-   <li>Shared bank account / IBAN on 7 of 9 applications</li>
-   <li>Two shared contact phone numbers across the cluster</li>
-  </ul>
-  <h2>5. Application inventory</h2>
-  <table><tr><th>Application</th><th>Applicant</th><th>Monthly benefit</th><th>Status</th></tr>${rows}
-   <tr><th colspan="2">Total monthly disbursement held</th><th style="text-align:right">${eur(FREEZE_TOTAL)}</th><th>FROZEN</th></tr></table>
-  <h2>6. Responsible-AI risk explainability</h2>
-  <table><tr><th>Contributing factor</th><th>Weight</th></tr>${rai}</table>
-  <h2>7. Actions taken</h2>
-  <ul>
-   <li><b>Payments frozen</b> &mdash; disbursement halted on all 9 applications (${eur(FREEZE_TOTAL)}/mo held)</li>
-   <li><b>Escalated to investigation</b> &mdash; enforcement case ENF-4471, investigator assigned, 48h SLA</li>
-   <li><b>Case file generated</b> &mdash; this document, by Document Generator + M365 Copilot</li>
-   <li><b>Partner agencies notified</b> &mdash; Tax Authority, Police Financial Crimes Unit, FIU (Purview-governed data-share)</li>
-  </ul>
-  <h2>8. Recommended action</h2>
-  <p>Maintain the payment freeze, pursue enforcement against the identified ring, and recover any prior disbursements linked to the shared bank account. Reinstate individually any application later cleared through manual review.</p>
-  <div class="note"><b>Fairness &amp; governance:</b> all automated findings are explainable and were confirmed by a human officer. Every decision and field-level disclosure is logged in Microsoft Purview.</div>
-  <div class="foot">Demonstration document &middot; synthetic data. Names, companies, IP addresses and figures are fictitious and for illustration only.</div>
-  </body></html>`;
+  const data = currentOfficerData();
+  const cluster = data.cluster;
+  const apps = data.applications;
+  const rows = apps.map(app=>`<tr><td>${escapeHtml(app.id)}</td><td>${escapeHtml(app.applicant)}</td><td style="text-align:right">${eur(app.monthlyBenefitEur)}</td><td>FROZEN</td></tr>`).join("");
+  const explain = Object.entries(cluster.riskExplainability || {}).map(entry=>`<tr><td>${escapeHtml(entry[0].replace(/_/g," "))}</td><td style="text-align:right">${Math.round(entry[1]*100)}%</td></tr>`).join("");
+  return `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word"><head><meta charset="utf-8"><title>Fraud Case File Cluster 4471</title><style>body{font-family:'Segoe UI',Arial,sans-serif;color:#1a2238;font-size:11pt;line-height:1.5;margin:40px}h1{font-size:20pt;margin:0;color:#0e1730}.sub{color:#9db4e6;font-size:9pt;letter-spacing:1px;text-transform:uppercase}.band{background:#0e1730;color:#fff;padding:16px 20px;margin:0 0 18px}h2{font-size:13pt;color:#1f4fa0;border-bottom:2px solid #cdd8ef;padding-bottom:4px;margin-top:22px}table{border-collapse:collapse;width:100%;font-size:10pt;margin-top:8px}th,td{border:1px solid #c9d3e8;padding:6px 9px;text-align:left}th{background:#eef2fb;color:#1f3a66}.pill{display:inline-block;background:#ffe3e8;color:#b3173a;font-weight:bold;padding:3px 12px;border-radius:10px;font-size:9pt}.note{background:#f4f6fc;border-left:4px solid #1f4fa0;padding:9px 12px;font-size:9.5pt;color:#33405a;margin-top:10px}.foot{margin-top:26px;border-top:1px solid #ccc;padding-top:10px;color:#888;font-size:8.5pt}</style></head><body><div class="band"><div class="sub">Confidential · Benefits Integrity · Case ENF-4471</div><h1>Fraud Case File — Cluster #4471</h1></div><p><span class="pill">RISK ${cluster.risk} / 100 · CRITICAL</span></p><h2>1. Executive summary</h2><p>Nine benefit applications were submitted from a single IP address (${escapeHtml(cluster.cyberSignals.sourceIp)}) within a ${cluster.cyberSignals.submissionWindowSeconds}-second window by an automated agent, all citing the unregistered employer “${escapeHtml(cluster.sharedEntities.employer.name)}” and sharing a common bank account. Cyber-signal, pattern and graph evidence indicate a coordinated organized-fraud ring. All nine payments have been frozen and an enforcement case opened. No improper funds were released.</p><h2>2. Application inventory</h2><table><tr><th>Application</th><th>Applicant</th><th>Monthly benefit</th><th>Status</th></tr>${rows}<tr><th colspan="2">Total monthly disbursement held</th><th style="text-align:right">${eur(data.totals.monthlyBenefitHeldEur)}</th><th>FROZEN</th></tr></table><h2>3. Responsible-AI risk explainability</h2><table><tr><th>Factor</th><th>Weight</th></tr>${explain}</table><div class="note"><b>Fairness &amp; governance:</b> all automated findings are explainable and were confirmed by a human officer. Every decision and field-level disclosure is logged in Microsoft Purview.</div><div class="foot">Demonstration document · synthetic data.</div></body></html>`;
 }
+
 function downloadCaseFile(){
-  // Use the API endpoint to download a real .docx generated by python-docx on the server.
-  // Falls back to the client-side HTML-Word export when running without the backend.
   const btn = document.querySelector('[data-action="dlcase"]');
-  if (btn) { btn.textContent = "⏳ Generating…"; btn.disabled = true; }
-  fetch('/api/officer/clusters/4471/casefile')
-    .then(function(r){
-      if (!r.ok) throw new Error('API unavailable');
-      return r.blob();
-    })
-    .then(function(blob){
+  if(btn){ btn.textContent = "⏳ Generating…"; btn.disabled = true; }
+  fetch("/api/officer/clusters/4471/casefile")
+    .then(res=>{ if(!res.ok) throw new Error("no-api"); return res.blob(); })
+    .then(blob=>{
       const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url; a.download = 'Fraud-Case-File-Cluster-4471.docx';
-      document.body.appendChild(a); a.click();
-      setTimeout(function(){ document.body.removeChild(a); URL.revokeObjectURL(url); }, 800);
-      if (btn) { btn.textContent = "✓ Case file downloaded"; }
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "Fraud-Case-File-Cluster-4471.docx";
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(()=>{ document.body.removeChild(a); URL.revokeObjectURL(url); }, 800);
+      if(btn){ btn.textContent = "✓ Case file downloaded"; }
     })
-    .catch(function(){
-      // Offline / static fallback — generate client-side HTML-Word export
-      const blob = new Blob(['\uFEFF', caseFileHTML()], {type:'application/msword'});
+    .catch(()=>{
+      const blob = new Blob(["\uFEFF", caseFileHTML()], {type:"application/msword"});
       const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url; a.download = 'Fraud-Case-File-Cluster-4471.doc';
-      document.body.appendChild(a); a.click();
-      setTimeout(function(){ document.body.removeChild(a); URL.revokeObjectURL(url); }, 800);
-      if (btn) { btn.textContent = "✓ Case file downloaded"; }
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "Fraud-Case-File-Cluster-4471.doc";
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(()=>{ document.body.removeChild(a); URL.revokeObjectURL(url); }, 800);
+      if(btn){ btn.textContent = "✓ Case file downloaded"; }
     });
 }
 
-function openCase(){ document.getElementById("queuePanel").classList.add("hide"); document.getElementById("investPanel").classList.add("on");
-  buildBurst(); buildGraph(); useCaps(["sentinel","defender","aml","graph","foundry","powerbi"]); window.scrollTo({top:120,behavior:"smooth"}); }
-function closeCase(){ document.getElementById("investPanel").classList.remove("on"); document.getElementById("queuePanel").classList.remove("hide"); window.scrollTo({top:0,behavior:"smooth"}); }
-
-/* ---------- guided tour ---------- */
 const TOUR = [
-  {view:"home", head:"The mission", text:"Governments lose billions to benefits fraud. Meet two personas — an applicant and an integrity officer — and the AI that serves both.", run:null},
-  {view:"home", head:"18 capabilities", text:"Across this story, 18 Microsoft AI capabilities work together. Watch the capability map light up as we go.", run:null},
-  {view:"s1", head:"Scenario 1 · Prevention", text:"An applicant — secretly a fraud-ring member — begins a benefits claim. Identity proofing runs via Entra Verified ID.", run:()=>{s1Reset(); s1Advance();}},
-  {view:"s1", head:"Forged passport", text:"They upload a passport. Document Intelligence reads it; Azure AI Vision spots a tampered, face-swapped portrait.", run:()=>s1Advance()},
-  {view:"s1", head:"Fictitious employer", text:"A pay stub from 'Northwind Staffing Solutions' — an employer that doesn't legally exist. Fabric cross-match exposes it.", run:()=>s1Advance()},
-  {view:"s1", head:"Altered address", text:"An 11-month-old utility bill with an altered name. Outside policy, and tampered.", run:()=>s1Advance()},
-  {view:"s1", head:"Deepfake on camera", text:"For the remote consultation, they use a deepfake. Azure Face liveness detection isn't fooled.", run:()=>s1Advance()},
-  {view:"s1", head:"Blocked at the door", text:"Azure AI Foundry orchestrates every finding and blocks the claim — before it is ever submitted. Fully explainable.", run:()=>s1Advance()},
-  {view:"s3", head:"Scenario 2 · The genuine applicant", text:"Now an honest citizen — Elena — applies. The same agents run; watch every check pass.", run:()=>{s3Reset(); s3Advance();}},
-  {view:"s3", head:"Genuine passport", text:"Her passport is authentic — Document Intelligence and Vision find no tampering and the portrait matches.", run:()=>s3Advance()},
-  {view:"s3", head:"Real employer, matching income", text:"Her pay stub is from Contoso — a registered employer — and the income matches tax records.", run:()=>s3Advance()},
-  {view:"s3", head:"Valid address", text:"A recent, unaltered utility bill clears the proof-of-address check.", run:()=>s3Advance()},
-  {view:"s3", head:"A live person", text:"On video, Azure Face confirms a live person who matches the ID — no deepfake.", run:()=>s3Advance()},
-  {view:"s3", head:"Approved in seconds", text:"The same orchestration that blocked the ring auto-approves Elena at risk 12. Fairness, engineered in.", run:()=>s3Advance()},
-  {view:"s2", head:"Scenario 3 · Detection", text:"Now the officer's view. Some fraud slips past intake — so we watch what's already submitted. The top case is a coordinated burst.", run:()=>{closeCase();}},
-  {view:"s2", head:"Cyber signals", text:"Nine applications from the same IP, submitted under 17 seconds apart by a bot — all citing the same fake employer.", run:()=>{openCase();}},
-  {view:"s2", head:"The network revealed", text:"Graph analytics on Cosmos DB links all nine applicants to a shared IP, employer, bank account and phone. The ring is exposed.", run:null},
-  {view:"s2", head:"Human decides — four actions", text:"The officer acts: freeze all 9 payments, open an enforcement case, let M365 Copilot build the case file, and alert partner agencies — every step audited in Purview.", run:()=>{
-      const seq=["freeze","escalate","casefile","notify"];
-      seq.forEach((d,i)=>setTimeout(()=>doDecision(d, document.querySelector('.act[data-d='+d+']')), i*650));
-  }},
-  {view:"close", head:"From recovery to prevention", text:"Fraud stopped at the source, genuine citizens served faster, every decision explainable and human-led. That's the Microsoft difference.", run:null}
+  {view:"home", head:"The mission", text:"Governments lose billions to benefits fraud. Meet two personas — an applicant and an integrity officer — and the AI that serves both."},
+  {view:"home", head:"18 capabilities", text:"Across this story, 18 Microsoft AI capabilities work together. Watch the capability map light up as we go."},
+  {view:"s1", head:"Scenario 1 · Prevention", text:"A fraud-ring applicant begins a claim. Identity proofing runs via Entra Verified ID.", run:()=>{ s1Reset(); runIdentityStep("s1"); }},
+  {view:"s1", head:"Forged passport", text:"They upload a passport. Document Intelligence reads it; Azure AI Vision spots a tampered, face-swapped portrait.", run:()=>{ advanceScenario("s1"); setTimeout(()=>useSampleDoc(SCENARIOS.s1.steps[1], "s1"), 220); }},
+  {view:"s1", head:"Fictitious employer", text:"A pay stub from Northwind Staffing — an employer that doesn't legally exist. Fabric cross-match exposes it.", run:()=>{ advanceScenario("s1"); setTimeout(()=>useSampleDoc(SCENARIOS.s1.steps[2], "s1"), 220); }},
+  {view:"s1", head:"Altered address", text:"An outdated utility bill with a manipulated date field trips policy and tamper checks.", run:()=>{ advanceScenario("s1"); setTimeout(()=>useSampleDoc(SCENARIOS.s1.steps[3], "s1"), 220); }},
+  {view:"s1", head:"Deepfake on camera", text:"For the remote consultation, they use a deepfake. Azure Face liveness detection isn't fooled.", run:()=>{ advanceScenario("s1"); setTimeout(()=>startVideoVerification("s1"), 220); }},
+  {view:"s1", head:"Blocked at the door", text:"Azure AI Foundry orchestrates every finding and blocks the claim — before it is ever submitted. Fully explainable."},
+  {view:"s3", head:"Scenario 2 · The genuine applicant", text:"Now an honest citizen — Elena — applies. The same agents run; watch every check pass.", run:()=>{ s3Reset(); runIdentityStep("s3"); }},
+  {view:"s3", head:"Genuine passport", text:"Her passport is authentic — Document Intelligence and Vision find no tampering and the portrait matches.", run:()=>{ advanceScenario("s3"); setTimeout(()=>useSampleDoc(SCENARIOS.s3.steps[1], "s3"), 220); }},
+  {view:"s3", head:"Real employer, matching income", text:"Her pay stub is from Contoso — a registered employer — and the income matches tax records.", run:()=>{ advanceScenario("s3"); setTimeout(()=>useSampleDoc(SCENARIOS.s3.steps[2], "s3"), 220); }},
+  {view:"s3", head:"Valid address", text:"A recent, unaltered utility bill clears the proof-of-address check.", run:()=>{ advanceScenario("s3"); setTimeout(()=>useSampleDoc(SCENARIOS.s3.steps[3], "s3"), 220); }},
+  {view:"s3", head:"A live person", text:"On video, Azure Face confirms a live person who matches the ID — no deepfake.", run:()=>{ advanceScenario("s3"); setTimeout(()=>startVideoVerification("s3"), 220); }},
+  {view:"s3", head:"Approved in seconds", text:"The same orchestration that blocked the ring auto-approves Elena at risk 12. Fairness, engineered in."},
+  {view:"s2", head:"Scenario 3 · Detection", text:"Now the officer's view. Some fraud slips past intake — so we watch what's already submitted. The top case is a coordinated burst.", run:()=>{ closeCase(); ensureOfficerQueue(); }},
+  {view:"s2", head:"Cyber signals", text:"Nine applications from the same IP, submitted under 17 seconds apart by a bot — all citing the same fake employer.", run:()=>{ openCase(); }},
+  {view:"s2", head:"The network revealed", text:"Graph analytics link all nine applicants to a shared IP, employer, bank account and phone. The ring is exposed."},
+  {view:"s2", head:"Human decides — four actions", text:"The officer acts: freeze all 9 payments, open an enforcement case, let M365 Copilot build the case file, and alert partner agencies — every step audited in Purview.", run:()=>{ ["freeze","escalate","casefile","notify"].forEach((d,i)=>setTimeout(()=>doDecision(d, document.querySelector('.act[data-d="'+d+'"]')), i*700)); }},
+  {view:"close", head:"From recovery to prevention", text:"Fraud stopped at the source, genuine citizens served faster, every decision explainable and human-led. That's the Microsoft difference."}
 ];
-let ti=-1, tourOn=false;
-function tourStart(){ tourOn=true; ti=-1; document.getElementById("narrator").classList.add("on"); tourNext(); }
-function tourStop(){ tourOn=false; document.getElementById("narrator").classList.remove("on"); }
+let ti = -1, tourOn = false;
+function tourStart(){ tourOn = true; ti = -1; s1Reset(); s3Reset(); closeCase(); resetOfficerActions(); byId("narrator").classList.add("on"); tourNext(); }
+function tourStop(){ tourOn = false; byId("narrator").classList.remove("on"); }
 function tourNext(){
-  if(ti>=TOUR.length-1){ tourStop(); return; }
+  if(ti >= TOUR.length - 1){ tourStop(); return; }
   ti++;
-  const t=TOUR[ti];
+  const t = TOUR[ti];
   showView(t.view);
-  document.getElementById("narHead").textContent=t.head;
-  document.getElementById("narText").innerHTML=t.text;
-  document.getElementById("narFill").style.width=((ti+1)/TOUR.length*100)+"%";
-  document.getElementById("tourNextBtn").textContent = ti>=TOUR.length-1? "Finish ✓":"Next →";
+  byId("narHead").textContent = t.head;
+  byId("narText").innerHTML = t.text;
+  byId("narFill").style.width = ((ti + 1) / TOUR.length * 100) + "%";
+  byId("tourNextBtn").textContent = ti >= TOUR.length - 1 ? "Finish ✓" : "Next →";
   if(t.run){ setTimeout(t.run, 350); }
 }
 
-/* ---------- init + events ---------- */
-buildS1Steps();
-setGauge(0);
-buildS3Steps();
-setGauge3(0);
-
 document.addEventListener("click", function(e){
-  const vt=e.target.closest("[data-view]");
+  const vt = e.target.closest("[data-view]");
   if(vt){ showView(vt.getAttribute("data-view")); return; }
-  const a=e.target.closest("[data-action]");
+  const a = e.target.closest("[data-action]");
   if(!a) return;
-  const act=a.getAttribute("data-action");
-  if(act==="s1next") s1Advance();
+  const act = a.getAttribute("data-action");
+  if(act==="s1next") advanceScenario("s1");
+  else if(act==="s3next") advanceScenario("s3");
   else if(act==="s1reset") s1Reset();
-  else if(act==="s3next") s3Advance();
   else if(act==="s3reset") s3Reset();
+  else if(act==="verifyid") runIdentityStep(a.getAttribute("data-scenario"));
+  else if(act==="usesample"){ const view = a.getAttribute("data-scenario"); const step = Number(a.getAttribute("data-step")); useSampleDoc(SCENARIOS[view].steps[step], view); }
+  else if(act==="startvideo") startVideoVerification(a.getAttribute("data-scenario"));
   else if(act==="opencase") openCase();
   else if(act==="closecase") closeCase();
   else if(act==="decision") doDecision(a.getAttribute("data-d"), a);
   else if(act==="tour") tourStart();
   else if(act==="tourstop") tourStop();
   else if(act==="tournext") tourNext();
-  else if(act==="dlcase"){ downloadCaseFile(); }
+  else if(act==="dlcase") downloadCaseFile();
 });
-// graph node hover/click
+
+document.addEventListener("change", function(e){
+  const input = e.target.closest('input[type="file"][data-scenario]');
+  if(!input || !input.files || !input.files[0]) return;
+  handleUploadedFile(input.getAttribute("data-scenario"), Number(input.getAttribute("data-step")), input.files[0]);
+});
+
 document.addEventListener("click", function(e){
-  const n=e.target.closest(".g-node");
+  const n = e.target.closest(".g-node");
   if(n){ highlightNode(n.getAttribute("data-node")); }
 });
 document.addEventListener("mouseover", function(e){
-  const n=e.target.closest(".g-node");
+  const n = e.target.closest(".g-node");
   if(n){ highlightNode(n.getAttribute("data-node")); }
 });
+
+s1Reset();
+s3Reset();
+ensureOfficerQueue();
 
 })();
 </script>
