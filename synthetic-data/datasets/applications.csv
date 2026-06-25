@@ -1,0 +1,14 @@
+application_id,applicant_name,national_id,dob,address,employer,declared_annual_income_eur,monthly_benefit_eur,iban,phone,benefit_types,channel,submitted_at,cluster_id
+A-90412,Andrei Volkov,UT-4471012,1989-03-12,"12 Harbor St, Lakeside",Northwind Staffing Solutions LLC,18000,1420,UT99BANK0000004471,+40 711 200 412,unemployment;housing,web,2026-06-23T14:02:01,4471
+A-90413,Ivan Petrov,UT-4471013,1991-07-05,"12 Harbor St, Lakeside",Northwind Staffing Solutions LLC,18500,1380,UT99BANK0000004471,+40 711 200 413,unemployment,web,2026-06-23T14:02:03,4471
+A-90414,Nadia Sokol,UT-4471014,1990-11-20,"8 Market Rd, Lakeside",Northwind Staffing Solutions LLC,17800,1510,UT99BANK0000004471,+40 711 999 000,unemployment;housing,web,2026-06-23T14:02:05,4471
+A-90415,Radu Marin,UT-4471015,1987-02-28,"8 Market Rd, Lakeside",Northwind Staffing Solutions LLC,19000,1295,UT99BANK0000004471,+40 711 200 415,housing,web,2026-06-23T14:02:06,4471
+A-90416,Dragan Ilic,UT-4471016,1992-09-09,"55 Pine Ave, Lakeside",Northwind Staffing Solutions LLC,18200,1460,UT99BANK0000004471,+40 711 200 416,unemployment,web,2026-06-23T14:02:08,4471
+A-90417,Katarina Novak,UT-4471017,1993-05-14,"55 Pine Ave, Lakeside",Northwind Staffing Solutions LLC,17500,1350,UT99BANK0000004471,+40 711 999 000,unemployment;housing,web,2026-06-23T14:02:11,4471
+A-90418,Sorin Toma,UT-4471018,1988-12-01,"9 Dock St, Lakeside",Northwind Staffing Solutions LLC,19500,1540,UT99BANK0000004471,+40 711 200 418,housing,web,2026-06-23T14:02:13,4471
+A-90419,Luka Horvat,UT-4471019,1990-06-22,"9 Dock St, Lakeside",Northwind Staffing Solutions LLC,18800,1400,UT99BANK0000007788,+40 711 200 419,unemployment,web,2026-06-23T14:02:15,4471
+A-90420,Maria Radu,UT-4471020,1991-01-30,"9 Dock St, Lakeside",Northwind Staffing Solutions LLC,17900,1325,UT99BANK0000007799,+40 711 200 420,unemployment,web,2026-06-23T14:02:18,4471
+A-88150,Ana Dumitru,UT-8815001,1985-04-17,"21 Elm St, Riverton",Tailspin Logistics,26000,980,UT12BANK0000088150,+40 720 110 150,unemployment,web,2026-06-18T09:14:00,
+A-88176,Mihai Stan,UT-8817601,1979-08-03,"4 Oak Ln, Riverton",Contoso Ltd,31000,1050,UT12BANK0000088176,+40 720 110 176,housing,mobile,2026-06-19T16:40:00,
+A-88204,Elena Marinescu,UT-8820401,1994-02-25,"77 Birch Rd, Capital City",Contoso Ltd,24000,1100,UT12BANK0000088204,+40 720 110 204,unemployment;housing,web,2026-06-22T11:05:00,
+A-88210,Petru Olaru,UT-8821001,1983-10-11,"33 Cedar Ave, Capital City",Fabrikam Services SRL,15000,1250,UT12BANK0000088210,+40 720 110 210,unemployment,web,2026-06-22T15:32:00,

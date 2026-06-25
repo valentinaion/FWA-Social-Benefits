@@ -1,0 +1,5 @@
+employer_name,registration_status,vat_id,vat_valid,registered_address,notes
+Northwind Staffing Solutions LLC,UNREGISTERED,VAT-INVALID,false,"Virtual mailbox — 1 Office Park, box 220",No active registration; flagged fictitious
+Contoso Ltd,ACTIVE,UT-VAT-114829,true,"100 Commerce Plaza, Capital City",
+Fabrikam Services SRL,ACTIVE,UT-VAT-220913,true,"44 Industrial Rd, Riverton",
+Tailspin Logistics,ACTIVE,UT-VAT-336501,true,"12 Transit Way, Riverton",

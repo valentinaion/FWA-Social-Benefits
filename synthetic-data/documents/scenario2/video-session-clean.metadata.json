@@ -1,0 +1,19 @@
+{
+  "file": "video-consult-frame-clean.png",
+  "synthetic": true,
+  "ground_truth": "genuine",
+  "expected_agent": "face-verification",
+  "expected_capabilities": [
+    "face",
+    "safety",
+    "vision"
+  ],
+  "liveness": {
+    "passive_score": 0.97,
+    "blink_detected": true,
+    "micro_expression": true
+  },
+  "deepfake_score": 0.03,
+  "face_match_to_id": true,
+  "expected_finding": "Live person, matches ID portrait"
+}

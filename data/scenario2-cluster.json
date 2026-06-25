@@ -1,0 +1,68 @@
+{
+  "_note": "SYNTHETIC demo data. IP, IBAN, device hashes, names and figures are fictitious.",
+  "scenario": "02-detection-coordinated-cluster",
+  "cluster": {
+    "id": "4471",
+    "risk": 97,
+    "applicationCount": 9,
+    "annualizedExposureEur": 1600000,
+    "annualizedExposureNote": "Illustrative — across all benefit types and projected ring scale.",
+    "cyberSignals": {
+      "sourceIp": "203.0.113.45",
+      "asn": "AS64500",
+      "asnType": "hosting/vpn",
+      "deviceFingerprint": "7f3a...c1",
+      "deviceFingerprintReuse": 9,
+      "formFillMsPerField": 74,
+      "submissionWindowSeconds": 16.8,
+      "meanInterArrivalSeconds": 1.9,
+      "threatIntelMatch": "Microsoft Defender — known ring TTP"
+    },
+    "submissionTimestamps": ["14:02:01.3","14:02:03.1","14:02:05.0","14:02:06.8","14:02:08.9","14:02:11.2","14:02:13.4","14:02:15.9","14:02:18.1"],
+    "sharedEntities": {
+      "employer": { "name": "Northwind Staffing Solutions LLC", "registered": false },
+      "ibanSharedOn": 7,
+      "phonesShared": 2
+    },
+    "riskExplainability": {
+      "coordinated_same_ip_burst": 0.32,
+      "shared_fictitious_employer": 0.24,
+      "shared_bank_account": 0.18,
+      "bot_like_form_cadence": 0.14,
+      "device_fingerprint_reuse": 0.12
+    }
+  },
+  "applications": [
+    { "id": "A-90412", "applicant": "A. Volkov",  "monthlyBenefitEur": 1420, "sharedIban": true,  "sharedPhone": false },
+    { "id": "A-90413", "applicant": "I. Petrov",  "monthlyBenefitEur": 1380, "sharedIban": true,  "sharedPhone": false },
+    { "id": "A-90414", "applicant": "N. Sokol",   "monthlyBenefitEur": 1510, "sharedIban": true,  "sharedPhone": true  },
+    { "id": "A-90415", "applicant": "R. Marin",   "monthlyBenefitEur": 1295, "sharedIban": true,  "sharedPhone": false },
+    { "id": "A-90416", "applicant": "D. Ilic",    "monthlyBenefitEur": 1460, "sharedIban": true,  "sharedPhone": false },
+    { "id": "A-90417", "applicant": "K. Novak",   "monthlyBenefitEur": 1350, "sharedIban": true,  "sharedPhone": true  },
+    { "id": "A-90418", "applicant": "S. Toma",    "monthlyBenefitEur": 1540, "sharedIban": true,  "sharedPhone": false },
+    { "id": "A-90419", "applicant": "L. Horvat",  "monthlyBenefitEur": 1400, "sharedIban": false, "sharedPhone": false },
+    { "id": "A-90420", "applicant": "M. Radu",    "monthlyBenefitEur": 1325, "sharedIban": false, "sharedPhone": false }
+  ],
+  "totals": { "monthlyBenefitHeldEur": 12680 },
+  "graph": {
+    "hubs": [
+      { "id": "ip",    "label": "IP 203.0.113.45",      "type": "ip" },
+      { "id": "emp",   "label": "Northwind Staffing",   "type": "employer" },
+      { "id": "bank",  "label": "IBAN ••4471",          "type": "bank" },
+      { "id": "phone", "label": "Phone ×2",             "type": "phone" }
+    ],
+    "edgeRule": "every applicant → ip; → emp; → bank if sharedIban; → phone if sharedPhone"
+  },
+  "queue": [
+    { "caseId": "Cluster #4471", "risk": 97, "tier": "hi", "reason": "Same IP · <17s apart · shared fictitious employer", "agent": "cyber-signals" },
+    { "caseId": "A-88210", "risk": 61, "tier": "md", "reason": "Declared income 38% below matched tax record", "agent": "consistency-checker" },
+    { "caseId": "A-88204", "risk": 12, "tier": "lo", "reason": "Verified credential · all cross-checks passed · auto-approved", "agent": "eligibility-decision" }
+  ],
+  "actions": {
+    "freeze":   { "label": "Freeze payments",        "agent": "Disbursement Engine · Azure ML",   "status": "FUNDS HELD" },
+    "escalate": { "label": "Escalate to investigation","agent": "Dynamics 365 · Case Management",  "status": "UNDER INVESTIGATION", "caseId": "ENF-4471", "investigator": "J. Marković", "slaHours": 48 },
+    "casefile": { "label": "Generate case file",     "agent": "Document Generator + M365 Copilot","status": "READY" },
+    "notify":   { "label": "Notify partner agencies", "agent": "Notification Agent · Purview governed", "status": "SENT",
+                  "recipients": ["National Tax Authority", "Police — Financial Crimes Unit", "Financial Intelligence Unit (FIU)"] }
+  }
+}

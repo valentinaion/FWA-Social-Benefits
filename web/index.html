@@ -1,0 +1,1593 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark">
+<title>Benefits Integrity Cloud — Fraud, Waste & Abuse Detection & Prevention</title>
+<style>
+:root{
+  color-scheme: dark;
+  --bg:#070b16;
+  --bg2:#0b1124;
+  --panel:#111a30;
+  --panel2:#16213c;
+  --panel3:#1c2a49;
+  --line:rgba(120,150,210,.16);
+  --line2:rgba(120,150,210,.30);
+  --ink:#eaf0ff;
+  --ink2:#aab8d8;
+  --ink3:#7588ad;
+  --blue:#3b9bff;
+  --blue2:#1f6fe0;
+  --cyan:#37e0d8;
+  --violet:#9d7bff;
+  --green:#39d98a;
+  --amber:#ffba49;
+  --red:#ff5d76;
+  --reddeep:#ff3b5c;
+  --grad:linear-gradient(135deg,#3b9bff,#9d7bff);
+  --gradline:linear-gradient(90deg,#3b9bff,#37e0d8,#9d7bff);
+  --shadow:0 18px 50px rgba(0,0,0,.45);
+  --radius:18px;
+  --font:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:var(--font);
+  background:
+    radial-gradient(1200px 700px at 80% -10%,rgba(59,155,255,.16),transparent 60%),
+    radial-gradient(1000px 600px at 0% 0%,rgba(157,123,255,.14),transparent 55%),
+    var(--bg);
+  color:var(--ink);
+  line-height:1.5;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+.app{max-width:1180px;margin:0 auto;padding:0 22px 80px}
+
+/* ===== Top bar ===== */
+.topbar{
+  position:sticky;top:0;z-index:50;
+  display:flex;align-items:center;gap:18px;
+  padding:14px 22px;margin:0 -22px 0;
+  background:rgba(7,11,22,.82);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.brand{display:flex;align-items:center;gap:11px;font-weight:600;letter-spacing:.2px}
+.mslogo{width:22px;height:22px;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:2px}
+.mslogo i{display:block;border-radius:1px}
+.mslogo i:nth-child(1){background:#f25022}
+.mslogo i:nth-child(2){background:#7fba00}
+.mslogo i:nth-child(3){background:#00a4ef}
+.mslogo i:nth-child(4){background:#ffb900}
+.brand .sub{color:var(--ink3);font-weight:500;font-size:13px;margin-left:4px;border-left:1px solid var(--line2);padding-left:12px}
+.spacer{flex:1}
+.persona-switch{display:flex;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:4px;gap:4px}
+.persona-switch button{
+  border:0;background:transparent;color:var(--ink2);font-family:var(--font);
+  font-size:13px;font-weight:600;padding:7px 15px;border-radius:999px;cursor:pointer;
+  display:flex;align-items:center;gap:7px;transition:.18s;white-space:nowrap;
+}
+.persona-switch button.on{background:var(--grad);color:#fff;box-shadow:0 6px 16px rgba(59,155,255,.35)}
+.ghost-btn{
+  border:1px solid var(--line2);background:var(--panel);color:var(--ink);
+  font-family:var(--font);font-size:13px;font-weight:600;padding:8px 14px;border-radius:10px;cursor:pointer;
+  display:inline-flex;align-items:center;gap:7px;transition:.18s;
+}
+.ghost-btn:hover{border-color:var(--blue);color:#fff}
+
+/* ===== Scenes ===== */
+.scene{display:none;animation:fade .5s ease}
+.scene.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* ===== Hero ===== */
+.hero{padding:54px 0 18px;text-align:center}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:9px;font-size:12.5px;font-weight:700;letter-spacing:1.4px;
+  text-transform:uppercase;color:var(--cyan);background:rgba(55,224,216,.08);
+  border:1px solid rgba(55,224,216,.25);padding:6px 14px;border-radius:999px;
+}
+.hero h1{font-size:clamp(30px,5vw,52px);line-height:1.05;margin:20px auto 14px;max-width:880px;font-weight:700;letter-spacing:-.5px}
+.hero h1 .gr{background:var(--gradline);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hero p.lead{font-size:18px;color:var(--ink2);max-width:680px;margin:0 auto 28px}
+.hero-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn{
+  border:0;cursor:pointer;font-family:var(--font);font-weight:700;font-size:15px;
+  padding:14px 24px;border-radius:12px;display:inline-flex;align-items:center;gap:10px;transition:.2s;
+}
+.btn.primary{background:var(--grad);color:#fff;box-shadow:0 12px 30px rgba(59,155,255,.35)}
+.btn.primary:hover{transform:translateY(-2px);box-shadow:0 16px 38px rgba(59,155,255,.5)}
+.btn.outline{background:var(--panel);color:var(--ink);border:1px solid var(--line2)}
+.btn.outline:hover{border-color:var(--blue);color:#fff}
+
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:42px 0 8px}
+.kpi{background:linear-gradient(180deg,var(--panel),rgba(17,26,48,.5));border:1px solid var(--line);border-radius:16px;padding:18px}
+.kpi .v{font-size:27px;font-weight:800;background:var(--gradline);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.kpi .l{font-size:12.5px;color:var(--ink2);margin-top:4px}
+
+.disclaimer{font-size:12px;color:var(--ink3);text-align:center;margin:18px auto 0;max-width:720px}
+
+/* ===== Section ===== */
+.section{margin-top:46px}
+.section h2{font-size:22px;font-weight:700;margin:0 0 6px;display:flex;align-items:center;gap:10px}
+.section .desc{color:var(--ink2);font-size:14px;margin:0 0 18px}
+.tag{font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--violet);background:rgba(157,123,255,.1);border:1px solid rgba(157,123,255,.28);padding:3px 9px;border-radius:6px}
+
+/* scenario picker */
+.pick{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.pick .card{
+  position:relative;overflow:hidden;cursor:pointer;text-align:left;
+  background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);
+  border-radius:var(--radius);padding:24px;transition:.2s;
+}
+.pick .card:hover{transform:translateY(-4px);border-color:var(--line2);box-shadow:var(--shadow)}
+.pick .card .num{font-size:13px;font-weight:800;letter-spacing:1px;color:var(--ink3)}
+.pick .card h3{font-size:20px;margin:8px 0 8px}
+.pick .card p{color:var(--ink2);font-size:14px;margin:0 0 16px}
+.pick .card .who{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;color:var(--ink2);background:var(--panel3);border:1px solid var(--line);padding:6px 11px;border-radius:999px}
+.pick .card .go{margin-top:18px;display:inline-flex;align-items:center;gap:8px;color:var(--blue);font-weight:700;font-size:14px}
+.pick .card .glow{position:absolute;inset:auto -40px -60px auto;width:200px;height:200px;border-radius:50%;filter:blur(50px);opacity:.5}
+.pick .card.s1 .glow{background:var(--red)}
+.pick .card.s2 .glow{background:var(--blue)}
+.pick .card.s3 .glow{background:var(--green)}
+
+/* ===== capability map ===== */
+.capgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.cap{
+  display:flex;align-items:center;gap:11px;background:var(--panel);border:1px solid var(--line);
+  border-radius:12px;padding:11px 13px;transition:.25s;position:relative;
+}
+.cap .dot{width:9px;height:9px;border-radius:50%;background:var(--ink3);flex:none;transition:.3s}
+.cap .ico{font-size:17px;width:22px;text-align:center;flex:none}
+.cap .nm{font-size:12.6px;font-weight:600;color:var(--ink2);line-height:1.25}
+.cap.lit{border-color:var(--green);background:linear-gradient(180deg,rgba(57,217,138,.12),var(--panel))}
+.cap.lit .dot{background:var(--green);box-shadow:0 0 0 4px rgba(57,217,138,.18)}
+.cap.lit .nm{color:#fff}
+.cap.fresh{animation:pop .6s ease}
+@keyframes pop{0%{transform:scale(1)}40%{transform:scale(1.05)}100%{transform:scale(1)}}
+.capcount{font-size:13px;color:var(--ink2);margin-bottom:12px}
+.capcount b{color:var(--green)}
+
+/* ===== process flow stepper ===== */
+.flow{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:6px}
+.flow .st{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:13px 12px;position:relative}
+.flow .st .n{font-size:11px;font-weight:800;color:var(--blue)}
+.flow .st h4{font-size:13px;margin:6px 0 5px;line-height:1.2}
+.flow .st p{font-size:11.5px;color:var(--ink3);margin:0}
+.flow .st::after{content:"";position:absolute;right:-6px;top:50%;width:8px;height:8px;border-top:2px solid var(--line2);border-right:2px solid var(--line2);transform:translateY(-50%) rotate(45deg);z-index:2}
+.flow .st:last-child::after{display:none}
+
+/* ===== Workspace layout (scenario) ===== */
+.ws{display:grid;grid-template-columns:1fr 340px;gap:18px;margin-top:18px;align-items:start}
+@media(max-width:900px){.ws{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr}.pick{grid-template-columns:1fr}.capgrid{grid-template-columns:1fr 1fr}.flow{grid-template-columns:1fr 1fr}}
+.panel{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:var(--radius);padding:20px}
+.panel .ph{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.panel .ph h3{font-size:16px;margin:0;display:flex;align-items:center;gap:9px}
+.subtle{color:var(--ink3);font-size:12.5px}
+
+/* persona banner */
+.persona-banner{display:flex;align-items:center;gap:14px;background:var(--panel3);border:1px solid var(--line);border-radius:14px;padding:13px 16px;margin-bottom:16px}
+.avatar{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font-size:22px;flex:none}
+.avatar.bad{background:linear-gradient(135deg,#ff5d76,#9d2b46)}
+.avatar.officer{background:linear-gradient(135deg,#3b9bff,#1f4fa0)}
+.avatar.good{background:linear-gradient(135deg,#39d98a,#1f9a5f)}
+.persona-banner .nm{font-weight:700;font-size:15px}
+.persona-banner .ro{font-size:12.5px;color:var(--ink2)}
+.intel{margin-left:auto;font-size:11.5px;color:var(--amber);background:rgba(255,186,73,.1);border:1px solid rgba(255,186,73,.3);padding:5px 11px;border-radius:999px;display:inline-flex;gap:7px;align-items:center}
+
+/* step rail */
+.steps{display:flex;flex-direction:column;gap:10px}
+.step{
+  display:flex;gap:13px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;
+  opacity:.5;transition:.3s;
+}
+.step.active{opacity:1;border-color:var(--blue);box-shadow:0 0 0 1px rgba(59,155,255,.3)}
+.step.done{opacity:1}
+.step .sico{width:38px;height:38px;border-radius:11px;background:var(--panel3);display:grid;place-items:center;font-size:18px;flex:none;border:1px solid var(--line)}
+.step.done .sico{background:linear-gradient(135deg,#39d98a,#1f9a5f);border-color:transparent}
+.step.flag .sico{background:linear-gradient(135deg,#ff5d76,#9d2b46);border-color:transparent}
+.step .sbody{flex:1;min-width:0}
+.step .stitle{font-weight:700;font-size:14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.step .smeta{font-size:12px;color:var(--ink3);margin-top:2px}
+.step .agent{font-size:10.5px;font-weight:700;color:var(--violet);background:rgba(157,123,255,.1);border:1px solid rgba(157,123,255,.25);padding:2px 7px;border-radius:5px}
+.step .result{margin-top:10px;display:none}
+.step.done .result,.step.flag .result{display:block}
+.signal{display:flex;align-items:flex-start;gap:8px;font-size:12.5px;color:var(--ink);background:rgba(255,93,118,.08);border:1px solid rgba(255,93,118,.22);border-radius:9px;padding:7px 10px;margin-top:6px}
+.signal.ok{background:rgba(57,217,138,.08);border-color:rgba(57,217,138,.22)}
+.signal .si{flex:none}
+.usedcaps{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
+.usedcaps span{font-size:10.5px;color:var(--cyan);background:rgba(55,224,216,.08);border:1px solid rgba(55,224,216,.22);padding:2px 8px;border-radius:6px}
+
+/* doc viewer */
+.docstage{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:18px;min-height:220px;display:grid;place-items:center;position:relative;overflow:hidden}
+.scanline{position:absolute;left:0;right:0;height:60px;background:linear-gradient(180deg,transparent,rgba(59,155,255,.25),transparent);top:-80px;opacity:0}
+.scanning .scanline{animation:scan 1.4s ease-in-out;opacity:1}
+@keyframes scan{0%{top:-80px}100%{top:100%}}
+
+/* passport mock */
+.passport{width:330px;max-width:100%;background:linear-gradient(135deg,#1a2540,#0e1730);border:1px solid var(--line2);border-radius:12px;padding:16px;color:var(--ink);position:relative}
+.passport .pp-h{display:flex;justify-content:space-between;font-size:10px;letter-spacing:1.5px;color:var(--ink3);text-transform:uppercase}
+.passport .pp-row{display:flex;gap:14px;margin-top:12px}
+.photo{width:84px;height:104px;border-radius:8px;background:linear-gradient(160deg,#33425f,#222e47);display:grid;place-items:center;font-size:40px;position:relative;overflow:hidden;flex:none}
+.photo .ela{position:absolute;inset:0;background:
+   radial-gradient(circle at 50% 38%,rgba(255,60,90,.55),transparent 46%),
+   repeating-linear-gradient(45deg,rgba(255,60,90,.12) 0 6px,transparent 6px 12px);
+  opacity:0;transition:.5s}
+.flagphoto .photo .ela{opacity:1}
+.flagphoto .photo{outline:2px solid var(--red);outline-offset:-2px}
+.tamper-badge{position:absolute;top:6px;left:6px;font-size:9px;font-weight:800;background:var(--red);color:#fff;padding:2px 6px;border-radius:5px;opacity:0;transition:.4s}
+.flagphoto .tamper-badge{opacity:1}
+.fields{flex:1;min-width:0}
+.fields .f{margin-bottom:7px}
+.fields .f .k{font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--ink3)}
+.fields .f .vv{font-size:13px;font-weight:600;font-family:"Consolas",monospace}
+.fields .f.bad .vv{color:var(--red)}
+.doc-hint{color:var(--ink3);font-size:13px;text-align:center}
+
+/* paystub mock */
+.paper{width:330px;max-width:100%;background:#f3f5fb;color:#1a2238;border-radius:10px;padding:16px 18px;font-size:12px;position:relative;box-shadow:0 12px 30px rgba(0,0,0,.4)}
+.paper h5{margin:0 0 2px;font-size:14px;color:#0e1730}
+.paper .small{color:#556;font-size:10px}
+.paper .ln{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px dashed #ccd3e6}
+.paper .hl{background:#ffd9e0;outline:1px solid #ff3b5c;border-radius:3px;padding:0 3px}
+.paper .stamp{position:absolute;right:10px;top:10px;font-size:9px;font-weight:800;color:#ff3b5c;border:2px solid #ff3b5c;border-radius:6px;padding:2px 6px;transform:rotate(8deg);opacity:0;transition:.4s}
+.flagdoc .paper .stamp{opacity:1}
+
+/* video mock */
+.videobox{width:340px;max-width:100%;aspect-ratio:16/10;border-radius:12px;background:radial-gradient(circle at 50% 40%,#243352,#0c1426);position:relative;overflow:hidden;border:1px solid var(--line2);display:grid;place-items:center}
+.videobox .face{font-size:72px;filter:saturate(.7)}
+.videobox .mesh{position:absolute;inset:0;background-image:linear-gradient(rgba(59,155,255,.18) 1px,transparent 1px),linear-gradient(90deg,rgba(59,155,255,.18) 1px,transparent 1px);background-size:26px 26px;opacity:0;transition:.5s}
+.scanning-video .mesh,.flagvideo .mesh{opacity:1}
+.videobox .deepfake-tag{position:absolute;left:10px;bottom:10px;font-size:11px;font-weight:800;background:var(--red);color:#fff;padding:4px 9px;border-radius:7px;opacity:0;transform:translateY(8px);transition:.4s}
+.flagvideo .deepfake-tag{opacity:1;transform:none}
+.videobox .rec{position:absolute;right:10px;top:10px;font-size:10px;color:#fff;display:flex;align-items:center;gap:6px}
+.videobox .rec i{width:8px;height:8px;border-radius:50%;background:var(--red);animation:blink 1.1s infinite}
+@keyframes blink{50%{opacity:.2}}
+
+/* risk gauge side panel */
+.gauge-wrap{display:flex;flex-direction:column;align-items:center;gap:6px}
+.gauge{position:relative;width:180px;height:104px;overflow:hidden}
+.gauge svg{width:180px;height:180px}
+.gauge .gval{position:absolute;left:0;right:0;bottom:2px;text-align:center}
+.gauge .gval .num{font-size:34px;font-weight:800;line-height:1}
+.gauge .gval .lab{font-size:11px;color:var(--ink3);letter-spacing:1px;text-transform:uppercase}
+.verdict-chip{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;padding:5px 12px;border-radius:999px}
+.vc-eval{background:rgba(59,155,255,.12);color:var(--blue);border:1px solid rgba(59,155,255,.3)}
+.vc-block{background:rgba(255,59,92,.14);color:var(--red);border:1px solid rgba(255,59,92,.35)}
+.vc-clear{background:rgba(57,217,138,.14);color:var(--green);border:1px solid rgba(57,217,138,.35)}
+
+.sig-stream{margin-top:14px;display:flex;flex-direction:column;gap:7px;max-height:none}
+.sig-stream .ss{font-size:12px;display:flex;gap:8px;align-items:flex-start;color:var(--ink2);opacity:0;transform:translateX(8px);transition:.4s}
+.sig-stream .ss.show{opacity:1;transform:none}
+.sig-stream .ss b{color:var(--ink)}
+
+.controls{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+
+/* verdict banner */
+.verdict-banner{display:none;margin-top:16px;border-radius:14px;padding:18px;border:1px solid;animation:fade .5s}
+.verdict-banner.show{display:block}
+.verdict-banner.block{background:linear-gradient(135deg,rgba(255,59,92,.16),rgba(255,59,92,.05));border-color:rgba(255,59,92,.4)}
+.verdict-banner.approve{background:linear-gradient(135deg,rgba(57,217,138,.16),rgba(57,217,138,.05));border-color:rgba(57,217,138,.4)}
+.verdict-banner h3{margin:0 0 6px;font-size:18px;display:flex;align-items:center;gap:10px}
+.verdict-banner ul{margin:10px 0 0;padding-left:18px;color:var(--ink2);font-size:13px}
+.verdict-banner li{margin-bottom:4px}
+.rai{margin-top:14px;background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:13px}
+.rai .rh{font-size:12px;font-weight:700;color:var(--cyan);letter-spacing:.5px;margin-bottom:9px;display:flex;align-items:center;gap:7px}
+.bar{display:flex;align-items:center;gap:10px;margin-bottom:7px}
+.bar .bl{width:160px;font-size:11.5px;color:var(--ink2);flex:none}
+.bar .bt{flex:1;height:8px;background:var(--panel3);border-radius:5px;overflow:hidden}
+.bar .bf{height:100%;border-radius:5px;background:var(--gradline);width:0;transition:1s ease}
+.bar .bv{font-size:11px;color:var(--ink3);width:36px;text-align:right;flex:none}
+
+/* ===== Scenario 2 — officer ===== */
+.queue{display:flex;flex-direction:column;gap:10px}
+.qcase{display:flex;gap:13px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:13px 15px;cursor:pointer;transition:.2s}
+.qcase:hover{border-color:var(--line2);transform:translateX(3px)}
+.qcase.hot{border-color:rgba(255,59,92,.4);background:linear-gradient(180deg,rgba(255,59,92,.07),var(--panel))}
+.qcase .risk-pill{font-weight:800;font-size:15px;width:54px;height:54px;border-radius:12px;display:grid;place-items:center;flex:none}
+.qcase .risk-pill.r-hi{background:rgba(255,59,92,.16);color:var(--red);border:1px solid rgba(255,59,92,.4)}
+.qcase .risk-pill.r-md{background:rgba(255,186,73,.14);color:var(--amber);border:1px solid rgba(255,186,73,.35)}
+.qcase .risk-pill.r-lo{background:rgba(57,217,138,.14);color:var(--green);border:1px solid rgba(57,217,138,.3)}
+.qcase .qc-body{flex:1;min-width:0}
+.qcase .qc-t{font-weight:700;font-size:14px}
+.qcase .qc-m{font-size:12px;color:var(--ink3);margin-top:2px}
+.qcase .qc-go{color:var(--blue);font-size:20px}
+.qcase .by{font-size:10px;color:var(--violet)}
+
+.invest{display:none}
+.invest.on{display:block;animation:fade .4s}
+.back-link{background:transparent;border:0;color:var(--blue);font-weight:700;font-family:var(--font);cursor:pointer;font-size:13px;display:inline-flex;gap:7px;align-items:center;padding:4px 0;margin-bottom:8px}
+
+.evi-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+@media(max-width:760px){.evi-grid{grid-template-columns:1fr}}
+.evi{background:var(--bg2);border:1px solid var(--line);border-radius:13px;padding:15px}
+.evi .eh{font-size:12.5px;font-weight:700;color:var(--cyan);letter-spacing:.4px;margin-bottom:11px;display:flex;align-items:center;gap:8px}
+.evi .eh .by{margin-left:auto;font-size:9.5px;color:var(--violet);background:rgba(157,123,255,.1);border:1px solid rgba(157,123,255,.25);padding:2px 6px;border-radius:5px}
+
+/* burst timeline */
+.timeline{position:relative;height:74px;margin:6px 0 4px}
+.timeline .axis{position:absolute;left:0;right:0;bottom:22px;height:2px;background:var(--line2)}
+.timeline .tk{position:absolute;bottom:18px;width:2px;height:10px;background:var(--ink3)}
+.timeline .ev{position:absolute;bottom:24px;width:11px;height:11px;border-radius:50%;background:var(--red);transform:translateX(-50%);box-shadow:0 0 0 4px rgba(255,59,92,.18);opacity:0;animation:drop .5s forwards}
+@keyframes drop{from{opacity:0;transform:translateX(-50%) translateY(-10px)}to{opacity:1;transform:translateX(-50%)}}
+.timeline .ev .tt{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);font-size:8.5px;color:var(--ink3);white-space:nowrap;font-family:"Consolas",monospace}
+.timeline .cap{position:absolute;bottom:2px;left:0;font-size:10.5px;color:var(--ink3)}
+.timeline .cap.r{left:auto;right:0}
+
+.fact{display:flex;justify-content:space-between;gap:10px;font-size:12.5px;padding:6px 0;border-bottom:1px solid var(--line)}
+.fact:last-child{border-bottom:0}
+.fact .fk{color:var(--ink3)}
+.fact .fv{font-weight:600;font-family:"Consolas",monospace;text-align:right}
+.fact .fv.bad{color:var(--red)}
+
+/* graph */
+.graph-wrap{grid-column:1/-1}
+.graphbox{width:100%;height:330px;background:radial-gradient(circle at 50% 50%,#0d1730,#080d1c);border:1px solid var(--line);border-radius:13px;position:relative;overflow:hidden}
+.graphbox svg{width:100%;height:100%}
+.g-node circle{cursor:pointer;transition:.2s}
+.g-legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11.5px;color:var(--ink2);margin-top:10px}
+.g-legend span{display:inline-flex;align-items:center;gap:6px}
+.g-legend i{width:11px;height:11px;border-radius:50%;display:inline-block}
+
+/* decision panel */
+.decision{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin-top:16px}
+@media(max-width:760px){.decision{grid-template-columns:1fr 1fr}}
+.act{
+  background:var(--panel);border:1px solid var(--line2);border-radius:13px;padding:15px 13px;cursor:pointer;
+  text-align:left;font-family:var(--font);color:var(--ink);transition:.2s;
+}
+.act:hover{transform:translateY(-3px);border-color:var(--blue)}
+.act .ai{font-size:22px}
+.act .at{font-weight:700;font-size:13.5px;margin-top:8px}
+.act .am{font-size:11px;color:var(--ink3);margin-top:3px}
+.act.danger:hover{border-color:var(--red)}
+.act.done{border-color:var(--green);background:linear-gradient(180deg,rgba(57,217,138,.1),var(--panel))}
+
+.audit{display:none;margin-top:16px;background:var(--bg2);border:1px solid rgba(57,217,138,.3);border-radius:13px;padding:15px}
+.audit.show{display:block;animation:fade .4s}
+.audit .alog{font-family:"Consolas",monospace;font-size:11.5px;color:var(--ink2);margin-top:8px;line-height:1.7}
+.audit .alog b{color:var(--green)}
+
+/* ===== officer action detail ===== */
+.actions-head{display:flex;align-items:center;gap:10px;margin:22px 0 2px}
+.actions-head h3{margin:0;font-size:16px}
+.act-counter{margin-left:auto;font-size:12px;font-weight:700;color:var(--ink2);background:var(--panel3);border:1px solid var(--line);padding:5px 12px;border-radius:999px}
+.action-card{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:14px;padding:16px;margin-top:12px;animation:fade .45s}
+.ac-head{display:flex;align-items:center;gap:12px;margin-bottom:12px;flex-wrap:wrap}
+.ac-ico{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;font-size:21px;flex:none;background:var(--panel3);border:1px solid var(--line)}
+.ac-ttl{font-weight:700;font-size:15px}
+.ac-sub{font-size:12px;color:var(--ink3)}
+.ac-by{font-size:9.5px;font-weight:700;color:var(--violet);background:rgba(157,123,255,.1);border:1px solid rgba(157,123,255,.25);padding:3px 8px;border-radius:6px;white-space:nowrap}
+.ac-status{font-size:10.5px;font-weight:800;letter-spacing:.6px;padding:5px 11px;border-radius:999px;white-space:nowrap}
+.st-red{background:rgba(255,59,92,.14);color:var(--red);border:1px solid rgba(255,59,92,.35)}
+.st-amber{background:rgba(255,186,73,.14);color:var(--amber);border:1px solid rgba(255,186,73,.35)}
+.st-blue{background:rgba(59,155,255,.14);color:var(--blue);border:1px solid rgba(59,155,255,.35)}
+.st-green{background:rgba(57,217,138,.14);color:var(--green);border:1px solid rgba(57,217,138,.35)}
+.pay-table{width:100%;border-collapse:collapse;font-size:12.5px}
+.pay-table th{text-align:left;color:var(--ink3);font-size:10px;text-transform:uppercase;letter-spacing:.6px;padding:6px 8px;border-bottom:1px solid var(--line2)}
+.pay-table td{padding:7px 8px;border-bottom:1px solid var(--line)}
+.pay-table td.amt{font-family:"Consolas",monospace;text-align:right}
+.ps-status{display:inline-block;font-weight:700;font-size:10.5px;padding:2px 9px;border-radius:6px;background:rgba(255,186,73,.14);color:var(--amber);border:1px solid rgba(255,186,73,.3);transition:.3s}
+.ps-status.frozen{background:rgba(55,160,255,.16);color:#7ec3ff;border-color:rgba(55,160,255,.4)}
+.pay-total{display:flex;justify-content:space-between;align-items:center;margin-top:12px;font-size:13px;color:var(--ink2)}
+.pay-total b{font-size:17px;color:#fff;font-family:"Consolas",monospace}
+.drafting{font-size:12.5px;color:var(--cyan);display:flex;gap:9px;align-items:center;margin:6px 0}
+.drafting .sp{width:14px;height:14px;border:2px solid rgba(55,224,216,.3);border-top-color:var(--cyan);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.docpreview{background:#f3f5fb;color:#1a2238;border-radius:9px;padding:16px 18px;box-shadow:0 12px 30px rgba(0,0,0,.4)}
+.docpreview .dt{font-size:15px;font-weight:800;color:#0e1730}
+.docpreview .dm{font-size:9.5px;color:#666e80;margin:2px 0 9px;letter-spacing:.6px}
+.docpreview .summ{font-size:11.5px;color:#33405a;line-height:1.5;background:#e9edf7;border-radius:6px;padding:9px 11px}
+.docpreview ol{margin:10px 0 0;padding-left:18px;font-size:12px;color:#2a3550}
+.docpreview ol li{margin-bottom:3px}
+.agency-row{display:flex;align-items:center;gap:11px;padding:9px 2px;border-bottom:1px solid var(--line);font-size:13px}
+.agency-row:last-child{border-bottom:0}
+.agency-row .ar-ico{font-size:18px;flex:none}
+.agency-row .ar-nm{flex:1;color:var(--ink)}
+.agency-row .ar-st{font-size:10.5px;font-weight:700;color:var(--green);background:rgba(57,217,138,.12);border:1px solid rgba(57,217,138,.3);padding:3px 9px;border-radius:6px;white-space:nowrap}
+.ac-note{font-size:12px;color:var(--ink2);margin-top:11px;background:var(--bg2);border:1px solid var(--line);border-radius:9px;padding:9px 12px}
+.case-resolved{display:none;margin-top:16px;border-radius:14px;padding:17px 19px;background:linear-gradient(135deg,rgba(57,217,138,.16),rgba(59,155,255,.06));border:1px solid rgba(57,217,138,.4);animation:fade .5s}
+.case-resolved.show{display:block}
+.case-resolved h3{margin:0 0 4px;font-size:17px}
+
+/* ===== Closing ===== */
+.outcome{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:760px){.outcome{grid-template-columns:1fr 1fr}}
+.oc{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:15px;padding:18px;text-align:center}
+.oc .oi{font-size:26px}
+.oc .ov{font-size:24px;font-weight:800;margin-top:6px;background:var(--gradline);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.oc .ol{font-size:12px;color:var(--ink2);margin-top:4px}
+
+/* ===== guided tour narrator ===== */
+.narrator{
+  position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(140%);
+  width:min(760px,92vw);z-index:90;transition:.45s cubic-bezier(.2,.8,.2,1);
+}
+.narrator.on{transform:translateX(-50%)}
+.narrator .nbox{background:rgba(11,17,36,.94);backdrop-filter:blur(16px);border:1px solid var(--line2);border-radius:16px;padding:14px 18px;box-shadow:var(--shadow);display:flex;align-items:center;gap:15px}
+.narrator .pulse{width:40px;height:40px;border-radius:12px;background:var(--grad);display:grid;place-items:center;font-size:19px;flex:none;animation:breathe 2.4s infinite}
+@keyframes breathe{50%{box-shadow:0 0 0 8px rgba(59,155,255,.12)}}
+.narrator .ntext{flex:1;min-width:0}
+.narrator .ntext .nt{font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:var(--cyan);font-weight:700}
+.narrator .ntext .nc{font-size:14px;color:var(--ink);margin-top:2px}
+.narrator .nbtns{display:flex;gap:8px;flex:none}
+.nmini{border:1px solid var(--line2);background:var(--panel);color:var(--ink);font-family:var(--font);font-weight:700;font-size:12.5px;padding:8px 13px;border-radius:9px;cursor:pointer}
+.nmini.go{background:var(--grad);border:0;color:#fff}
+.nprog{height:3px;background:var(--panel3);border-radius:2px;margin-top:10px;overflow:hidden}
+.nprog .nf{height:100%;background:var(--gradline);width:0;transition:.4s}
+
+/* misc */
+.foot{margin-top:50px;text-align:center;color:var(--ink3);font-size:12px;border-top:1px solid var(--line);padding-top:22px}
+.pillrow{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:10px}
+.pillrow span{font-size:11px;color:var(--ink2);background:var(--panel);border:1px solid var(--line);padding:4px 10px;border-radius:999px}
+.hide{display:none!important}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">
+    <span class="mslogo"><i></i><i></i><i></i><i></i></span>
+    Microsoft <span class="sub">Benefits Integrity Cloud · FWA Detection &amp; Prevention</span>
+  </div>
+  <div class="spacer"></div>
+  <div class="persona-switch" id="personaSwitch">
+    <button data-view="home" class="on">🏠 Overview</button>
+    <button data-view="s1">🧑‍💻 Applicant</button>
+    <button data-view="s3">🟢 Genuine</button>
+    <button data-view="s2">🛡️ Officer</button>
+  </div>
+  <button class="ghost-btn" data-action="tour">▶ Play the story</button>
+</div>
+
+<div class="app">
+
+  <!-- ============ HOME ============ -->
+  <section class="scene on" id="view-home">
+    <div class="hero">
+      <span class="eyebrow">⬡ Public Sector · Health &amp; Social Services</span>
+      <h1>Protecting public funds.<br><span class="gr">Protecting real citizens.</span></h1>
+      <p class="lead">An interactive walkthrough of how Microsoft AI detects and prevents fraud, waste &amp; abuse across the benefits lifecycle — stopping an organized crime ring using fake identities, forged documents and deepfakes, while genuine applicants pass through effortlessly.</p>
+      <div class="hero-cta">
+        <button class="btn primary" data-action="tour">▶ Play the guided story</button>
+        <button class="btn outline" data-view="s1">Fraud applicant →</button>
+        <button class="btn outline" data-view="s3">Genuine applicant →</button>
+        <button class="btn outline" data-view="s2">Officer →</button>
+      </div>
+      <div class="kpis">
+        <div class="kpi"><div class="v">2</div><div class="l">Fraud rings stopped in this demo</div></div>
+        <div class="kpi"><div class="v">18</div><div class="l">Microsoft AI capabilities showcased</div></div>
+        <div class="kpi"><div class="v">&lt;17s</div><div class="l">Coordinated bot attack detected</div></div>
+        <div class="kpi"><div class="v">0</div><div class="l">Genuine applicants impacted</div></div>
+      </div>
+      <p class="disclaimer">⚠ Demonstration scenario built on synthetic data. Names, documents, companies and IP addresses are fictitious and for illustration only. Figures shown are illustrative.</p>
+    </div>
+
+    <div class="section">
+      <h2>Three personas, one integrity fabric</h2>
+      <p class="desc">Pick a path. The same AI agents serve the honest citizen and the caseworker — letting genuine applicants through, stopping fraud at the door, and detecting rings after submission.</p>
+      <div class="pick">
+        <button class="card s1" data-view="s1">
+          <span class="glow"></span>
+          <div class="num">SCENARIO 01 · PREVENTION</div>
+          <h3>Stopped before submission</h3>
+          <p>A fraud-ring applicant uploads a tampered passport photo, a forged pay stub from a fictitious employer, and joins a deepfake video call. The system blocks the claim <b>before it is ever filed</b>.</p>
+          <span class="who">🧑‍💻 Persona: Applicant <span class="subtle">(covert fraud-ring member)</span></span>
+          <div class="go">Enter the citizen portal →</div>
+        </button>
+        <button class="card s3" data-view="s3">
+          <span class="glow"></span>
+          <div class="num">SCENARIO 02 · FAIR ACCESS</div>
+          <h3>The genuine applicant</h3>
+          <p>An honest citizen submits authentic documents and passes a live video check. The same agents verify everything and <b>auto-approve in seconds</b> — risk 12. Fairness, engineered in.</p>
+          <span class="who">🟢 Persona: Genuine applicant <span class="subtle">(honest citizen)</span></span>
+          <div class="go">Walk the happy path →</div>
+        </button>
+        <button class="card s2" data-view="s2">
+          <span class="glow"></span>
+          <div class="num">SCENARIO 03 · DETECTION</div>
+          <h3>The coordinated ring</h3>
+          <p>Nine applications already submitted — placed automatically from the <b>same IP, seconds apart</b>, all naming the same fictitious employer. Cyber signals and graph analytics expose the network.</p>
+          <span class="who">🛡️ Persona: Social Services Officer <span class="subtle">(integrity analyst)</span></span>
+          <div class="go">Open the command center →</div>
+        </button>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Microsoft AI capability map</h2>
+      <p class="desc">Watch these light up as you move through the scenarios. <span class="capcount" style="display:inline">Demonstrated: <b id="capCountHome">0</b> / 18</span></p>
+      <div class="capgrid" id="capGrid"></div>
+    </div>
+
+    <div class="section">
+      <h2>The reference process flow <span class="tag">RefArch PH&amp;SS · FWA</span></h2>
+      <p class="desc">Both scenarios map to Microsoft's Public Health &amp; Social Services reference architecture for FWA detection &amp; prevention.</p>
+      <div class="flow">
+        <div class="st"><div class="n">01</div><h4>Intake &amp; Enrollment</h4><p>Collect data, verify identity, assess eligibility</p></div>
+        <div class="st"><div class="n">02</div><h4>Risk Scoring &amp; Screening</h4><p>Predictive risk, cross-match, watchlist</p></div>
+        <div class="st"><div class="n">03</div><h4>Benefit Disbursement</h4><p>Controlled payments, transaction monitoring</p></div>
+        <div class="st"><div class="n">04</div><h4>Continuous Monitoring</h4><p>Behavioral analytics, cyber signals</p></div>
+        <div class="st"><div class="n">05</div><h4>Investigation &amp; Enforcement</h4><p>Case management, evidence, action</p></div>
+        <div class="st"><div class="n">06</div><h4>Prevention &amp; Education</h4><p>Awareness, training, policy updates</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SCENARIO 1 — APPLICANT ============ -->
+  <section class="scene" id="view-s1">
+    <div class="section" style="margin-top:28px">
+      <h2>🧑‍💻 Citizen Portal — New Benefit Application <span class="tag">Scenario 01 · Prevention</span></h2>
+      <p class="desc">Step through the application the way the applicant experiences it. Behind the glass, Azure AI Foundry agents validate every input in real time.</p>
+    </div>
+
+    <div class="persona-banner">
+      <div class="avatar bad">🕵️</div>
+      <div>
+        <div class="nm">Andrei V. <span class="subtle">· Applicant ID #A-90412</span></div>
+        <div class="ro">Applying for unemployment + housing support</div>
+      </div>
+      <div class="intel">🎭 Known to audience: organized fraud-ring member</div>
+    </div>
+
+    <div class="ws">
+      <div>
+        <div class="panel">
+          <div class="ph">
+            <h3>🔎 Document &amp; identity workspace</h3>
+            <span class="subtle" id="s1StageLabel">Step 1 of 6</span>
+          </div>
+          <div class="docstage" id="docStage">
+            <div class="scanline"></div>
+            <div class="doc-hint" id="docHint">Press <b>Run next check →</b> to begin identity proofing.</div>
+          </div>
+          <div class="controls">
+            <button class="btn primary" data-action="s1next" id="s1NextBtn">Run next check →</button>
+            <button class="ghost-btn" data-action="s1reset">↺ Restart scenario</button>
+          </div>
+          <div class="verdict-banner block" id="verdictBanner">
+            <h3>🚫 Submission blocked — before filing</h3>
+            <p class="subtle">The orchestration agent halted this application during intake. No payment instruction was ever created.</p>
+            <ul id="verdictReasons"></ul>
+            <div class="rai">
+              <div class="rh">⬡ Responsible AI · Explainable risk contribution</div>
+              <div id="raiBars"></div>
+            </div>
+            <div style="margin-top:12px;font-size:12.5px;color:var(--ink2)">
+              ✔ <b>Fairness safeguard:</b> a genuine applicant with a minor mismatch (e.g. a blurry scan) would instead be auto-reconciled or routed to a human reviewer — not blocked. Decisions are logged to Microsoft Purview with full audit trail.
+            </div>
+          </div>
+        </div>
+
+        <div class="panel" style="margin-top:16px">
+          <div class="ph"><h3>🧩 Agent activity</h3><span class="subtle">Azure AI Foundry · multi-agent orchestration</span></div>
+          <div class="steps" id="s1Steps"></div>
+        </div>
+      </div>
+
+      <!-- side: risk -->
+      <div>
+        <div class="panel" style="position:sticky;top:78px">
+          <div class="ph"><h3>⚠ Live fraud risk</h3></div>
+          <div class="gauge-wrap">
+            <div class="gauge">
+              <svg viewBox="0 0 180 180">
+                <path d="M20 95 A 70 70 0 0 1 160 95" fill="none" stroke="rgba(120,150,210,.18)" stroke-width="14" stroke-linecap="round"/>
+                <path id="gaugeArc" d="M20 95 A 70 70 0 0 1 160 95" fill="none" stroke="url(#gg)" stroke-width="14" stroke-linecap="round" stroke-dasharray="220" stroke-dashoffset="220"/>
+                <defs><linearGradient id="gg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#39d98a"/><stop offset="0.5" stop-color="#ffba49"/><stop offset="1" stop-color="#ff3b5c"/></linearGradient></defs>
+              </svg>
+              <div class="gval"><div class="num" id="riskNum">0</div><div class="lab">Risk score</div></div>
+            </div>
+            <div class="verdict-chip vc-eval" id="riskChip">Evaluating</div>
+          </div>
+          <div class="sig-stream" id="sigStream"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SCENARIO 3 — GENUINE APPLICANT ============ -->
+  <section class="scene" id="view-s3">
+    <div class="section" style="margin-top:28px">
+      <h2>🟢 Citizen Portal — New Benefit Application <span class="tag" style="color:var(--green);background:rgba(57,217,138,.1);border-color:rgba(57,217,138,.28)">Scenario 02 · Fair access</span></h2>
+      <p class="desc">The genuine applicant's journey. The same Azure AI Foundry agents validate every input — and let an honest citizen through in seconds.</p>
+    </div>
+
+    <div class="persona-banner">
+      <div class="avatar good">🙋‍♀️</div>
+      <div>
+        <div class="nm">Elena M. <span class="subtle">· Applicant ID #A-88204</span></div>
+        <div class="ro">Applying for unemployment + housing support</div>
+      </div>
+      <div class="intel" style="color:var(--green);background:rgba(57,217,138,.1);border-color:rgba(57,217,138,.3)">🟢 Honest citizen — genuine documents</div>
+    </div>
+
+    <div class="ws">
+      <div>
+        <div class="panel">
+          <div class="ph">
+            <h3>🔎 Document &amp; identity workspace</h3>
+            <span class="subtle" id="s3StageLabel">Step 1 of 6</span>
+          </div>
+          <div class="docstage" id="docStage3">
+            <div class="scanline"></div>
+            <div class="doc-hint" id="docHint3">Press <b>Run next check →</b> to begin identity proofing.</div>
+          </div>
+          <div class="controls">
+            <button class="btn primary" data-action="s3next" id="s3NextBtn">Run next check →</button>
+            <button class="ghost-btn" data-action="s3reset">↺ Restart scenario</button>
+          </div>
+          <div class="verdict-banner approve" id="verdictBanner3">
+            <h3>✅ Application approved — auto-onboarded</h3>
+            <p class="subtle">Every check passed. The genuine applicant is approved without friction; benefits proceed to disbursement.</p>
+            <ul id="approvedChecks3"></ul>
+            <div style="margin-top:12px;font-size:12.5px;color:var(--ink2)">
+              ✔ <b>Same agents, opposite outcome:</b> the very checks that blocked the fraud ring let an honest citizen through in seconds — decision logged to Microsoft Purview.
+            </div>
+          </div>
+        </div>
+
+        <div class="panel" style="margin-top:16px">
+          <div class="ph"><h3>🧩 Agent activity</h3><span class="subtle">Azure AI Foundry · multi-agent orchestration</span></div>
+          <div class="steps" id="s3Steps"></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="panel" style="position:sticky;top:78px">
+          <div class="ph"><h3>🟢 Live fraud risk</h3></div>
+          <div class="gauge-wrap">
+            <div class="gauge">
+              <svg viewBox="0 0 180 180">
+                <path d="M20 95 A 70 70 0 0 1 160 95" fill="none" stroke="rgba(120,150,210,.18)" stroke-width="14" stroke-linecap="round"/>
+                <path id="gaugeArc3" d="M20 95 A 70 70 0 0 1 160 95" fill="none" stroke="url(#gg3)" stroke-width="14" stroke-linecap="round" stroke-dasharray="220" stroke-dashoffset="220"/>
+                <defs><linearGradient id="gg3" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#39d98a"/><stop offset="0.5" stop-color="#ffba49"/><stop offset="1" stop-color="#ff3b5c"/></linearGradient></defs>
+              </svg>
+              <div class="gval"><div class="num" id="riskNum3">0</div><div class="lab">Risk score</div></div>
+            </div>
+            <div class="verdict-chip vc-eval" id="riskChip3">Evaluating</div>
+          </div>
+          <div class="sig-stream" id="sigStream3"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SCENARIO 2 — OFFICER ============ -->
+  <section class="scene" id="view-s2">
+    <div class="section" style="margin-top:28px">
+      <h2>🛡️ Integrity Command Center <span class="tag">Scenario 02 · Detection</span></h2>
+      <p class="desc">Submitted applications, ranked by the Prioritization Agent. The hottest case is a coordinated burst — investigate it.</p>
+    </div>
+
+    <div class="persona-banner">
+      <div class="avatar officer">👩‍💼</div>
+      <div>
+        <div class="nm">Officer Maria S. <span class="subtle">· Benefits Integrity Analyst</span></div>
+        <div class="ro">Reviewing post-submission risk queue · Region: West</div>
+      </div>
+      <div class="intel" style="color:var(--green);background:rgba(57,217,138,.1);border-color:rgba(57,217,138,.3)">🟢 Human-in-the-loop · final decision is yours</div>
+    </div>
+
+    <!-- queue -->
+    <div class="panel" id="queuePanel">
+      <div class="ph"><h3>📥 Risk-ranked case queue</h3><span class="subtle">Prioritization Agent · refreshed 14:03</span></div>
+      <div class="queue">
+        <div class="qcase hot" data-action="opencase">
+          <div class="risk-pill r-hi">97</div>
+          <div class="qc-body">
+            <div class="qc-t">Cluster #4471 — 9 linked applications <span class="by">⬡ Cyber Signals Agent</span></div>
+            <div class="qc-m">Same source IP · submitted &lt;17s apart · shared employer “Northwind Staffing Solutions LLC”</div>
+          </div>
+          <div class="qc-go">›</div>
+        </div>
+        <div class="qcase" data-action="opencase">
+          <div class="risk-pill r-md">61</div>
+          <div class="qc-body">
+            <div class="qc-t">Application #A-88210 — income mismatch <span class="by">⬡ Consistency Checker</span></div>
+            <div class="qc-m">Declared income 38% below matched tax record · single applicant</div>
+          </div>
+          <div class="qc-go">›</div>
+        </div>
+        <div class="qcase" data-action="opencase">
+          <div class="risk-pill r-lo">12</div>
+          <div class="qc-body">
+            <div class="qc-t">Application #A-88204 — clean <span class="by">⬡ Eligibility Agent</span></div>
+            <div class="qc-m">Verified credential · all cross-checks passed · auto-approved</div>
+          </div>
+          <div class="qc-go">›</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- investigation -->
+    <div class="invest panel" id="investPanel">
+      <button class="back-link" data-action="closecase">‹ Back to queue</button>
+      <div class="ph" style="margin-top:4px">
+        <h3>🧠 Investigation — Cluster #4471 <span class="verdict-chip vc-block" style="margin-left:8px">Risk 97 · Critical</span></h3>
+        <span class="subtle">9 applications · €1.6M annualized exposure (illustrative)</span>
+      </div>
+
+      <div class="evi-grid">
+        <!-- cyber signals -->
+        <div class="evi">
+          <div class="eh">🛰️ Cyber signals <span class="by">Cyber Signals Agent</span></div>
+          <div class="fact"><span class="fk">Source IP</span><span class="fv bad">203.0.113.45</span></div>
+          <div class="fact"><span class="fk">Network (ASN)</span><span class="fv bad">Hosting / VPN · AS64500</span></div>
+          <div class="fact"><span class="fk">Device fingerprint</span><span class="fv bad">reused ×9 (hash 7f3a…c1)</span></div>
+          <div class="fact"><span class="fk">Form-fill cadence</span><span class="fv bad">~74 ms/field (bot)</span></div>
+          <div class="fact"><span class="fk">Submission window</span><span class="fv bad">16.8 seconds</span></div>
+          <div class="fact"><span class="fk">Threat intel match</span><span class="fv bad">Defender · known ring TTP</span></div>
+        </div>
+        <!-- ML anomaly -->
+        <div class="evi">
+          <div class="eh">📈 Burst timeline <span class="by">Azure ML · Anomaly Detection</span></div>
+          <div class="timeline" id="burstTimeline">
+            <div class="axis"></div>
+            <span class="cap">14:02:01</span><span class="cap r">14:02:18</span>
+          </div>
+          <div class="fact"><span class="fk">Applications in burst</span><span class="fv bad">9</span></div>
+          <div class="fact"><span class="fk">Mean inter-arrival</span><span class="fv bad">1.9 s</span></div>
+          <div class="fact"><span class="fk">Shared employer</span><span class="fv bad">Northwind Staffing (unregistered)</span></div>
+          <div class="fact"><span class="fk">Shared IBAN</span><span class="fv bad">7 of 9 applications</span></div>
+        </div>
+      </div>
+
+      <!-- graph -->
+      <div class="evi graph-wrap" style="margin-top:14px">
+        <div class="eh">🕸️ Relationship graph <span class="by">Graph Relationship Explorer · Cosmos DB</span></div>
+        <div class="subtle" style="margin:-4px 0 8px">Click any applicant node to highlight the attributes the ring shares.</div>
+        <div class="graphbox" id="graphBox"></div>
+        <div class="g-legend">
+          <span><i style="background:#ff5d76"></i> Applicant (9)</span>
+          <span><i style="background:#3b9bff"></i> Shared IP</span>
+          <span><i style="background:#9d7bff"></i> Fictitious employer</span>
+          <span><i style="background:#37e0d8"></i> Shared bank / IBAN</span>
+          <span><i style="background:#ffba49"></i> Shared phone</span>
+        </div>
+      </div>
+
+      <!-- decision -->
+      <div class="eh" style="margin-top:18px;color:var(--ink);font-size:14px">⚖️ Your decision <span class="subtle" style="font-weight:400">— human-in-the-loop</span></div>
+      <div class="decision" id="decisionRow">
+        <button class="act danger" data-action="decision" data-d="freeze">
+          <div class="ai">🧊</div><div class="at">Freeze payments</div><div class="am">Halt disbursement on all 9 applications</div>
+        </button>
+        <button class="act" data-action="decision" data-d="escalate">
+          <div class="ai">🚨</div><div class="at">Escalate to investigation</div><div class="am">Open enforcement case + assign investigator</div>
+        </button>
+        <button class="act" data-action="decision" data-d="casefile">
+          <div class="ai">📄</div><div class="at">Generate case file</div><div class="am">Document Generator + M365 Copilot</div>
+        </button>
+        <button class="act" data-action="decision" data-d="notify">
+          <div class="ai">📨</div><div class="at">Notify partner agencies</div><div class="am">Tax &amp; police data-share alert</div>
+        </button>
+      </div>
+
+      <div class="actions-head hide" id="actionsHead">
+        <h3>🗂️ Actions taken</h3>
+        <span class="act-counter" id="actCounter">0 / 4 completed</span>
+      </div>
+      <div id="actionsTaken"></div>
+
+      <div class="audit" id="auditBox">
+        <div class="eh" style="color:var(--green)">✅ Immutable audit trail <span class="by" style="background:rgba(57,217,138,.12);border-color:rgba(57,217,138,.3);color:var(--green)">Microsoft Purview · Audit</span></div>
+        <div class="alog" id="auditLog"></div>
+      </div>
+
+      <div class="case-resolved" id="caseResolved">
+        <h3>✅ Case #4471 fully actioned</h3>
+        <div style="color:var(--ink2);font-size:13px">Payments frozen · investigation opened · case file generated · partner agencies notified. The ring is neutralized, no improper funds were released, and every step is auditable in Microsoft Purview.</div>
+      </div>
+    </div>
+
+    <!-- outcome -->
+    <div class="section" style="margin-top:30px">
+      <h2>Outcome</h2>
+      <div class="outcome">
+        <div class="oc"><div class="oi">🛑</div><div class="ov">9</div><div class="ol">Fraudulent claims stopped pre-payment</div></div>
+        <div class="oc"><div class="oi">💶</div><div class="ov">€1.6M</div><div class="ol">Annualized improper payments prevented (illustrative)</div></div>
+        <div class="oc"><div class="oi">⚡</div><div class="ov">Seconds</div><div class="ol">From burst to flagged — not weeks</div></div>
+        <div class="oc"><div class="oi">🤝</div><div class="ov">100%</div><div class="ol">Decisions made by a human, fully audited</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CLOSING (revealed at end of tour) ============ -->
+  <section class="scene" id="view-close">
+    <div class="hero" style="padding-top:40px">
+      <span class="eyebrow">⬡ The bigger picture</span>
+      <h1>From reactive recovery<br><span class="gr">to real-time prevention.</span></h1>
+      <p class="lead">One unified data estate. A team of AI agents. Genuine citizens served faster, organized fraud stopped at the source — every decision explainable, governed and human-led.</p>
+    </div>
+    <div class="section">
+      <h2>Value delivered</h2>
+      <div class="outcome">
+        <div class="oc"><div class="oi">🛡️</div><div class="ov">Prevent</div><div class="ol">Stop fraud before payment, not after</div></div>
+        <div class="oc"><div class="oi">🚀</div><div class="ov">~35%</div><div class="ol">Targeted cost savings via agentic workflows</div></div>
+        <div class="oc"><div class="oi">💚</div><div class="ov">Trust</div><div class="ol">Genuine applicants onboarded effortlessly</div></div>
+        <div class="oc"><div class="oi">🔍</div><div class="ov">Explain</div><div class="ol">Responsible AI &amp; full Purview audit</div></div>
+      </div>
+    </div>
+    <div class="section">
+      <h2>Built on Microsoft Cloud</h2>
+      <p class="desc">Every capability demonstrated maps to the PH&amp;SS reference architecture.</p>
+      <div class="capgrid" id="capGridClose"></div>
+    </div>
+    <div class="hero-cta" style="margin-top:34px">
+      <button class="btn primary" data-view="home">↺ Replay overview</button>
+      <button class="btn outline" data-action="tour">▶ Run the guided story again</button>
+    </div>
+  </section>
+
+  <div class="foot">
+    Interactive demonstration · Microsoft Public Sector · Health &amp; Social Services<br>
+    Grounded in <b>RefArch PH&amp;SS — Enable detection and prevention for Fraud, Waste &amp; Abuse</b>
+    <div class="pillrow">
+      <span>Azure AI Foundry</span><span>Document Intelligence</span><span>Azure AI Vision</span><span>Azure Face</span>
+      <span>Entra Verified ID</span><span>Microsoft Sentinel</span><span>Cosmos DB Graph</span><span>Microsoft Fabric</span>
+      <span>Azure OpenAI</span><span>Copilot Studio</span><span>M365 Copilot</span><span>Power BI</span><span>Purview</span>
+    </div>
+  </div>
+</div>
+
+<!-- guided tour narrator -->
+<div class="narrator" id="narrator">
+  <div class="nbox">
+    <div class="pulse">⬡</div>
+    <div class="ntext">
+      <div class="nt" id="narHead">Guided story</div>
+      <div class="nc" id="narText">—</div>
+      <div class="nprog"><div class="nf" id="narFill"></div></div>
+    </div>
+    <div class="nbtns">
+      <button class="nmini" data-action="tourstop">✕ Exit</button>
+      <button class="nmini go" data-action="tournext" id="tourNextBtn">Next →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+"use strict";
+(function(){
+
+/* ---------- capability catalogue ---------- */
+const CAPS = [
+  {id:"docintel", ico:"📑", nm:"Azure AI Document Intelligence"},
+  {id:"content",  ico:"🧠", nm:"Azure AI Content Understanding"},
+  {id:"vision",   ico:"🖼️", nm:"Azure AI Vision · Tamper detection"},
+  {id:"face",     ico:"🪪", nm:"Azure Face · Liveness &amp; deepfake"},
+  {id:"safety",   ico:"🛟", nm:"Azure AI Content Safety"},
+  {id:"verid",    ico:"✅", nm:"Microsoft Entra Verified ID"},
+  {id:"openai",   ico:"💬", nm:"Azure OpenAI · Reasoning &amp; NLP"},
+  {id:"aml",      ico:"📈", nm:"Azure ML · Risk &amp; anomaly"},
+  {id:"sentinel", ico:"🛰️", nm:"Microsoft Sentinel · Cyber Signals"},
+  {id:"defender", ico:"🦠", nm:"Microsoft Defender · Threat intel"},
+  {id:"graph",    ico:"🕸️", nm:"Graph Analytics · Cosmos DB"},
+  {id:"fabric",   ico:"🧱", nm:"Microsoft Fabric · OneLake"},
+  {id:"foundry",  ico:"⬡", nm:"Azure AI Foundry · Multi-agent"},
+  {id:"copstudio",ico:"🧩", nm:"Microsoft Copilot Studio"},
+  {id:"m365",     ico:"📨", nm:"Microsoft 365 Copilot"},
+  {id:"powerbi",  ico:"📊", nm:"Power BI · RAI dashboards"},
+  {id:"purview",  ico:"🔐", nm:"Microsoft Purview · Governance"},
+  {id:"rai",      ico:"⚖️", nm:"Responsible AI · Explainability"}
+];
+const used = new Set();
+
+function buildCapGrid(elId){
+  const el = document.getElementById(elId);
+  if(!el) return;
+  el.innerHTML = CAPS.map(c=>
+    `<div class="cap" data-cap="${c.id}"><span class="dot"></span><span class="ico">${c.ico}</span><span class="nm">${c.nm}</span></div>`
+  ).join("");
+}
+function litCap(id, fresh){
+  document.querySelectorAll('.cap[data-cap="'+id+'"]').forEach(node=>{
+    node.classList.add("lit");
+    if(fresh){ node.classList.add("fresh"); setTimeout(()=>node.classList.remove("fresh"),650); }
+  });
+}
+function useCaps(ids){
+  ids.forEach(id=>{ const isNew=!used.has(id); used.add(id); litCap(id,isNew); });
+  const n = used.size;
+  const h=document.getElementById("capCountHome"); if(h) h.textContent=n;
+}
+buildCapGrid("capGrid");
+buildCapGrid("capGridClose");
+
+/* ---------- view switching ---------- */
+function showView(v){
+  document.querySelectorAll(".scene").forEach(s=>s.classList.remove("on"));
+  const node=document.getElementById("view-"+v);
+  if(node) node.classList.add("on");
+  document.querySelectorAll("#personaSwitch button").forEach(b=>{
+    b.classList.toggle("on", b.getAttribute("data-view")===v);
+  });
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+/* ---------- Scenario 1 data ---------- */
+const S1 = [
+  { ico:"✅", title:"Identity proofing", agent:"Identity Proofing Agent",
+    caps:["verid","foundry"],
+    hint:"Applicant asked to present a verifiable digital credential.",
+    render:()=>docStageMsg("🪪","Requesting a verifiable credential via Microsoft Entra Verified ID…"),
+    delta:15, ok:false,
+    signals:["Identity not backed by a cryptographically <b>verifiable credential</b>","Self-asserted name only — no trusted issuer"]
+  },
+  { ico:"🪪", title:"Government ID — passport", agent:"Document Parsing + Validation Agent",
+    caps:["docintel","vision","content"],
+    hint:"Passport uploaded. Running OCR + image-tamper analysis.",
+    render:renderPassport,
+    delta:30, ok:false,
+    signals:["<b>Tampered portrait</b> detected — face region spliced / re-compressed (Error-Level Analysis)","Document metadata edited 2 days ago in image software","Portrait does not match document substrate"]
+  },
+  { ico:"💵", title:"Proof of income — pay stub", agent:"Validation Agent + Consistency Checker",
+    caps:["docintel","openai","fabric"],
+    hint:"Pay stub uploaded. Cross-matching employer + income.",
+    render:renderPaystub,
+    delta:25, ok:false,
+    signals:["Employer <b>“Northwind Staffing Solutions”</b> has no active business / VAT registration","Synthetic pay stub — font &amp; kerning anomalies, weekend pay date","Declared income inconsistent with matched tax records (Fabric cross-match)"]
+  },
+  { ico:"🏠", title:"Proof of address — utility bill", agent:"Validation Agent",
+    caps:["docintel","vision"],
+    hint:"Utility bill uploaded. Checking recency + integrity.",
+    render:()=>docStageMsg("🧾","Utility bill — verifying issue date &amp; field integrity…"),
+    delta:10, ok:false,
+    signals:["Document <b>outdated</b> — issued 11 months ago (exceeds 3-month rule)","Account-holder name altered — different embedded font detected"]
+  },
+  { ico:"🎥", title:"Remote video consultation", agent:"Face Verification Agent",
+    caps:["face","safety","vision"],
+    hint:"Live verification call started. Running liveness + deepfake checks.",
+    render:renderVideo,
+    delta:15, ok:false,
+    signals:["<b>Deepfake / synthetic video</b> detected — frame-level GAN artifacts","Liveness check failed — no natural micro-expressions or blink","Face does not match the (already tampered) ID portrait"]
+  },
+  { ico:"⬡", title:"Orchestrated eligibility decision", agent:"Eligibility Decision Agent",
+    caps:["foundry","openai","rai","purview","powerbi"],
+    hint:"All agents reporting. Composing final decision.",
+    render:()=>docStageMsg("🧠","Azure AI Foundry orchestrating all agent findings…"),
+    delta:0, ok:false, final:true,
+    signals:["Aggregate fraud risk <b>95 / 100</b> — threshold for auto-block exceeded","Decision is explainable &amp; logged — submission halted pre-filing"]
+  }
+];
+let s1i = -1, risk = 0;
+
+function docStageMsg(icon,text){
+  return `<div style="text-align:center"><div style="font-size:46px">${icon}</div><div class="doc-hint" style="margin-top:10px">${text}</div></div>`;
+}
+function renderPassport(){
+  return `<div class="passport" id="ppCard">
+    <div class="pp-h"><span>PASSPORT · SPECIMEN</span><span>UTOPIA</span></div>
+    <div class="pp-row">
+      <div class="photo">🧑<div class="ela"></div><div class="tamper-badge">TAMPERED</div></div>
+      <div class="fields">
+        <div class="f"><div class="k">Surname</div><div class="vv">VOLKOV</div></div>
+        <div class="f"><div class="k">Given name</div><div class="vv">ANDREI</div></div>
+        <div class="f bad"><div class="k">Passport №</div><div class="vv">X1 902 412</div></div>
+        <div class="f"><div class="k">Expiry</div><div class="vv">2031-04</div></div>
+      </div>
+    </div></div>`;
+}
+function renderPaystub(){
+  return `<div class="paper" id="psCard">
+    <div class="stamp">FORGED</div>
+    <h5>Northwind Staffing Solutions LLC</h5>
+    <div class="small">Payslip · Period 05/2026 · Ref NW-44812</div>
+    <div class="ln"><span>Employee</span><span>A. Volkov</span></div>
+    <div class="ln"><span>Employer VAT</span><span class="hl">INVALID / UNREGISTERED</span></div>
+    <div class="ln"><span>Gross pay</span><span class="hl">€4,950.00</span></div>
+    <div class="ln"><span>Pay date</span><span class="hl">Sun 2026-05-31</span></div>
+    <div class="ln"><span>Net pay</span><span>€3,910.00</span></div>
+  </div>`;
+}
+function renderVideo(){
+  return `<div class="videobox" id="vidCard">
+    <div class="rec"><i></i> LIVE</div>
+    <div class="mesh"></div>
+    <div class="face">🧑‍🦱</div>
+    <div class="deepfake-tag">⚠ DEEPFAKE DETECTED · liveness failed</div>
+  </div>`;
+}
+
+function buildS1Steps(){
+  const wrap=document.getElementById("s1Steps");
+  wrap.innerHTML = S1.map((s,i)=>
+    `<div class="step" data-step="${i}">
+       <div class="sico">${s.ico}</div>
+       <div class="sbody">
+         <div class="stitle">${s.title} <span class="agent">⬡ ${s.agent}</span></div>
+         <div class="smeta">Awaiting check…</div>
+         <div class="result"></div>
+       </div>
+     </div>`).join("");
+}
+function setGauge(v){
+  const off = 220 - (220 * Math.min(v,100)/100);
+  document.getElementById("gaugeArc").style.strokeDashoffset = off;
+  document.getElementById("riskNum").textContent = Math.round(v);
+}
+function pushSignalStream(html, ok){
+  const s=document.getElementById("sigStream");
+  const row=document.createElement("div");
+  row.className="ss";
+  row.innerHTML=`<span>${ok?"🟢":"🔺"}</span><span>${html}</span>`;
+  s.appendChild(row);
+  requestAnimationFrame(()=>row.classList.add("show"));
+}
+
+function s1Advance(){
+  if(s1i >= S1.length-1){ return false; }
+  s1i++;
+  const s = S1[s1i];
+  document.getElementById("s1StageLabel").textContent = "Step "+(s1i+1)+" of "+S1.length;
+  // mark active
+  document.querySelectorAll("#s1Steps .step").forEach((n,idx)=>{
+    n.classList.toggle("active", idx===s1i);
+  });
+  const stage=document.getElementById("docStage");
+  stage.innerHTML = '<div class="scanline"></div>' + (s.render? s.render() : docStageMsg("📄",s.hint));
+  document.getElementById("docHint") && (document.getElementById("docHint").innerHTML=s.hint);
+  // scan animation then reveal
+  stage.classList.add("scanning");
+  if(s1i===4) stage.classList.add("scanning-video");
+  useCaps(s.caps);
+
+  setTimeout(()=>{
+    stage.classList.remove("scanning","scanning-video");
+    // flag visuals
+    const pp=document.getElementById("ppCard"); if(pp) pp.parentElement.classList.add("flagphoto");
+    const ps=document.getElementById("psCard"); if(ps) ps.parentElement.classList.add("flagdoc");
+    const vc=document.getElementById("vidCard"); if(vc){ vc.classList.add("flagvideo"); }
+    if(document.getElementById("ppCard")) document.getElementById("docStage").classList.add("flagphoto");
+    if(document.getElementById("psCard")) document.getElementById("docStage").classList.add("flagdoc");
+    if(document.getElementById("vidCard")) document.getElementById("docStage").classList.add("flagvideo");
+
+    // step result
+    const stepNode=document.querySelectorAll("#s1Steps .step")[s1i];
+    stepNode.classList.remove("active");
+    stepNode.classList.add(s.final? "done":"flag");
+    stepNode.querySelector(".smeta").textContent = s.final? "Decision composed" : "Risk signals found";
+    stepNode.querySelector(".result").innerHTML =
+      s.signals.map(sig=>`<div class="signal"><span class="si">🔺</span><span>${sig}</span></div>`).join("") +
+      `<div class="usedcaps">${s.caps.map(c=>{const cc=CAPS.find(x=>x.id===c);return `<span>${cc?cc.ico:""} ${cc?cc.nm.replace(/&amp;/g,'&'):c}</span>`}).join("")}</div>`;
+    // risk
+    risk = Math.min(95, risk + s.delta);
+    setGauge(risk);
+    s.signals.forEach(sig=>pushSignalStream(sig,false));
+
+    if(risk>=70){ document.getElementById("riskChip").className="verdict-chip vc-block"; document.getElementById("riskChip").textContent="High risk"; }
+    else if(risk>=35){ document.getElementById("riskChip").className="verdict-chip"; document.getElementById("riskChip").style.cssText=""; document.getElementById("riskChip").classList.add("verdict-chip"); document.getElementById("riskChip").textContent="Elevated"; }
+
+    if(s.final){ finalizeS1(); }
+  }, s.render && (s1i!==3 && s1i!==5)? 1500 : 1100);
+  return true;
+}
+
+function finalizeS1(){
+  document.getElementById("riskChip").className="verdict-chip vc-block";
+  document.getElementById("riskChip").textContent="Blocked";
+  setGauge(95);
+  const banner=document.getElementById("verdictBanner"); banner.classList.add("show");
+  document.getElementById("verdictReasons").innerHTML = [
+    "Tampered passport portrait (deepfake face-swap)",
+    "Forged pay stub from a fictitious, unregistered employer",
+    "Outdated &amp; altered proof of address",
+    "Deepfake detected in the live video consultation",
+    "Identity never backed by a verifiable credential"
+  ].map(r=>`<li>${r}</li>`).join("");
+  const bars=[
+    ["Document tampering",34],["Deepfake / liveness",26],["Fictitious employer",20],["Identity unverifiable",12],["Cross-record mismatch",8]
+  ];
+  document.getElementById("raiBars").innerHTML = bars.map(b=>
+    `<div class="bar"><span class="bl">${b[0]}</span><span class="bt"><span class="bf" data-w="${b[1]}"></span></span><span class="bv">${b[1]}%</span></div>`).join("");
+  setTimeout(()=>document.querySelectorAll("#raiBars .bf").forEach(f=>f.style.width=f.getAttribute("data-w")+"%"),120);
+  const btn=document.getElementById("s1NextBtn"); btn.textContent="✓ Claim blocked"; btn.disabled=true; btn.style.opacity=".6";
+}
+
+function s1Reset(){
+  s1i=-1; risk=0;
+  buildS1Steps(); setGauge(0);
+  document.getElementById("sigStream").innerHTML="";
+  document.getElementById("docStage").className="docstage";
+  document.getElementById("docStage").innerHTML='<div class="scanline"></div><div class="doc-hint" id="docHint">Press <b>Run next check →</b> to begin identity proofing.</div>';
+  document.getElementById("verdictBanner").classList.remove("show");
+  document.getElementById("s1StageLabel").textContent="Step 1 of 6";
+  const chip=document.getElementById("riskChip"); chip.className="verdict-chip vc-eval"; chip.textContent="Evaluating";
+  const btn=document.getElementById("s1NextBtn"); btn.textContent="Run next check →"; btn.disabled=false; btn.style.opacity="1";
+}
+
+/* ---------- Scenario 3 — genuine applicant ---------- */
+function renderPassportClean(){
+  return '<div class="passport"><div class="pp-h"><span>PASSPORT · SPECIMEN</span><span>UTOPIA</span></div>'+
+  '<div class="pp-row"><div class="photo">🙋‍♀️<div style="position:absolute;top:6px;left:6px;font-size:8.5px;font-weight:800;background:var(--green);color:#06210f;padding:2px 6px;border-radius:5px">VERIFIED</div></div>'+
+  '<div class="fields"><div class="f"><div class="k">Surname</div><div class="vv">MARINESCU</div></div>'+
+  '<div class="f"><div class="k">Given name</div><div class="vv">ELENA</div></div>'+
+  '<div class="f"><div class="k">Passport №</div><div class="vv">Y2 884 204</div></div>'+
+  '<div class="f"><div class="k">Expiry</div><div class="vv">2032-10</div></div></div></div></div>';
+}
+function renderPaystubClean(){
+  return '<div class="paper"><div class="stamp" style="color:#1f9a5f;border-color:#1f9a5f;opacity:1">VALID</div>'+
+  '<h5>Contoso Ltd</h5><div class="small">Payslip · Period 05/2026 · Ref CTS-20416</div>'+
+  '<div class="ln"><span>Employee</span><span>E. Marinescu</span></div>'+
+  '<div class="ln"><span>Employer VAT</span><span style="color:#1f9a5f;font-weight:700">UT-VAT-114829 ✓</span></div>'+
+  '<div class="ln"><span>Gross pay</span><span>€2,000.00</span></div>'+
+  '<div class="ln"><span>Pay date</span><span>2026-05-29</span></div>'+
+  '<div class="ln"><span>Net pay</span><span>€1,600.00</span></div></div>';
+}
+function renderVideoClean(){
+  return '<div class="videobox"><div class="rec"><i style="background:var(--green)"></i> LIVE</div>'+
+  '<div class="mesh" style="opacity:1"></div><div class="face">🙋‍♀️</div>'+
+  '<div style="position:absolute;left:10px;bottom:10px;font-size:10.5px;font-weight:800;background:var(--green);color:#06210f;padding:4px 9px;border-radius:7px">✓ LIVENESS PASSED · face matches ID</div></div>';
+}
+const S3 = [
+  { ico:"✅", title:"Identity proofing", agent:"Identity Proofing Agent", caps:["verid","foundry"],
+    hint:"Applicant presents a verifiable digital credential.",
+    render:()=>docStageMsg("🪪","Validating a verifiable credential via Microsoft Entra Verified ID…"),
+    delta:2, signals:["Verifiable credential validated — issued by a trusted government issuer"] },
+  { ico:"🪪", title:"Government ID — passport", agent:"Document Parsing + Validation Agent", caps:["docintel","vision","content"],
+    hint:"Passport uploaded. Running OCR + image-integrity analysis.",
+    render:renderPassportClean,
+    delta:2, signals:["Passport authentic — no tampering detected","Portrait matches the document and the applicant"] },
+  { ico:"💵", title:"Proof of income — pay stub", agent:"Validation Agent + Consistency Checker", caps:["docintel","openai","fabric"],
+    hint:"Pay stub uploaded. Cross-matching employer + income.",
+    render:renderPaystubClean,
+    delta:2, signals:["Employer “Contoso Ltd” is registered with a valid VAT ID","Declared income matches tax records (Fabric cross-match)"] },
+  { ico:"🏠", title:"Proof of address — utility bill", agent:"Validation Agent", caps:["docintel","vision"],
+    hint:"Utility bill uploaded. Checking recency + integrity.",
+    render:()=>docStageMsg("🧾","Utility bill — recent and unaltered, within policy."),
+    delta:2, signals:["Issued this month — within the 3-month policy","Name and address consistent; no alterations"] },
+  { ico:"🎥", title:"Remote video consultation", agent:"Face Verification Agent", caps:["face","safety","vision"],
+    hint:"Live verification call started. Running liveness + match checks.",
+    render:renderVideoClean,
+    delta:2, signals:["Live person confirmed — natural micro-expressions and blink","Face matches the ID portrait"] },
+  { ico:"⬡", title:"Orchestrated eligibility decision", agent:"Eligibility Decision Agent", caps:["foundry","openai","rai","purview","m365"],
+    hint:"All agents reporting. Composing final decision.",
+    render:()=>docStageMsg("🧠","Azure AI Foundry orchestrating all agent findings…"),
+    delta:2, final:true, signals:["All cross-checks passed — risk 12 / 100","Auto-approved — benefits proceed to disbursement"] }
+];
+let s3i=-1, risk3=0;
+function buildS3Steps(){
+  const wrap=document.getElementById("s3Steps");
+  wrap.innerHTML=S3.map((s,i)=>'<div class="step" data-step="'+i+'"><div class="sico">'+s.ico+'</div><div class="sbody"><div class="stitle">'+s.title+' <span class="agent">⬡ '+s.agent+'</span></div><div class="smeta">Awaiting check…</div><div class="result"></div></div></div>').join("");
+}
+function setGauge3(v){
+  const off=220-(220*Math.min(v,100)/100);
+  document.getElementById("gaugeArc3").style.strokeDashoffset=off;
+  document.getElementById("riskNum3").textContent=Math.round(v);
+}
+function pushSig3(html){
+  const s=document.getElementById("sigStream3");
+  const row=document.createElement("div"); row.className="ss";
+  row.innerHTML='<span>🟢</span><span>'+html+'</span>';
+  s.appendChild(row); requestAnimationFrame(()=>row.classList.add("show"));
+}
+function s3Advance(){
+  if(s3i>=S3.length-1){ return false; }
+  s3i++;
+  const s=S3[s3i];
+  document.getElementById("s3StageLabel").textContent="Step "+(s3i+1)+" of "+S3.length;
+  document.querySelectorAll("#s3Steps .step").forEach((n,idx)=>n.classList.toggle("active",idx===s3i));
+  const stage=document.getElementById("docStage3");
+  stage.innerHTML='<div class="scanline"></div>'+(s.render?s.render():docStageMsg("📄",s.hint));
+  const dh=document.getElementById("docHint3"); if(dh) dh.innerHTML=s.hint;
+  stage.classList.add("scanning");
+  if(s3i===4) stage.classList.add("scanning-video");
+  useCaps(s.caps);
+  setTimeout(()=>{
+    stage.classList.remove("scanning","scanning-video");
+    const stepNode=document.querySelectorAll("#s3Steps .step")[s3i];
+    stepNode.classList.remove("active"); stepNode.classList.add("done");
+    stepNode.querySelector(".smeta").textContent = s.final? "Approved" : "Verified — passed";
+    stepNode.querySelector(".result").innerHTML=
+      s.signals.map(sig=>'<div class="signal ok"><span class="si">🟢</span><span>'+sig+'</span></div>').join("")+
+      '<div class="usedcaps">'+s.caps.map(c=>{const cc=CAPS.find(x=>x.id===c);return '<span>'+(cc?cc.ico:'')+' '+(cc?cc.nm.replace(/&amp;/g,'&'):c)+'</span>'}).join("")+'</div>';
+    risk3=Math.min(12, risk3 + s.delta);
+    setGauge3(risk3);
+    s.signals.forEach(sig=>pushSig3(sig));
+    const chip=document.getElementById("riskChip3"); chip.className="verdict-chip vc-clear"; chip.textContent="Low risk";
+    if(s.final){ finalizeS3(); }
+  }, s.render && (s3i===1||s3i===2||s3i===4)? 1400 : 1000);
+  return true;
+}
+function finalizeS3(){
+  const chip=document.getElementById("riskChip3"); chip.className="verdict-chip vc-clear"; chip.textContent="Approved";
+  setGauge3(12);
+  document.getElementById("verdictBanner3").classList.add("show");
+  document.getElementById("approvedChecks3").innerHTML=[
+    "Verifiable identity credential (Entra Verified ID)",
+    "Authentic passport — no tampering",
+    "Registered employer; income matches tax records",
+    "Recent, unaltered proof of address",
+    "Live person on video; face matches ID"
+  ].map(r=>'<li>'+r+'</li>').join("");
+  const btn=document.getElementById("s3NextBtn"); btn.textContent="✓ Approved"; btn.disabled=true; btn.style.opacity=".6";
+}
+function s3Reset(){
+  s3i=-1; risk3=0; buildS3Steps(); setGauge3(0);
+  document.getElementById("sigStream3").innerHTML="";
+  const ds=document.getElementById("docStage3"); ds.className="docstage";
+  ds.innerHTML='<div class="scanline"></div><div class="doc-hint" id="docHint3">Press <b>Run next check →</b> to begin identity proofing.</div>';
+  document.getElementById("verdictBanner3").classList.remove("show");
+  document.getElementById("s3StageLabel").textContent="Step 1 of 6";
+  const chip=document.getElementById("riskChip3"); chip.className="verdict-chip vc-eval"; chip.textContent="Evaluating";
+  const btn=document.getElementById("s3NextBtn"); btn.textContent="Run next check →"; btn.disabled=false; btn.style.opacity="1";
+}
+
+/* ---------- Scenario 2 ---------- */
+function buildBurst(){
+  const tl=document.getElementById("burstTimeline");
+  if(!tl || tl.dataset.built) return;
+  tl.dataset.built="1";
+  const times=["01.3","03.1","05.0","06.8","08.9","11.2","13.4","15.9","18.1"];
+  times.forEach((t,i)=>{
+    const ev=document.createElement("div");
+    ev.className="ev";
+    ev.style.left=(6 + i*(88/8))+"%";
+    ev.style.animationDelay=(i*0.12)+"s";
+    ev.innerHTML=`<span class="tt">:${t}</span>`;
+    tl.appendChild(ev);
+  });
+}
+
+/* graph */
+const GRAPH = {
+  hubs:[
+    {id:"ip", x:50, y:50, c:"#3b9bff", r:17, label:"IP 203.0.113.45"},
+    {id:"emp", x:22, y:24, c:"#9d7bff", r:15, label:"Northwind Staffing"},
+    {id:"bank", x:80, y:26, c:"#37e0d8", r:15, label:"IBAN ••4471"},
+    {id:"phone", x:78, y:78, c:"#ffba49", r:13, label:"Phone ×2"}
+  ],
+  applicants:[]
+};
+(function(){
+  const names=["A. Volkov","I. Petrov","N. Sokol","R. Marin","D. Ilic","K. Novak","S. Toma","L. Horvat","M. Radu"];
+  for(let i=0;i<9;i++){
+    const ang=(Math.PI*2/9)*i - Math.PI/2;
+    const x=50+Math.cos(ang)*40, y=50+Math.sin(ang)*40;
+    // each applicant links to ip always; others vary
+    const links=["ip"];
+    if(i%1===0) links.push("emp");
+    if(i<7) links.push("bank");
+    if(i===2||i===5) links.push("phone");
+    GRAPH.applicants.push({id:"a"+i, x, y, name:names[i], links});
+  }
+})();
+
+function buildGraph(){
+  const box=document.getElementById("graphBox");
+  if(!box || box.dataset.built) return;
+  box.dataset.built="1";
+  const W=100,H=100;
+  let svg=`<svg viewBox="0 0 100 100" preserveAspectRatio="none">`;
+  // edges
+  let edges="";
+  GRAPH.applicants.forEach(a=>{
+    a.links.forEach(l=>{
+      const hub=GRAPH.hubs.find(h=>h.id===l);
+      edges+=`<line class="edge" data-a="${a.id}" data-hub="${l}" x1="${a.x}" y1="${a.y}" x2="${hub.x}" y2="${hub.y}" stroke="${hub.c}" stroke-opacity="0.22" stroke-width="0.4"/>`;
+    });
+  });
+  svg+=edges;
+  // hubs
+  GRAPH.hubs.forEach(h=>{
+    svg+=`<g><circle cx="${h.x}" cy="${h.y}" r="${h.r/3.2}" fill="${h.c}" fill-opacity="0.18" stroke="${h.c}" stroke-width="0.5"/>
+      <text x="${h.x}" y="${h.y+0.8}" font-size="2.1" fill="#eaf0ff" text-anchor="middle" font-family="Segoe UI">${h.label}</text></g>`;
+  });
+  // applicant nodes
+  GRAPH.applicants.forEach(a=>{
+    svg+=`<g class="g-node" data-node="${a.id}">
+      <circle cx="${a.x}" cy="${a.y}" r="3" fill="#ff5d76" fill-opacity="0.9"/>
+      <text x="${a.x}" y="${a.y-4}" font-size="1.9" fill="#aab8d8" text-anchor="middle" font-family="Segoe UI">${a.name}</text></g>`;
+  });
+  svg+=`</svg>`;
+  box.innerHTML=svg;
+}
+
+function highlightNode(id){
+  const box=document.getElementById("graphBox");
+  box.querySelectorAll(".edge").forEach(e=>{
+    const on = e.getAttribute("data-a")===id;
+    e.setAttribute("stroke-opacity", on? "0.95":"0.07");
+    e.setAttribute("stroke-width", on? "0.7":"0.4");
+  });
+  box.querySelectorAll(".g-node circle").forEach(c=>{
+    const on=c.parentElement.getAttribute("data-node")===id;
+    c.setAttribute("r", on? "4":"3");
+    c.setAttribute("fill-opacity", on? "1":"0.45");
+  });
+}
+
+const APPS = [
+  {id:"A-90412",name:"A. Volkov",amt:1420},
+  {id:"A-90413",name:"I. Petrov",amt:1380},
+  {id:"A-90414",name:"N. Sokol",amt:1510},
+  {id:"A-90415",name:"R. Marin",amt:1295},
+  {id:"A-90416",name:"D. Ilic",amt:1460},
+  {id:"A-90417",name:"K. Novak",amt:1350},
+  {id:"A-90418",name:"S. Toma",amt:1540},
+  {id:"A-90419",name:"L. Horvat",amt:1400},
+  {id:"A-90420",name:"M. Radu",amt:1325}
+];
+const FREEZE_TOTAL = APPS.reduce((s,a)=>s+a.amt,0);
+function eur(n){ return "€"+n.toLocaleString("en-US"); }
+
+const AUDIT = {
+  freeze:"PAYMENT FREEZE applied · 9 applications · "+eur(FREEZE_TOTAL)+"/mo held · status: funds protected",
+  escalate:"ENFORCEMENT CASE ENF-4471 opened · investigator J. Marković assigned · evidence package attached",
+  casefile:"CASE FILE generated (Document Generator + M365 Copilot) · saved to SharePoint, shared in Teams",
+  notify:"PARTNER ALERT dispatched · Tax Authority · Police FCU · FIU · governed data-share logged"
+};
+
+let auditClock = 0;
+const T0 = 14*3600 + 3*60 + 12;
+function stamp(){ const s=T0+auditClock*6; auditClock++; const p=x=>String(x).padStart(2,"0"); return p(Math.floor(s/3600))+":"+p(Math.floor(s%3600/60))+":"+p(s%60); }
+
+function acHead(ico,ttl,sub,by,status,sc){
+  return `<div class="ac-head"><div class="ac-ico">${ico}</div>
+    <div style="flex:1;min-width:0"><div class="ac-ttl">${ttl}</div><div class="ac-sub">${sub}</div></div>
+    <span class="ac-by">⬡ ${by}</span><span class="ac-status ${sc}">${status}</span></div>`;
+}
+function renderActionDetail(d){
+  if(d==="freeze"){
+    return acHead("🧊","Payments frozen","Disbursement halted across all 9 linked applications","Disbursement Engine · Azure ML","FUNDS HELD","st-red")+
+    `<table class="pay-table"><thead><tr><th>Application</th><th>Applicant</th><th>Monthly benefit</th><th>Status</th></tr></thead><tbody>`+
+    APPS.map((a,i)=>`<tr><td style="font-family:Consolas,monospace">${a.id}</td><td>${a.name}</td><td class="amt">${eur(a.amt)}</td><td><span class="ps-status">Scheduled</span></td></tr>`).join("")+
+    `</tbody></table>
+     <div class="pay-total"><span>Monthly benefit disbursement held</span><b>${eur(FREEZE_TOTAL)}</b></div>
+     <div class="ac-note">No funds leave the treasury for this cluster. Holds stay in force until the enforcement case is resolved — reversible for any application later cleared.</div>`;
+  }
+  if(d==="escalate"){
+    return acHead("🚨","Escalated to investigation","Enforcement case opened and assigned","Dynamics 365 · Case Management","UNDER INVESTIGATION","st-amber")+
+    `<div class="fact"><span class="fk">Enforcement case</span><span class="fv">ENF-4471</span></div>
+     <div class="fact"><span class="fk">Priority</span><span class="fv bad">Critical</span></div>
+     <div class="fact"><span class="fk">Response SLA</span><span class="fv">48 hours</span></div>
+     <div class="fact"><span class="fk">Assigned investigator</span><span class="fv">J. Marković · Sr Fraud Investigator</span></div>
+     <div class="fact"><span class="fk">Evidence package</span><span class="fv">Signals · graph · timeline · 9 apps</span></div>
+     <div class="ac-note">The investigator is notified in Microsoft Teams; the full evidence package is auto-attached and the case is tracked to closure.</div>`;
+  }
+  if(d==="casefile"){
+    return acHead("📄","Case file generated","Compiled from all evidence by AI","Document Generator + M365 Copilot","READY","st-blue")+
+    `<div class="drafting" id="draftingLine"><span class="sp"></span> Microsoft 365 Copilot is drafting the case file…</div>
+     <div id="docPreviewWrap" style="display:none">
+       <div class="docpreview">
+         <div class="dt">Fraud Case File — Cluster #4471</div>
+         <div class="dm">PREPARED BY MICROSOFT 365 COPILOT · CONFIDENTIAL · CASE ENF-4471</div>
+         <div class="summ"><b>Executive summary —</b> Nine benefit applications were submitted from a single IP address within a 16.8-second window by an automated agent, all citing the unregistered employer “Northwind Staffing Solutions LLC” and sharing a common bank account. Cyber-signal, pattern and graph evidence indicate a coordinated organized-fraud ring. Recommended action: maintain payment freeze and pursue enforcement.</div>
+         <ol>
+           <li>Executive summary &amp; risk rating (97 / 100)</li>
+           <li>Cyber-signal evidence — IP, device fingerprint, bot cadence</li>
+           <li>Network relationship graph (9 applicants + shared entities)</li>
+           <li>Submission burst timeline</li>
+           <li>Application inventory — 9 records &amp; amounts</li>
+           <li>Responsible-AI risk explainability</li>
+           <li>Recommended enforcement action</li>
+         </ol>
+       </div>
+       <div class="ac-note">Saved to SharePoint and shared to the Teams channel <b>#benefits-integrity</b> for investigator review.</div>
+       <button class="btn primary" data-action="dlcase" style="margin-top:13px;font-size:13.5px;padding:12px 20px">⬇ Download case file</button>
+     </div>`;
+  }
+  if(d==="notify"){
+    return acHead("📨","Partner agencies notified","Secure cross-agency data-share dispatched","Notification Agent · Purview governed","SENT","st-green")+
+    `<div class="agency-row"><span class="ar-ico">🏛️</span><span class="ar-nm">National Tax Authority — benefit/income discrepancy</span><span class="ar-st">Delivered ✓</span></div>
+     <div class="agency-row"><span class="ar-ico">👮</span><span class="ar-nm">Police — Financial Crimes Unit liaison</span><span class="ar-st">Acknowledged ✓</span></div>
+     <div class="agency-row"><span class="ar-ico">🔎</span><span class="ar-nm">Financial Intelligence Unit (FIU)</span><span class="ar-st">Delivered ✓</span></div>
+     <div class="ac-note">Each agency receives only the fields it is authorized to see, via an approved channel. Every field-level disclosure is logged in Microsoft Purview.</div>`;
+  }
+  return "";
+}
+function animateFreeze(){
+  document.querySelectorAll('#act-freeze .ps-status').forEach((sp,i)=>{
+    setTimeout(()=>{ sp.textContent="FROZEN"; sp.classList.add("frozen"); }, 200 + i*140);
+  });
+}
+function animateCasefile(){
+  setTimeout(()=>{
+    const line=document.getElementById("draftingLine"); if(line) line.style.display="none";
+    const wrap=document.getElementById("docPreviewWrap"); if(wrap) wrap.style.display="block";
+  }, 1500);
+}
+function updateActionCounter(){
+  const n=actionsDone.size;
+  const c=document.getElementById("actCounter"); if(c) c.textContent=n+" / 4 completed";
+  if(n===4){ const cr=document.getElementById("caseResolved"); if(cr) cr.classList.add("show"); }
+}
+
+const actionsDone = new Set();
+function doDecision(d, btn){
+  if(actionsDone.has(d)){ const ex=document.getElementById("act-"+d); if(ex) ex.scrollIntoView({behavior:"smooth",block:"center"}); return; }
+  actionsDone.add(d);
+  if(btn) btn.classList.add("done");
+  if(d==="freeze") useCaps(["aml","purview"]);
+  else if(d==="escalate") useCaps(["foundry","purview"]);
+  else if(d==="casefile") useCaps(["m365","copstudio","openai","purview"]);
+  else if(d==="notify") useCaps(["sentinel","purview"]);
+  document.getElementById("actionsHead").classList.remove("hide");
+  const card=document.createElement("div");
+  card.className="action-card"; card.id="act-"+d;
+  card.innerHTML=renderActionDetail(d);
+  document.getElementById("actionsTaken").appendChild(card);
+  document.getElementById("auditBox").classList.add("show");
+  document.getElementById("auditLog").innerHTML += "["+stamp()+"] Officer Maria S. · "+AUDIT[d]+"<br>";
+  if(d==="freeze") animateFreeze();
+  if(d==="casefile") animateCasefile();
+  updateActionCounter();
+}
+
+function caseFileHTML(){
+  let today;
+  try{ today = new Date().toLocaleDateString("en-GB",{year:"numeric",month:"long",day:"numeric"}); }catch(e){ today="2026"; }
+  const rows = APPS.map(a=>`<tr><td>${a.id}</td><td>${a.name}</td><td style="text-align:right">${eur(a.amt)}</td><td>FROZEN</td></tr>`).join("");
+  const rai = [["Coordinated same-IP burst",32],["Shared fictitious employer",24],["Shared bank account / IBAN",18],["Bot-like form cadence",14],["Device fingerprint reuse",12]]
+     .map(r=>`<tr><td>${r[0]}</td><td style="text-align:right">${r[1]}%</td></tr>`).join("");
+  return `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word"><head><meta charset="utf-8"><title>Fraud Case File Cluster 4471</title>
+  <style>
+   body{font-family:'Segoe UI',Arial,sans-serif;color:#1a2238;font-size:11pt;line-height:1.5;margin:40px}
+   h1{font-size:20pt;margin:0;color:#0e1730}
+   .sub{color:#9db4e6;font-size:9pt;letter-spacing:1px;text-transform:uppercase}
+   .band{background:#0e1730;color:#fff;padding:16px 20px;margin:0 0 18px}
+   h2{font-size:13pt;color:#1f4fa0;border-bottom:2px solid #cdd8ef;padding-bottom:4px;margin-top:22px}
+   table{border-collapse:collapse;width:100%;font-size:10pt;margin-top:8px}
+   th,td{border:1px solid #c9d3e8;padding:6px 9px;text-align:left}
+   th{background:#eef2fb;color:#1f3a66}
+   .pill{display:inline-block;background:#ffe3e8;color:#b3173a;font-weight:bold;padding:3px 12px;border-radius:10px;font-size:9pt}
+   .note{background:#f4f6fc;border-left:4px solid #1f4fa0;padding:9px 12px;font-size:9.5pt;color:#33405a;margin-top:10px}
+   .foot{margin-top:26px;border-top:1px solid #ccc;padding-top:10px;color:#888;font-size:8.5pt}
+  </style></head><body>
+  <div class="band"><div class="sub">Confidential &middot; Benefits Integrity &middot; Case ENF-4471</div>
+   <h1>Fraud Case File &mdash; Cluster #4471</h1>
+   <div class="sub" style="margin-top:6px">Prepared by Microsoft 365 Copilot &middot; Generated ${today}</div></div>
+  <p><span class="pill">RISK 97 / 100 &middot; CRITICAL</span></p>
+  <h2>1. Executive summary</h2>
+  <p>Nine benefit applications were submitted from a single IP address within a 16.8-second window by an automated agent, all citing the unregistered employer &ldquo;Northwind Staffing Solutions LLC&rdquo; and sharing a common bank account. Cyber-signal, pattern and graph evidence indicate a coordinated organized-fraud ring. All nine payments have been frozen and an enforcement case opened. No improper funds were released.</p>
+  <h2>2. Cyber-signal evidence</h2>
+  <table><tr><th>Signal</th><th>Finding</th></tr>
+   <tr><td>Source IP</td><td>203.0.113.45</td></tr>
+   <tr><td>Network (ASN)</td><td>Hosting / VPN &middot; AS64500</td></tr>
+   <tr><td>Device fingerprint</td><td>Reused x9 (hash 7f3a...c1)</td></tr>
+   <tr><td>Form-fill cadence</td><td>~74 ms/field (bot-driven)</td></tr>
+   <tr><td>Submission window</td><td>16.8 seconds (9 applications)</td></tr>
+   <tr><td>Threat-intel match</td><td>Microsoft Defender &middot; known ring TTP</td></tr></table>
+  <h2>3. Submission burst timeline</h2>
+  <p>Applications submitted 14:02:01 to 14:02:18 local time. Mean inter-arrival 1.9 seconds &mdash; far below human entry speed and consistent with scripted automation.</p>
+  <h2>4. Network relationships</h2>
+  <ul>
+   <li>Shared source IP across all 9 applications</li>
+   <li>Shared employer: &ldquo;Northwind Staffing Solutions LLC&rdquo; (no active business / VAT registration)</li>
+   <li>Shared bank account / IBAN on 7 of 9 applications</li>
+   <li>Two shared contact phone numbers across the cluster</li>
+  </ul>
+  <h2>5. Application inventory</h2>
+  <table><tr><th>Application</th><th>Applicant</th><th>Monthly benefit</th><th>Status</th></tr>${rows}
+   <tr><th colspan="2">Total monthly disbursement held</th><th style="text-align:right">${eur(FREEZE_TOTAL)}</th><th>FROZEN</th></tr></table>
+  <h2>6. Responsible-AI risk explainability</h2>
+  <table><tr><th>Contributing factor</th><th>Weight</th></tr>${rai}</table>
+  <h2>7. Actions taken</h2>
+  <ul>
+   <li><b>Payments frozen</b> &mdash; disbursement halted on all 9 applications (${eur(FREEZE_TOTAL)}/mo held)</li>
+   <li><b>Escalated to investigation</b> &mdash; enforcement case ENF-4471, investigator assigned, 48h SLA</li>
+   <li><b>Case file generated</b> &mdash; this document, by Document Generator + M365 Copilot</li>
+   <li><b>Partner agencies notified</b> &mdash; Tax Authority, Police Financial Crimes Unit, FIU (Purview-governed data-share)</li>
+  </ul>
+  <h2>8. Recommended action</h2>
+  <p>Maintain the payment freeze, pursue enforcement against the identified ring, and recover any prior disbursements linked to the shared bank account. Reinstate individually any application later cleared through manual review.</p>
+  <div class="note"><b>Fairness &amp; governance:</b> all automated findings are explainable and were confirmed by a human officer. Every decision and field-level disclosure is logged in Microsoft Purview.</div>
+  <div class="foot">Demonstration document &middot; synthetic data. Names, companies, IP addresses and figures are fictitious and for illustration only.</div>
+  </body></html>`;
+}
+function downloadCaseFile(){
+  // Use the API endpoint to download a real .docx generated by python-docx on the server.
+  // Falls back to the client-side HTML-Word export when running without the backend.
+  const btn = document.querySelector('[data-action="dlcase"]');
+  if (btn) { btn.textContent = "⏳ Generating…"; btn.disabled = true; }
+  fetch('/api/officer/clusters/4471/casefile')
+    .then(function(r){
+      if (!r.ok) throw new Error('API unavailable');
+      return r.blob();
+    })
+    .then(function(blob){
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'Fraud-Case-File-Cluster-4471.docx';
+      document.body.appendChild(a); a.click();
+      setTimeout(function(){ document.body.removeChild(a); URL.revokeObjectURL(url); }, 800);
+      if (btn) { btn.textContent = "✓ Case file downloaded"; }
+    })
+    .catch(function(){
+      // Offline / static fallback — generate client-side HTML-Word export
+      const blob = new Blob(['\uFEFF', caseFileHTML()], {type:'application/msword'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'Fraud-Case-File-Cluster-4471.doc';
+      document.body.appendChild(a); a.click();
+      setTimeout(function(){ document.body.removeChild(a); URL.revokeObjectURL(url); }, 800);
+      if (btn) { btn.textContent = "✓ Case file downloaded"; }
+    });
+}
+
+function openCase(){ document.getElementById("queuePanel").classList.add("hide"); document.getElementById("investPanel").classList.add("on");
+  buildBurst(); buildGraph(); useCaps(["sentinel","defender","aml","graph","foundry","powerbi"]); window.scrollTo({top:120,behavior:"smooth"}); }
+function closeCase(){ document.getElementById("investPanel").classList.remove("on"); document.getElementById("queuePanel").classList.remove("hide"); window.scrollTo({top:0,behavior:"smooth"}); }
+
+/* ---------- guided tour ---------- */
+const TOUR = [
+  {view:"home", head:"The mission", text:"Governments lose billions to benefits fraud. Meet two personas — an applicant and an integrity officer — and the AI that serves both.", run:null},
+  {view:"home", head:"18 capabilities", text:"Across this story, 18 Microsoft AI capabilities work together. Watch the capability map light up as we go.", run:null},
+  {view:"s1", head:"Scenario 1 · Prevention", text:"An applicant — secretly a fraud-ring member — begins a benefits claim. Identity proofing runs via Entra Verified ID.", run:()=>{s1Reset(); s1Advance();}},
+  {view:"s1", head:"Forged passport", text:"They upload a passport. Document Intelligence reads it; Azure AI Vision spots a tampered, face-swapped portrait.", run:()=>s1Advance()},
+  {view:"s1", head:"Fictitious employer", text:"A pay stub from 'Northwind Staffing Solutions' — an employer that doesn't legally exist. Fabric cross-match exposes it.", run:()=>s1Advance()},
+  {view:"s1", head:"Altered address", text:"An 11-month-old utility bill with an altered name. Outside policy, and tampered.", run:()=>s1Advance()},
+  {view:"s1", head:"Deepfake on camera", text:"For the remote consultation, they use a deepfake. Azure Face liveness detection isn't fooled.", run:()=>s1Advance()},
+  {view:"s1", head:"Blocked at the door", text:"Azure AI Foundry orchestrates every finding and blocks the claim — before it is ever submitted. Fully explainable.", run:()=>s1Advance()},
+  {view:"s3", head:"Scenario 2 · The genuine applicant", text:"Now an honest citizen — Elena — applies. The same agents run; watch every check pass.", run:()=>{s3Reset(); s3Advance();}},
+  {view:"s3", head:"Genuine passport", text:"Her passport is authentic — Document Intelligence and Vision find no tampering and the portrait matches.", run:()=>s3Advance()},
+  {view:"s3", head:"Real employer, matching income", text:"Her pay stub is from Contoso — a registered employer — and the income matches tax records.", run:()=>s3Advance()},
+  {view:"s3", head:"Valid address", text:"A recent, unaltered utility bill clears the proof-of-address check.", run:()=>s3Advance()},
+  {view:"s3", head:"A live person", text:"On video, Azure Face confirms a live person who matches the ID — no deepfake.", run:()=>s3Advance()},
+  {view:"s3", head:"Approved in seconds", text:"The same orchestration that blocked the ring auto-approves Elena at risk 12. Fairness, engineered in.", run:()=>s3Advance()},
+  {view:"s2", head:"Scenario 3 · Detection", text:"Now the officer's view. Some fraud slips past intake — so we watch what's already submitted. The top case is a coordinated burst.", run:()=>{closeCase();}},
+  {view:"s2", head:"Cyber signals", text:"Nine applications from the same IP, submitted under 17 seconds apart by a bot — all citing the same fake employer.", run:()=>{openCase();}},
+  {view:"s2", head:"The network revealed", text:"Graph analytics on Cosmos DB links all nine applicants to a shared IP, employer, bank account and phone. The ring is exposed.", run:null},
+  {view:"s2", head:"Human decides — four actions", text:"The officer acts: freeze all 9 payments, open an enforcement case, let M365 Copilot build the case file, and alert partner agencies — every step audited in Purview.", run:()=>{
+      const seq=["freeze","escalate","casefile","notify"];
+      seq.forEach((d,i)=>setTimeout(()=>doDecision(d, document.querySelector('.act[data-d='+d+']')), i*650));
+  }},
+  {view:"close", head:"From recovery to prevention", text:"Fraud stopped at the source, genuine citizens served faster, every decision explainable and human-led. That's the Microsoft difference.", run:null}
+];
+let ti=-1, tourOn=false;
+function tourStart(){ tourOn=true; ti=-1; document.getElementById("narrator").classList.add("on"); tourNext(); }
+function tourStop(){ tourOn=false; document.getElementById("narrator").classList.remove("on"); }
+function tourNext(){
+  if(ti>=TOUR.length-1){ tourStop(); return; }
+  ti++;
+  const t=TOUR[ti];
+  showView(t.view);
+  document.getElementById("narHead").textContent=t.head;
+  document.getElementById("narText").innerHTML=t.text;
+  document.getElementById("narFill").style.width=((ti+1)/TOUR.length*100)+"%";
+  document.getElementById("tourNextBtn").textContent = ti>=TOUR.length-1? "Finish ✓":"Next →";
+  if(t.run){ setTimeout(t.run, 350); }
+}
+
+/* ---------- init + events ---------- */
+buildS1Steps();
+setGauge(0);
+buildS3Steps();
+setGauge3(0);
+
+document.addEventListener("click", function(e){
+  const vt=e.target.closest("[data-view]");
+  if(vt){ showView(vt.getAttribute("data-view")); return; }
+  const a=e.target.closest("[data-action]");
+  if(!a) return;
+  const act=a.getAttribute("data-action");
+  if(act==="s1next") s1Advance();
+  else if(act==="s1reset") s1Reset();
+  else if(act==="s3next") s3Advance();
+  else if(act==="s3reset") s3Reset();
+  else if(act==="opencase") openCase();
+  else if(act==="closecase") closeCase();
+  else if(act==="decision") doDecision(a.getAttribute("data-d"), a);
+  else if(act==="tour") tourStart();
+  else if(act==="tourstop") tourStop();
+  else if(act==="tournext") tourNext();
+  else if(act==="dlcase"){ downloadCaseFile(); }
+});
+// graph node hover/click
+document.addEventListener("click", function(e){
+  const n=e.target.closest(".g-node");
+  if(n){ highlightNode(n.getAttribute("data-node")); }
+});
+document.addEventListener("mouseover", function(e){
+  const n=e.target.closest(".g-node");
+  if(n){ highlightNode(n.getAttribute("data-node")); }
+});
+
+})();
+</script>
+</body>
+</html>
