@@ -1,0 +1,55 @@
+source_id,target_id,target_type,edge_type
+A-90412,ip:203.0.113.45,ip,USED_IP
+A-90412,device:7f3a9b2e4d1180c1,device,USED_DEVICE
+A-90412,employer:northwind-staffing,employer,CLAIMS_EMPLOYER
+A-90412,iban:UT99BANK0000004471,iban,USES_IBAN
+A-90412,phone:+40711200412,phone,USES_PHONE
+A-90412,"address:12 Harbor St, Lakeside",address,RESIDES_AT
+A-90413,ip:203.0.113.45,ip,USED_IP
+A-90413,device:7f3a9b2e4d1180c1,device,USED_DEVICE
+A-90413,employer:northwind-staffing,employer,CLAIMS_EMPLOYER
+A-90413,iban:UT99BANK0000004471,iban,USES_IBAN
+A-90413,phone:+40711200413,phone,USES_PHONE
+A-90413,"address:12 Harbor St, Lakeside",address,RESIDES_AT
+A-90414,ip:203.0.113.45,ip,USED_IP
+A-90414,device:7f3a9b2e4d1180c1,device,USED_DEVICE
+A-90414,employer:northwind-staffing,employer,CLAIMS_EMPLOYER
+A-90414,iban:UT99BANK0000004471,iban,USES_IBAN
+A-90414,phone:+40711999000,phone,USES_PHONE
+A-90414,"address:8 Market Rd, Lakeside",address,RESIDES_AT
+A-90415,ip:203.0.113.45,ip,USED_IP
+A-90415,device:7f3a9b2e4d1180c1,device,USED_DEVICE
+A-90415,employer:northwind-staffing,employer,CLAIMS_EMPLOYER
+A-90415,iban:UT99BANK0000004471,iban,USES_IBAN
+A-90415,phone:+40711200415,phone,USES_PHONE
+A-90415,"address:8 Market Rd, Lakeside",address,RESIDES_AT
+A-90416,ip:203.0.113.45,ip,USED_IP
+A-90416,device:7f3a9b2e4d1180c1,device,USED_DEVICE
+A-90416,employer:northwind-staffing,employer,CLAIMS_EMPLOYER
+A-90416,iban:UT99BANK0000004471,iban,USES_IBAN
+A-90416,phone:+40711200416,phone,USES_PHONE
+A-90416,"address:55 Pine Ave, Lakeside",address,RESIDES_AT
+A-90417,ip:203.0.113.45,ip,USED_IP
+A-90417,device:7f3a9b2e4d1180c1,device,USED_DEVICE
+A-90417,employer:northwind-staffing,employer,CLAIMS_EMPLOYER
+A-90417,iban:UT99BANK0000004471,iban,USES_IBAN
+A-90417,phone:+40711999000,phone,USES_PHONE
+A-90417,"address:55 Pine Ave, Lakeside",address,RESIDES_AT
+A-90418,ip:203.0.113.45,ip,USED_IP
+A-90418,device:7f3a9b2e4d1180c1,device,USED_DEVICE
+A-90418,employer:northwind-staffing,employer,CLAIMS_EMPLOYER
+A-90418,iban:UT99BANK0000004471,iban,USES_IBAN
+A-90418,phone:+40711200418,phone,USES_PHONE
+A-90418,"address:9 Dock St, Lakeside",address,RESIDES_AT
+A-90419,ip:203.0.113.45,ip,USED_IP
+A-90419,device:7f3a9b2e4d1180c1,device,USED_DEVICE
+A-90419,employer:northwind-staffing,employer,CLAIMS_EMPLOYER
+A-90419,iban:UT99BANK0000007788,iban,USES_IBAN
+A-90419,phone:+40711200419,phone,USES_PHONE
+A-90419,"address:9 Dock St, Lakeside",address,RESIDES_AT
+A-90420,ip:203.0.113.45,ip,USED_IP
+A-90420,device:7f3a9b2e4d1180c1,device,USED_DEVICE
+A-90420,employer:northwind-staffing,employer,CLAIMS_EMPLOYER
+A-90420,iban:UT99BANK0000007799,iban,USES_IBAN
+A-90420,phone:+40711200420,phone,USES_PHONE
+A-90420,"address:9 Dock St, Lakeside",address,RESIDES_AT

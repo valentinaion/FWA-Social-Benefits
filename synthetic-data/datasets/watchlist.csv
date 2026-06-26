@@ -1,0 +1,7 @@
+indicator_type,value,severity,reason,added
+ip,203.0.113.45,high,Hosting/VPN ASN linked to coordinated submissions,2026-06-23
+device_fingerprint,7f3a9b2e4d1180c1,high,Reused across 9 applications,2026-06-23
+iban,UT99BANK0000004471,high,Shared across 7 applications in cluster #4471,2026-06-23
+employer,Northwind Staffing Solutions LLC,high,Fictitious/unregistered employer,2026-06-23
+phone,+40 711 999 000,medium,Shared across 2 applications,2026-06-23
+asn,AS64500,medium,Hosting/VPN network,2026-06-23

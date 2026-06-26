@@ -1,0 +1,14 @@
+application_id,submitted_at,source_ip,asn,asn_type,device_fingerprint,fields_per_second,session_duration_s,user_agent
+A-90412,2026-06-23T14:02:01,203.0.113.45,AS64500,hosting/vpn,7f3a9b2e4d1180c1,13.5,5,HeadlessChrome/124.0 (automation)
+A-90413,2026-06-23T14:02:03,203.0.113.45,AS64500,hosting/vpn,7f3a9b2e4d1180c1,13.5,5,HeadlessChrome/124.0 (automation)
+A-90414,2026-06-23T14:02:05,203.0.113.45,AS64500,hosting/vpn,7f3a9b2e4d1180c1,13.5,5,HeadlessChrome/124.0 (automation)
+A-90415,2026-06-23T14:02:06,203.0.113.45,AS64500,hosting/vpn,7f3a9b2e4d1180c1,13.5,5,HeadlessChrome/124.0 (automation)
+A-90416,2026-06-23T14:02:08,203.0.113.45,AS64500,hosting/vpn,7f3a9b2e4d1180c1,13.5,5,HeadlessChrome/124.0 (automation)
+A-90417,2026-06-23T14:02:11,203.0.113.45,AS64500,hosting/vpn,7f3a9b2e4d1180c1,13.5,5,HeadlessChrome/124.0 (automation)
+A-90418,2026-06-23T14:02:13,203.0.113.45,AS64500,hosting/vpn,7f3a9b2e4d1180c1,13.5,5,HeadlessChrome/124.0 (automation)
+A-90419,2026-06-23T14:02:15,203.0.113.45,AS64500,hosting/vpn,7f3a9b2e4d1180c1,13.5,5,HeadlessChrome/124.0 (automation)
+A-90420,2026-06-23T14:02:18,203.0.113.45,AS64500,hosting/vpn,7f3a9b2e4d1180c1,13.5,5,HeadlessChrome/124.0 (automation)
+A-88150,2026-06-18T09:14:00,198.51.100.23,AS5618,residential,b21c77ad90e34f02,0.4,242,Mozilla/5.0 (Windows NT 10.0) Chrome/124.0
+A-88176,2026-06-19T16:40:00,198.51.100.91,AS5618,residential,c0a1d2e3f4b5a6c7,0.5,198,Mozilla/5.0 (iPhone) Safari/17
+A-88204,2026-06-22T11:05:00,203.0.113.200,AS8048,residential,aa11bb22cc33dd44,0.6,310,Mozilla/5.0 (Macintosh) Safari/17
+A-88210,2026-06-22T15:32:00,198.51.100.140,AS8708,residential,dd44ee55ff660011,0.3,377,Mozilla/5.0 (Windows NT 10.0) Firefox/126

@@ -1,0 +1,122 @@
+{
+  "$schema": "https://example.org/fwa-agent-manifest.schema.json",
+  "solution": "Benefits Integrity Cloud — FWA Detection & Prevention",
+  "orchestration": {
+    "platform": "Azure AI Foundry Agent Service",
+    "framework": "Semantic Kernel (Magentic planner)",
+    "reasoningModel": "gpt-4o",
+    "humanInTheLoop": true
+  },
+  "agents": [
+    {
+      "id": "identity-proofing",
+      "name": "Identity Proofing Agent",
+      "scenario": [1],
+      "role": "Request and verify a verifiable digital credential before intake proceeds.",
+      "tools": ["entra-verified-id"],
+      "capabilities": ["verid", "foundry"],
+      "inputs": ["applicantSession"],
+      "outputs": ["credentialVerified", "riskDelta"]
+    },
+    {
+      "id": "document-parsing",
+      "name": "Document Parsing Agent",
+      "scenario": [1],
+      "role": "Extract structured fields from uploaded identity and supporting documents.",
+      "tools": ["azure-document-intelligence", "content-understanding"],
+      "capabilities": ["docintel", "content"],
+      "inputs": ["documentBlob"],
+      "outputs": ["extractedFields", "documentImage"]
+    },
+    {
+      "id": "validation",
+      "name": "Validation Agent",
+      "scenario": [1],
+      "role": "Detect tampering, forgery and expiry; match document fields to applicant data.",
+      "tools": ["azure-ai-vision", "ela-exif-check"],
+      "capabilities": ["vision", "docintel"],
+      "inputs": ["documentImage", "extractedFields"],
+      "outputs": ["tamperFindings", "riskDelta"]
+    },
+    {
+      "id": "face-verification",
+      "name": "Face Verification Agent",
+      "scenario": [1],
+      "role": "Run liveness and deepfake detection on the remote consultation; match to ID portrait.",
+      "tools": ["azure-face-liveness", "content-safety"],
+      "capabilities": ["face", "safety", "vision"],
+      "inputs": ["videoSession", "idPortrait"],
+      "outputs": ["livenessResult", "faceMatch", "riskDelta"]
+    },
+    {
+      "id": "consistency-checker",
+      "name": "Consistency Checker",
+      "scenario": [1],
+      "role": "Cross-match employer, income, residency against tax/employment/registry data.",
+      "tools": ["fabric-cross-match", "external-verification"],
+      "capabilities": ["openai", "fabric"],
+      "inputs": ["extractedFields", "applicantProfile"],
+      "outputs": ["crossMatchFindings", "riskDelta"]
+    },
+    {
+      "id": "eligibility-decision",
+      "name": "Eligibility Decision Agent",
+      "scenario": [1],
+      "role": "Aggregate all agent findings into an explainable accept / review / block decision.",
+      "tools": ["azure-openai", "azure-ml-risk", "rai-explainer", "purview-audit"],
+      "capabilities": ["foundry", "openai", "rai", "purview", "powerbi"],
+      "inputs": ["allFindings"],
+      "outputs": ["decision", "riskScore", "explanation", "auditRecord"]
+    },
+    {
+      "id": "cyber-signals",
+      "name": "Cyber Signals Agent",
+      "scenario": [2],
+      "role": "Detect coordinated/automated submission bursts from telemetry (IP, device, cadence).",
+      "tools": ["sentinel-kql", "defender-ti", "azure-ml-anomaly"],
+      "capabilities": ["sentinel", "defender", "aml"],
+      "inputs": ["submissionTelemetry"],
+      "outputs": ["cyberSignals", "clusterCandidate"]
+    },
+    {
+      "id": "prioritization",
+      "name": "Prioritization Agent",
+      "scenario": [2],
+      "role": "Rank clusters and applications by fraud likelihood for officer review.",
+      "tools": ["azure-ml-risk"],
+      "capabilities": ["aml"],
+      "inputs": ["clusterCandidate", "applicationScores"],
+      "outputs": ["rankedQueue"]
+    },
+    {
+      "id": "graph-explorer",
+      "name": "Graph Relationship Explorer",
+      "scenario": [2],
+      "role": "Build and traverse the relationship network linking applicants to shared entities.",
+      "tools": ["cosmos-gremlin"],
+      "capabilities": ["graph"],
+      "inputs": ["clusterId"],
+      "outputs": ["graphNodes", "graphEdges", "sharedEntities"]
+    },
+    {
+      "id": "document-generator",
+      "name": "Document Generator",
+      "scenario": [2],
+      "role": "Compile the evidence into a structured case file (Word) for investigators.",
+      "tools": ["m365-copilot", "azure-openai", "docx-generator"],
+      "capabilities": ["m365", "copstudio", "openai"],
+      "inputs": ["clusterEvidence"],
+      "outputs": ["caseFileDocx", "sharePointLink"]
+    },
+    {
+      "id": "notification",
+      "name": "Notification Agent",
+      "scenario": [2],
+      "role": "Dispatch governed, field-minimized alerts to partner agencies.",
+      "tools": ["graph-mail", "purview-dlp"],
+      "capabilities": ["m365", "purview"],
+      "inputs": ["clusterEvidence", "recipientPolicy"],
+      "outputs": ["dispatchStatus", "auditRecord"]
+    }
+  ]
+}

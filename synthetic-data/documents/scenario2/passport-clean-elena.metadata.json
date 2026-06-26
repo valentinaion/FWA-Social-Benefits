@@ -1,0 +1,19 @@
+{
+  "file": "passport-clean-elena.png",
+  "synthetic": true,
+  "ground_truth": "genuine",
+  "expected_agent": "validation",
+  "expected_capabilities": [
+    "vision",
+    "docintel"
+  ],
+  "indicators": {
+    "portrait_splice": false,
+    "noise_inconsistency": false,
+    "jpeg_ghost": false,
+    "copy_move": false,
+    "metadata_software": "GovScan IDCapture v3",
+    "edited": false
+  },
+  "expected_finding": "No tampering detected \u2014 genuine document"
+}

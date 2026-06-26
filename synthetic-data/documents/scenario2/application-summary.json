@@ -1,0 +1,37 @@
+{
+  "_note": "SYNTHETIC. Genuine control application \u2014 the clean counterpart to the fraud ring.",
+  "applicant": {
+    "id": "A-88204",
+    "name": "Elena Marinescu",
+    "national_id": "UT-8820401",
+    "dob": "1994-02-25",
+    "address": "77 Birch Rd, Capital City",
+    "employer": "Contoso Ltd",
+    "declared_annual_income_eur": 24000,
+    "monthly_benefit_eur": 1100,
+    "iban": "UT12BANK0000088204",
+    "phone": "+40 720 110 204",
+    "benefit_types": [
+      "unemployment",
+      "housing"
+    ]
+  },
+  "checks": {
+    "identity_verified": true,
+    "document_tampering": false,
+    "employer_registered": true,
+    "income_matches_tax": true,
+    "address_valid_recent": true,
+    "liveness_passed": true,
+    "device_ip_anomaly": false
+  },
+  "decision": {
+    "outcome": "approve",
+    "stage": "auto",
+    "riskScore": 12,
+    "note": "All cross-checks passed \u2014 onboarded without friction.",
+    "audit": {
+      "loggedTo": "Microsoft Purview"
+    }
+  }
+}

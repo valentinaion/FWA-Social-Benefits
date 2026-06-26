@@ -1,0 +1,24 @@
+{
+  "file": "video-consult-frame.png",
+  "synthetic": true,
+  "ground_truth": "deepfake",
+  "expected_agent": "face-verification",
+  "expected_capabilities": [
+    "face",
+    "safety",
+    "vision"
+  ],
+  "liveness": {
+    "passive_score": 0.08,
+    "blink_detected": false,
+    "micro_expression": false
+  },
+  "deepfake_score": 0.94,
+  "face_match_to_id": false,
+  "frame_artifacts": [
+    "gan_checkerboard",
+    "temporal_flicker",
+    "lip_sync_drift"
+  ],
+  "expected_finding": "Synthetic video detected \u2014 liveness failed, face mismatch"
+}

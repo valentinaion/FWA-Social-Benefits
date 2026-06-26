@@ -1,0 +1,130 @@
+{
+  "_note": "SYNTHETIC demo data. All names, documents, employers and figures are fictitious.",
+  "scenario": "01-prevention-blocked-pre-submission",
+  "applicant": {
+    "id": "A-90412",
+    "displayName": "Andrei V.",
+    "benefitsRequested": ["unemployment", "housing-support"],
+    "audienceNote": "Covert organized fraud-ring member (known to demo audience, not to the system)."
+  },
+  "steps": [
+    {
+      "order": 1,
+      "agent": "identity-proofing",
+      "title": "Identity proofing",
+      "capabilities": ["verid", "foundry"],
+      "result": {
+        "credentialVerified": false,
+        "issuer": null,
+        "riskDelta": 15,
+        "findings": [
+          "Identity not backed by a cryptographically verifiable credential",
+          "Self-asserted name only — no trusted issuer"
+        ]
+      }
+    },
+    {
+      "order": 2,
+      "agent": "document-parsing+validation",
+      "title": "Government ID — passport",
+      "capabilities": ["docintel", "vision", "content"],
+      "document": {
+        "type": "passport",
+        "fields": { "surname": "VOLKOV", "given": "ANDREI", "number": "X1 902 412", "expiry": "2031-04" },
+        "metadata": { "lastEditedDaysAgo": 2, "editor": "image-software" }
+      },
+      "result": {
+        "tampered": true,
+        "tamperRegion": "portrait",
+        "method": "face-swap / re-compression (Error-Level Analysis)",
+        "riskDelta": 30,
+        "findings": [
+          "Tampered portrait detected — face region spliced / re-compressed",
+          "Document metadata edited 2 days ago in image software",
+          "Portrait does not match document substrate"
+        ]
+      }
+    },
+    {
+      "order": 3,
+      "agent": "consistency-checker",
+      "title": "Proof of income — pay stub",
+      "capabilities": ["docintel", "openai", "fabric"],
+      "document": {
+        "type": "payslip",
+        "employer": "Northwind Staffing Solutions LLC",
+        "employerVat": "INVALID / UNREGISTERED",
+        "grossPay": 4950.0,
+        "netPay": 3910.0,
+        "payDate": "2026-05-31",
+        "payDateIsWeekend": true
+      },
+      "result": {
+        "employerRegistered": false,
+        "incomeMatch": false,
+        "riskDelta": 25,
+        "findings": [
+          "Employer has no active business / VAT registration",
+          "Synthetic pay stub — font & kerning anomalies, weekend pay date",
+          "Declared income inconsistent with matched tax records"
+        ]
+      }
+    },
+    {
+      "order": 4,
+      "agent": "validation",
+      "title": "Proof of address — utility bill",
+      "capabilities": ["docintel", "vision"],
+      "document": { "type": "utility-bill", "issuedMonthsAgo": 11, "policyMaxMonths": 3, "nameFieldAltered": true },
+      "result": {
+        "expired": true,
+        "tampered": true,
+        "riskDelta": 10,
+        "findings": [
+          "Document outdated — issued 11 months ago (exceeds 3-month rule)",
+          "Account-holder name altered — different embedded font detected"
+        ]
+      }
+    },
+    {
+      "order": 5,
+      "agent": "face-verification",
+      "title": "Remote video consultation",
+      "capabilities": ["face", "safety", "vision"],
+      "result": {
+        "live": false,
+        "deepfakeScore": 0.94,
+        "faceMatch": false,
+        "riskDelta": 15,
+        "findings": [
+          "Deepfake / synthetic video detected — frame-level GAN artifacts",
+          "Liveness check failed — no natural micro-expressions or blink",
+          "Face does not match the (already tampered) ID portrait"
+        ]
+      }
+    }
+  ],
+  "decision": {
+    "agent": "eligibility-decision",
+    "outcome": "block",
+    "stage": "pre-submission",
+    "riskScore": 95,
+    "blockThreshold": 70,
+    "reasons": [
+      "Tampered passport portrait (deepfake face-swap)",
+      "Forged pay stub from a fictitious, unregistered employer",
+      "Outdated & altered proof of address",
+      "Deepfake detected in the live video consultation",
+      "Identity never backed by a verifiable credential"
+    ],
+    "explainability": {
+      "document_tampering": 0.34,
+      "deepfake_liveness": 0.26,
+      "fictitious_employer": 0.20,
+      "identity_unverifiable": 0.12,
+      "cross_record_mismatch": 0.08
+    },
+    "fairnessSafeguard": "A genuine applicant with a minor mismatch (e.g. a blurry scan) is auto-reconciled or routed to human review — never auto-blocked.",
+    "audit": { "loggedTo": "Microsoft Purview", "paymentInstructionCreated": false }
+  }
+}

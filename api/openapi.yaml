@@ -1,0 +1,139 @@
+openapi: 3.0.3
+info:
+  title: Benefits Integrity Cloud — FWA Demo API
+  version: 1.0.0
+  description: >
+    Orchestrator API for the Fraud, Waste & Abuse detection & prevention demo.
+    In DEMO_MODE the endpoints return fixtures from /data; in live mode they call
+    Azure AI Foundry agents and Azure AI services. See docs/reference-architecture.md.
+servers:
+  - url: http://localhost:8000
+tags:
+  - name: applicant
+  - name: officer
+  - name: meta
+paths:
+  /api/capabilities:
+    get:
+      tags: [meta]
+      summary: List the 18 Microsoft AI capabilities and lit-state
+      responses:
+        '200': { description: OK }
+  /api/scenario1/session:
+    post:
+      tags: [applicant]
+      summary: Begin an applicant intake session
+      responses:
+        '200': { description: Session created }
+  /api/scenario1/step/{order}:
+    post:
+      tags: [applicant]
+      summary: Run the next intake check (agent step) and return findings + risk
+      parameters:
+        - in: path
+          name: order
+          required: true
+          schema: { type: integer, minimum: 1, maximum: 5 }
+      responses:
+        '200':
+          description: Step result
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/StepResult' }
+  /api/scenario1/decision:
+    get:
+      tags: [applicant]
+      summary: Get the orchestrated eligibility decision (block/review/approve)
+      responses:
+        '200':
+          description: Decision
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Decision' }
+  /api/officer/queue:
+    get:
+      tags: [officer]
+      summary: Risk-ranked case queue (Prioritization Agent)
+      responses:
+        '200': { description: OK }
+  /api/officer/clusters/{id}:
+    get:
+      tags: [officer]
+      summary: Cluster investigation detail (cyber signals, applications, timeline)
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        '200': { description: OK }
+  /api/officer/clusters/{id}/graph:
+    get:
+      tags: [officer]
+      summary: Relationship graph for a cluster (Graph Relationship Explorer)
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        '200': { description: Nodes + edges }
+  /api/officer/clusters/{id}/actions/{action}:
+    post:
+      tags: [officer]
+      summary: Execute an officer action (human-in-the-loop)
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+        - in: path
+          name: action
+          required: true
+          schema: { type: string, enum: [freeze, escalate, casefile, notify] }
+      responses:
+        '200':
+          description: Action result + audit record
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ActionResult' }
+  /api/officer/clusters/{id}/casefile:
+    get:
+      tags: [officer]
+      summary: Download the generated case file (.docx)
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Word document
+          content:
+            application/vnd.openxmlformats-officedocument.wordprocessingml.document: {}
+components:
+  schemas:
+    StepResult:
+      type: object
+      properties:
+        order: { type: integer }
+        agent: { type: string }
+        title: { type: string }
+        capabilities: { type: array, items: { type: string } }
+        findings: { type: array, items: { type: string } }
+        riskDelta: { type: integer }
+        cumulativeRisk: { type: integer }
+    Decision:
+      type: object
+      properties:
+        outcome: { type: string, enum: [approve, review, block] }
+        riskScore: { type: integer }
+        reasons: { type: array, items: { type: string } }
+        explainability: { type: object, additionalProperties: { type: number } }
+    ActionResult:
+      type: object
+      properties:
+        action: { type: string }
+        status: { type: string }
+        detail: { type: object }
+        audit: { type: object }

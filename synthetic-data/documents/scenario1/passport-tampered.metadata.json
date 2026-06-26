@@ -1,0 +1,25 @@
+{
+  "file": "passport-tampered.png",
+  "synthetic": true,
+  "ground_truth": "tampered",
+  "expected_agent": "validation",
+  "expected_capabilities": [
+    "vision",
+    "docintel"
+  ],
+  "indicators": {
+    "portrait_splice": true,
+    "ela_hotspot_region_xywh": [
+      76,
+      160,
+      160,
+      160
+    ],
+    "noise_inconsistency": true,
+    "jpeg_ghost": true,
+    "copy_move": false,
+    "metadata_software": "GIMP 2.10",
+    "last_modified": "2026-06-21T22:14:00Z"
+  },
+  "expected_finding": "Tampered portrait detected \u2014 face-swap / re-compression"
+}

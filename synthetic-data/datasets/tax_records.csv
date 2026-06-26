@@ -1,0 +1,14 @@
+national_id,applicant_name,reported_annual_income_eur,declared_annual_income_eur,variance_pct,match,source
+UT-4471012,Andrei Volkov,0,18000,n/a,false,no-record
+UT-4471013,Ivan Petrov,0,18500,n/a,false,no-record
+UT-4471014,Nadia Sokol,0,17800,n/a,false,no-record
+UT-4471015,Radu Marin,0,19000,n/a,false,no-record
+UT-4471016,Dragan Ilic,0,18200,n/a,false,no-record
+UT-4471017,Katarina Novak,0,17500,n/a,false,no-record
+UT-4471018,Sorin Toma,0,19500,n/a,false,no-record
+UT-4471019,Luka Horvat,0,18800,n/a,false,no-record
+UT-4471020,Maria Radu,0,17900,n/a,false,no-record
+UT-8815001,Ana Dumitru,26000,26000,0%,true,matched
+UT-8817601,Mihai Stan,31000,31000,0%,true,matched
+UT-8820401,Elena Marinescu,24000,24000,0%,true,matched
+UT-8821001,Petru Olaru,24200,15000,-38%,false,mismatch
