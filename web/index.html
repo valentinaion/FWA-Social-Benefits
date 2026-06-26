@@ -477,11 +477,14 @@ body{
 .vc-badge.bad{background:var(--red);color:#fff}
 .vc-badge.good{background:var(--green);color:#06210f}
 /* aliases used by the upload runner */
-.deepfake-tag.show{opacity:1;transform:none}
-.live-badge.show{opacity:1;transform:none}
+.deepfake-tag,.live-badge{position:absolute;left:10px;bottom:10px;font-size:11px;font-weight:800;padding:4px 9px;border-radius:7px;opacity:0;transform:translateY(8px);transition:.4s;z-index:3}
+.deepfake-tag.show,.live-badge.show{opacity:1;transform:none}
 .deepfake-tag{background:var(--red);color:#fff}
 .live-badge{background:var(--green);color:#06210f}
 .queue-actions{display:flex;align-items:center;gap:10px;margin-top:10px;flex-wrap:wrap}
+/* Ghost button */
+.ghost-btn{background:transparent;border:1px solid var(--line2);color:var(--ink2);font-family:var(--font);font-size:12.5px;padding:8px 14px;border-radius:9px;cursor:pointer;transition:.2s}
+.ghost-btn:hover{border-color:var(--blue);color:var(--ink);background:var(--panel)}
 </style>
 </head>
 <body>
@@ -1218,6 +1221,8 @@ function renderQueue(queue){
 
 function buildBurst(){
   const tl=document.getElementById("burstTimeline");if(!tl||tl.dataset.built)return;tl.dataset.built="1";
+  const bs=document.getElementById("burstStart");if(bs)bs.textContent="14:02:01";
+  const be=document.getElementById("burstEnd");if(be)be.textContent="14:02:18";
   const times=["01.3","03.1","05.0","06.8","08.9","11.2","13.4","15.9","18.1"];
   times.forEach((t,i)=>{const ev=document.createElement("div");ev.className="ev";ev.style.left=(6+i*(88/8))+"%";ev.style.animationDelay=(i*0.12)+"s";ev.innerHTML=`<span class="tt">:${t}</span>`;tl.appendChild(ev);});
 }
@@ -1308,6 +1313,12 @@ function openCase(){
   document.getElementById("queuePanel").classList.add("hide");
   document.getElementById("investPanel").classList.add("on");
   buildBurst();buildGraph();
+  // Populate cyber signals (once)
+  const cf=document.getElementById("cyberFacts");
+  if(cf&&!cf.dataset.built){cf.dataset.built="1";cf.innerHTML=`<div class="fact"><span class="fk">Source IP</span><span class="fv bad">203.0.113.45 · AS64500 (hosting/VPN)</span></div><div class="fact"><span class="fk">Device fingerprint</span><span class="fv bad">Reused across all 9 applications</span></div><div class="fact"><span class="fk">Form fill speed</span><span class="fv bad">74 ms/field — automated agent</span></div><div class="fact"><span class="fk">Submission window</span><span class="fv bad">16.8 seconds · 9 forms submitted</span></div><div class="fact"><span class="fk">Threat intel</span><span class="fv bad">Microsoft Defender — known ring TTP</span></div>`;}
+  // Populate timeline facts (once)
+  const tf=document.getElementById("timelineFacts");
+  if(tf&&!tf.dataset.built){tf.dataset.built="1";tf.innerHTML=`<div class="fact"><span class="fk">Mean inter-arrival</span><span class="fv bad">1.9 s</span></div><div class="fact"><span class="fk">Employer cited</span><span class="fv bad">Northwind Staffing Solutions — unregistered</span></div><div class="fact"><span class="fk">Shared bank (IBAN)</span><span class="fv bad">7 of 9 applications</span></div>`;}
   useCaps(["sentinel","defender","aml","graph","foundry","powerbi"]);
   window.scrollTo({top:120,behavior:"smooth"});
 }
