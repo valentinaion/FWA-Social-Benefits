@@ -4,10 +4,10 @@ uvicorn[standard]==0.30.6
 python-docx==1.1.2
 
 # --- Live mode (uncomment per build-plan phase) ---
-# azure-identity
-# azure-ai-projects                # Azure AI Foundry Agent Service
+azure-identity
+azure-ai-projects                # Azure AI Foundry Agent Service
+openai
 # semantic-kernel
-# openai
 # azure-ai-documentintelligence
 # azure-ai-vision-imageanalysis
 # azure-ai-contentsafety

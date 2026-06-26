@@ -9,6 +9,8 @@ agent calls — one at a time, per the phased build-plan in docs/build-plan.md.
 """
 import io
 import json
+import os
+from functools import lru_cache
 from datetime import datetime
 from pathlib import Path
 from typing import Any
@@ -16,6 +18,57 @@ from typing import Any
 from docx import Document
 from docx.shared import Pt, RGBColor
 from docx.enum.text import WD_PARAGRAPH_ALIGNMENT
+
+
+FOUNDRY_REASONING_MODEL = os.getenv("FOUNDRY_REASONING_MODEL", "gpt-4o")
+
+
+def _live_config(name: str) -> str:
+    value = os.getenv(name)
+    if not value:
+        raise RuntimeError(
+            f"Live mode requires {name} to be set. "
+            "Copy app/.env.example to .env and fill in the Foundry settings."
+        )
+    return value
+
+
+@lru_cache(maxsize=1)
+def _get_foundry_openai_client():
+    try:
+        from azure.ai.projects import AIProjectClient
+        from azure.identity import DefaultAzureCredential
+    except ImportError as exc:
+        raise RuntimeError(
+            "Live mode requires azure-ai-projects and azure-identity to be installed."
+        ) from exc
+
+    endpoint = _live_config("FOUNDRY_PROJECT_ENDPOINT")
+    project_client = AIProjectClient(endpoint=endpoint, credential=DefaultAzureCredential())
+    try:
+        return project_client.get_openai_client()
+    except Exception as exc:
+        raise RuntimeError("Unable to create a Foundry OpenAI client for live mode.") from exc
+
+
+def _run_foundry_json(system_prompt: str, payload: dict, model: str | None = None) -> dict:
+    client = _get_foundry_openai_client()
+    response = client.chat.completions.create(
+        model=model or FOUNDRY_REASONING_MODEL,
+        temperature=0,
+        response_format={"type": "json_object"},
+        messages=[
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": json.dumps(payload, ensure_ascii=False, indent=2)},
+        ],
+    )
+    content = response.choices[0].message.content
+    if not content:
+        raise RuntimeError("Foundry returned an empty response.")
+    parsed = json.loads(content)
+    if not isinstance(parsed, dict):
+        raise RuntimeError("Foundry returned a non-object JSON payload.")
+    return parsed
 
 # ---------------------------------------------------------------------------
 # Scenario 1 — applicant intake
@@ -40,14 +93,71 @@ def run_intake_step(step: dict, demo: bool = True) -> dict:
             "demo": True,
         }
 
-    # TODO(live) — Phase 3
-    # from azure.ai.projects import AIProjectClient
-    # from azure.identity import DefaultAzureCredential
-    # client = AIProjectClient(os.environ["FOUNDRY_PROJECT_ENDPOINT"], DefaultAzureCredential())
-    # agent = client.agents.get_agent(step["agent"])
-    # result = agent.run(payload=step)
-    # return result.output
-    raise NotImplementedError("Live mode not yet wired — set DEMO_MODE=true")
+    prompts = {
+        "identity-proofing": (
+            "You are the Identity Proofing Agent for a benefits intake flow. "
+            "Return JSON only. Output the same step envelope the API uses, with "
+            "keys: findings (array of strings), riskDelta (integer), "
+            "credentialVerified (boolean), issuer (string or null), ok (boolean). "
+            "Treat a missing trusted credential as a negative result. "
+            "Use the provided input only and do not invent unrelated facts."
+        ),
+        "document-parsing+validation": (
+            "You are the Document Parsing and Validation pipeline for a benefits "
+            "intake flow. Return JSON only. Output the same step envelope the API "
+            "uses, with keys: findings (array of strings), riskDelta (integer), "
+            "tampered (boolean), expired (boolean), metadataEdited (string or null), "
+            "regions (array of strings), docType (string or null), fields (object or null), "
+            "confidence (number or null), ok (boolean). Apply fairness by routing "
+            "low-confidence ambiguity to review rather than hard block."
+        ),
+        "validation": (
+            "You are the Validation Agent for a benefits intake flow. Return JSON only. "
+            "Output the same step envelope the API uses, with keys: findings (array of strings), "
+            "riskDelta (integer), tampered (boolean), expired (boolean), metadataEdited "
+            "(string or null), regions (array of strings), ok (boolean). "
+            "Treat a single low-confidence blur as review, not block."
+        ),
+        "face-verification": (
+            "You are the Face Verification Agent for a benefits intake flow. Return JSON only. "
+            "Output the same step envelope the API uses, with keys: findings (array of strings), "
+            "riskDelta (integer), live (boolean), deepfakeScore (number), faceMatch (boolean), ok (boolean). "
+            "Use the provided video session information and ID portrait details only."
+        ),
+        "consistency-checker": (
+            "You are the Consistency Checker for a benefits intake flow. Return JSON only. "
+            "Output the same step envelope the API uses, with keys: findings (array of strings), "
+            "riskDelta (integer), employerRegistered (boolean), incomeMatch (boolean), ok (boolean). "
+            "Cross-check employer, income, and residency details against the supplied data."
+        ),
+    }
+    prompt = prompts.get(
+        step["agent"],
+        "Return JSON only. Produce the same step envelope the API uses with findings, riskDelta, "
+        "and any agent-specific fields inferred from the supplied data.",
+    )
+    payload = {k: v for k, v in step.items() if k != "result"}
+    result = _run_foundry_json(prompt, payload)
+    findings = result.get("findings", [])
+    if not isinstance(findings, list):
+        findings = [str(findings)]
+    risk_delta = result.get("riskDelta")
+    if risk_delta is None:
+        raise RuntimeError("Live agent response did not include riskDelta.")
+    output = {
+        "order": step["order"],
+        "agent": step["agent"],
+        "title": step["title"],
+        "capabilities": step["capabilities"],
+        "findings": findings,
+        "riskDelta": risk_delta,
+        "ok": result.get("ok", risk_delta < 35),
+        "demo": False,
+    }
+    for key, value in result.items():
+        if key not in output:
+            output[key] = value
+    return output
 
 
 def compose_decision(s1: dict, demo: bool = True) -> dict:
@@ -66,8 +176,47 @@ def compose_decision(s1: dict, demo: bool = True) -> dict:
             "demo": True,
         }
 
-    # TODO(live) — Phase 4
-    raise NotImplementedError("Live mode not yet wired")
+    payload = {
+        "scenario": s1.get("scenario", "01-prevention-blocked-pre-submission"),
+        "steps": [
+            {k: v for k, v in step.items() if k != "result"}
+            for step in s1.get("steps", [])
+        ],
+        "policy": {
+            "blockThreshold": 70,
+            "reviewThreshold": 35,
+            "riskBands": {
+                "approve": "< 35",
+                "review": "35..69",
+                "block": ">= 70",
+            },
+        },
+    }
+    prompt = (
+        "You are the Eligibility Decision Agent for a benefits intake flow. Return JSON only. "
+        "Output the same decision envelope the API uses, with keys: outcome (approve|review|block), "
+        "stage, riskScore (integer), blockThreshold (integer), reasons (array of strings), "
+        "explainability (object with numeric weights), fairnessSafeguard (string), audit (object). "
+        "Use the supplied steps and policy to derive the final decision. Keep the result explainable "
+        "and consistent with the threshold policy."
+    )
+    result = _run_foundry_json(prompt, payload)
+    outcome = result.get("outcome")
+    risk_score = result.get("riskScore")
+    if outcome is None or risk_score is None:
+        raise RuntimeError("Live decision agent response was missing outcome or riskScore.")
+    output = {
+        "outcome": outcome,
+        "stage": result.get("stage", "pre-submission"),
+        "riskScore": risk_score,
+        "blockThreshold": result.get("blockThreshold", 70),
+        "reasons": result.get("reasons", []),
+        "explainability": result.get("explainability", {}),
+        "fairnessSafeguard": result.get("fairnessSafeguard", ""),
+        "audit": result.get("audit", {"loggedTo": "Microsoft Purview"}),
+        "demo": False,
+    }
+    return output
 
 
 # ---------------------------------------------------------------------------
@@ -113,8 +262,27 @@ def build_graph(s2: dict, demo: bool = True) -> dict:
 
         return {"nodes": nodes, "edges": edges, "demo": True}
 
-    # TODO(live) — Phase 4 (Cosmos DB Gremlin)
-    raise NotImplementedError("Live mode not yet wired")
+    payload = {
+        "cluster": s2.get("cluster", {}),
+        "applications": s2.get("applications", []),
+        "graph": s2.get("graph", {}),
+    }
+    prompt = (
+        "You are the Graph Relationship Explorer for a benefits integrity case. Return JSON only. "
+        "Output a graph object with keys: nodes (array), edges (array), demo (boolean). Build the "
+        "network from the supplied cluster and application data so shared IP, employer, bank, and phone "
+        "relationships are explicit. Keep labels short and suitable for an investigator UI."
+    )
+    result = _run_foundry_json(prompt, payload)
+    nodes = result.get("nodes")
+    edges = result.get("edges")
+    if nodes is None or edges is None:
+        raise RuntimeError("Live graph agent response was missing nodes or edges.")
+    return {
+        "nodes": nodes,
+        "edges": edges,
+        "demo": False,
+    }
 
 
 def execute_action(action: str, s2: dict, demo: bool = True) -> dict:
@@ -137,8 +305,30 @@ def execute_action(action: str, s2: dict, demo: bool = True) -> dict:
             "demo": True,
         }
 
-    # TODO(live) — Phase 5
-    raise NotImplementedError("Live mode not yet wired")
+    payload = {
+        "action": action,
+        "cluster": s2.get("cluster", {}),
+        "actions": s2.get("actions", {}),
+    }
+    prompt = (
+        "You are the officer action orchestrator for a benefits integrity case. Return JSON only. "
+        "Output the same action envelope the API uses, with keys: action, status, label, agent, detail "
+        "(object), audit (object), demo (boolean). Preserve governed, human-in-the-loop behavior and keep "
+        "the response concise."
+    )
+    result = _run_foundry_json(prompt, payload)
+    status = result.get("status")
+    if status is None:
+        raise RuntimeError("Live action agent response was missing status.")
+    return {
+        "action": result.get("action", action),
+        "status": status,
+        "label": result.get("label", s2["actions"][action]["label"]),
+        "agent": result.get("agent", s2["actions"][action]["agent"]),
+        "detail": result.get("detail", {}),
+        "audit": result.get("audit", {}),
+        "demo": False,
+    }
 
 
 # ---------------------------------------------------------------------------
