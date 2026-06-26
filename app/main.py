@@ -22,11 +22,23 @@ ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
 DEMO_MODE = os.getenv("DEMO_MODE", "true").lower() != "false"
 
-app = FastAPI(title="Benefits Integrity Cloud — FWA Demo API", version="1.0.0")
+app = FastAPI(
+    title="Benefits Integrity Cloud — FWA Demo API",
+    version="1.0.0",
+    docs_url="/api/docs",
+    redoc_url=None,
+)
 
 
 def load(name: str) -> dict:
     return json.loads((DATA / name).read_text(encoding="utf-8"))
+
+
+def _resolve_cluster(cid: str) -> dict:
+    cluster_id = S2["cluster"]["id"]
+    if cid not in (cluster_id, f"#{cluster_id}", "4471"):
+        raise HTTPException(404, "unknown cluster")
+    return S2["cluster"]
 
 
 S1 = load("scenario1-applicant.json")
@@ -89,9 +101,7 @@ def officer_queue():
 
 @app.get("/api/officer/clusters/{cid}")
 def cluster_detail(cid: str):
-    if cid not in (S2["cluster"]["id"], f"#{S2['cluster']['id']}", "4471"):
-        raise HTTPException(404, "unknown cluster")
-    c = S2["cluster"]
+    c = _resolve_cluster(cid)
     return {
         "cluster": c,
         "applications": S2["applications"],
@@ -102,11 +112,13 @@ def cluster_detail(cid: str):
 
 @app.get("/api/officer/clusters/{cid}/graph")
 def cluster_graph(cid: str):
+    _resolve_cluster(cid)
     return agents.build_graph(S2, demo=DEMO_MODE)
 
 
 @app.post("/api/officer/clusters/{cid}/actions/{action}")
 def officer_action(cid: str, action: str):
+    _resolve_cluster(cid)
     if action not in S2["actions"]:
         raise HTTPException(400, "unknown action")
     return agents.execute_action(action, S2, demo=DEMO_MODE)
@@ -114,8 +126,13 @@ def officer_action(cid: str, action: str):
 
 @app.get("/api/officer/clusters/{cid}/casefile")
 def download_casefile(cid: str):
+    cluster = _resolve_cluster(cid)
     buf = agents.generate_case_file(S2)
-    headers = {"Content-Disposition": 'attachment; filename="Fraud-Case-File-Cluster-4471.docx"'}
+    headers = {
+        "Content-Disposition": (
+            f'attachment; filename="Fraud-Case-File-Cluster-{cluster["id"]}.docx"'
+        )
+    }
     return StreamingResponse(
         io.BytesIO(buf),
         media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document",

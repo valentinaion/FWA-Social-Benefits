@@ -53,7 +53,7 @@ Three interactive scenarios:
 | POST | `/api/officer/clusters/4471/actions/{freeze\|escalate\|casefile\|notify}` | Officer action |
 | GET | `/api/officer/clusters/4471/casefile` | Download generated .docx case file |
 
-Interactive API docs: **http://localhost:8000/docs**
+Interactive API docs: **http://localhost:8000/api/docs**
 
 ---
 
